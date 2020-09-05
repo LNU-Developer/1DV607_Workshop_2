@@ -6,7 +6,7 @@ namespace workshop_2
     {
         static void Main(string[] args)
         {
-            Member one = new Member("Kalle", "Anka", "199002021412", 1); //Wrong Social Security Number
+            Member one = new Member("Musse", "Pigg", "199002021412", 1); //Wrong Social Security Number
             Console.WriteLine(one.FullName);
         }
     }
