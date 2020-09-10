@@ -29,5 +29,10 @@ namespace workshop_2
             Type = Enum.IsDefined(typeof(BoatTypes), boatType) ? boatType : throw new ArgumentException(nameof(boatType));
             _length = length;
         }
+
+         public override string ToString()
+        {
+            return $"Length: {Length} \nType: {Type}";
+        }
     }
 }

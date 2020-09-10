@@ -7,9 +7,18 @@ namespace workshop_2
     {
         private List<Boat> _boats = new List<Boat>();
 
-        public void addBoat(BoatTypes boatType, double length)
+        public IReadOnlyList<Boat> Boats
         {
+            get
+            {
+                return _boats.AsReadOnly();
+            }
+        }
 
+        public void addBoat(BoatTypes boatType, double length)
+           {
+            Boat newBoat = new Boat(boatType, length);
+            _boats.Add(newBoat);
         }
 
         public void deleteBoat()

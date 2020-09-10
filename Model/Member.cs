@@ -11,6 +11,8 @@ namespace workshop_2
         private string _personalId;
         private int _memberId;
 
+        private BoatRegister _boatRegister = new BoatRegister();
+
         //Properties
         public string FullName
         {
@@ -78,6 +80,14 @@ namespace workshop_2
 
                 _memberId=value;
             }
+        }
+
+         public BoatRegister BoatRegister
+        {
+             get
+             {
+                return _boatRegister;
+             }
         }
 
         //Method
