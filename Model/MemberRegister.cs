@@ -5,9 +5,21 @@ namespace workshop_2
 {
     class MemberRegister
     {
+
+        // Fields
         private List<int> _memberIds = new List<int>();
         private List<Member> _members = new List<Member>();
 
+        // Properties
+        public IReadOnlyList<Member> Members
+        {
+            get
+            {
+                return _members.AsReadOnly();
+            }
+        }
+
+        // Methods
         public void addMember(string firstName, string lastName, string personalId)
         {
             int index = _members.FindIndex(member => member.PersonalId == personalId);
