@@ -6,8 +6,7 @@ namespace workshop_2
     class BoatRegister
     {
         private List<Boat> _boats = new List<Boat>();
-                private List<int> _boatIds = new List<int>();
-
+        private List<int> _boatIds = new List<int>();
         public IReadOnlyList<Boat> Boats
         {
             get

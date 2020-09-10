@@ -16,7 +16,8 @@ namespace workshop_2
                 {
                      Console.WriteLine(boat.ToString());
                 }
-            
+            // TODO: Make sure you cant create an instance of Boatregister without member
+            // BoatRegister boatreg = new BoatRegister();
             
             // register.deleteMemberBySsn("9510101349");
             // Console.WriteLine(register.getMemberBySsn("9510101349").MemberId);
