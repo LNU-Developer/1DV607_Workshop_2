@@ -21,9 +21,16 @@ namespace workshop_2
             _boats.Add(newBoat);
         }
 
-        public void deleteBoat()
+        public void deleteBoat(int id)
         {
-
+            Boat foundBoat = getBoatById(id);
+            _boatIds.RemoveAll(boatId => boatId == foundBoat.BoatId);
+            _boats.RemoveAll(boat => boat.BoatId == id);
+        }
+        
+        public Boat getBoatById (int id) {
+            Boat foundBoat = _boats.Find(boat => boat.BoatId == id);
+            return foundBoat;
         }
 
         public void updateBoat()
