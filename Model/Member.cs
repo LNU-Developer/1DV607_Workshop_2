@@ -1,8 +1,10 @@
 using System;
 using System.Text.RegularExpressions;
+using Google.Cloud.Firestore;
 
 namespace workshop_2
 {
+    [FirestoreData]
     class Member
     {
         //Fields
@@ -21,6 +23,7 @@ namespace workshop_2
                 return _firstName + " " + _lastName;
              }
         }
+        [FirestoreProperty]
         public string FirstName
         {
             get
@@ -36,6 +39,7 @@ namespace workshop_2
                 _firstName=value;
             }
         }
+        [FirestoreProperty]
         public string LastName
         {
             get
@@ -51,6 +55,7 @@ namespace workshop_2
                 _lastName=value;
             }
         }
+        [FirestoreProperty]
         public string PersonalId
         {
             get
@@ -66,6 +71,7 @@ namespace workshop_2
                 _personalId=value;
             }
         }
+        [FirestoreProperty]
         public int MemberId
         {
             get
@@ -81,7 +87,6 @@ namespace workshop_2
                 _memberId=value;
             }
         }
-
          public BoatRegister BoatRegister
         {
              get
@@ -152,15 +157,6 @@ namespace workshop_2
                 sum = sum + Char.GetNumericValue(temp[i]);
             }
             return sum;
-        }
-
-        //Constructor
-        public Member(string firstName, string lastName, string personalId, int memberId)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            PersonalId = personalId;
-            MemberId = memberId;
         }
     }
 }

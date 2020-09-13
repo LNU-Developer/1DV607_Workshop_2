@@ -7,12 +7,16 @@ namespace workshop_2
         static void Main(string[] args)
         {
             DotNetEnv.Env.Load();
-            Database database = new Database(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
-            database.addData().Wait();
 
             MemberRegister register = new MemberRegister();
             register.addMember("Musse", "Pigg", "9510101349");
             Member member1 = register.getMemberBySsn("9510101349");
+
+            foreach (Member i in register.Members)
+            {
+                Console.WriteLine(i.FullName);
+            }
+
 
             //Adding boats to member
             member1.BoatRegister.addBoat(BoatTypes.Sailboat, 4.5);
