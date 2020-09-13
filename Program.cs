@@ -6,7 +6,11 @@ namespace workshop_2
     {
         static void Main(string[] args)
         {
-           MemberRegister register = new MemberRegister();
+            DotNetEnv.Env.Load();
+            Database database = new Database(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
+            database.addData().Wait();
+
+            MemberRegister register = new MemberRegister();
             register.addMember("Musse", "Pigg", "9510101349");
             Member member1 = register.getMemberBySsn("9510101349");
 
@@ -32,7 +36,7 @@ namespace workshop_2
 
             // TODO: Make sure you cant create an instance of Boatregister without member
             // BoatRegister boatreg = new BoatRegister();
-            
+
             // register.deleteMemberBySsn("9510101349");
             // Console.WriteLine(register.getMemberBySsn("9510101349").MemberId);
 

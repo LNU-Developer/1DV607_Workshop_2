@@ -12,6 +12,9 @@
 *.user
 *.sln.docstates
 
+# Credentials
+Credentials/
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
@@ -151,7 +154,7 @@ UpgradeLog*.htm
 
 # Temp files when opening LibreOffice on ubuntu
 .~lock.*
- 
+
 # svn
 .svn
 
@@ -219,6 +222,10 @@ project.lock.json
 *.feature.cs
 *.feature.xlsx.*
 *.Specs_*.html
+
+# dotenv environment variables file
+.env
+.env.test
 
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
