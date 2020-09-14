@@ -8,11 +8,15 @@ namespace workshop_2
     {
         static void Main(string[] args)
         {
+            try
+            {
             DotNetEnv.Env.Load();
 
             MemberRegister register = new MemberRegister();
             register.addMember("Musse", "Pigg", "9510101349");
+            register.addMember("Kalle", "Anka", "8710134050");
             Member member1 = register.getMemberBySsn("9510101349");
+            Member member2 = register.getMemberBySsn("8710134050");
 
             foreach (Member i in register.Members)
             {
@@ -20,8 +24,12 @@ namespace workshop_2
             }
 
             //Adding boats to member
-            member1.BoatRegister.addBoat(BoatTypes.Sailboat, 4.5);
-            member1.BoatRegister.addBoat(BoatTypes.Kayak, 7.3);
+            member1.BoatRegister.addBoat(BoatTypes.Kayak, 10);
+            member1.BoatRegister.addBoat(BoatTypes.Other, 5);
+            member2.BoatRegister.addBoat(BoatTypes.Motorsailer, 4.5);
+            member2.BoatRegister.addBoat(BoatTypes.Sailboat, 2);
+            member1.BoatRegister.addBoat(BoatTypes.Kayak, 1);
+
 
             foreach (object boat in member1.BoatRegister.Boats)
             {
@@ -29,8 +37,8 @@ namespace workshop_2
             }
 
             // Deleting boat from BoatRegister
-            int id = member1.BoatRegister.Boats[0].BoatId;
-            member1.BoatRegister.deleteBoat(id);
+            // int id = member1.BoatRegister.Boats[0].BoatId;
+            // member1.BoatRegister.deleteBoat(id);
 
             Console.WriteLine("-------------------------------------");
 
@@ -48,6 +56,11 @@ namespace workshop_2
             // Boat two = new Boat(BoatTypes.Sailboat, 1.0);
             // Console.WriteLine(two.Type);
 
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
     }
 }

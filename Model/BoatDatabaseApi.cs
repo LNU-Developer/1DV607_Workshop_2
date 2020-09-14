@@ -26,9 +26,9 @@ namespace Model
             }
         }
 
-        public async Task<bool> boatIdExist(int boatId)
+        public async Task<bool> boatIdExist(int boatId, string personalId)
         {
-            DocumentReference docRef = _db.Collection("boats").Document(boatId.ToString());
+            DocumentReference docRef = _db.Collection("boats").Document(personalId).Collection("boats").Document(boatId.ToString());
             DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
             if (snapshot.Exists)
             {

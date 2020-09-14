@@ -6,14 +6,14 @@ namespace Model
 {
     class BoatRegister
     {
+
+        BoatDatabaseApi database = new BoatDatabaseApi(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
         private string _ownerPersonalId;
-        private List<Boat> _boats = new List<Boat>();
-        private List<int> _boatIds = new List<int>();
         public IReadOnlyList<Boat> Boats
         {
             get
             {
-                return _boats.AsReadOnly();
+                return database.fetchAllBoatsForMember(_ownerPersonalId).Result.AsReadOnly();
             }
         }
 
@@ -25,23 +25,41 @@ namespace Model
                 Length = length,
                 BoatId = generateBoatId()
             };
-            _boats.Add(newBoat);
+            database.addBoat(newBoat, _ownerPersonalId).Wait();
         }
 
         public void deleteBoat(int id)
         {
-            Boat foundBoat = getBoatById(id);
-            _boatIds.RemoveAll(boatId => boatId == foundBoat.BoatId);
-            _boats.RemoveAll(boat => boat.BoatId == id);
+            if(database.boatIdExist(id, _ownerPersonalId).Result)
+            {
+                database.removeBoatById(id, _ownerPersonalId).Wait();
+            }
         }
 
         public Boat getBoatById (int id) {
-            Boat foundBoat = _boats.Find(boat => boat.BoatId == id);
-            return foundBoat;
+            if(database.boatIdExist(id, _ownerPersonalId).Result)
+            {
+                return database.fetchBoatById(id).Result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                        $"{nameof(id)} boat doesn't exists.");
+            }
         }
 
-        public void updateBoat()
+        public void updateBoat(int id, BoatTypes boatType, double length)
         {
+            if(database.boatIdExist(id, _ownerPersonalId).Result)
+            {
+                Boat newBoat = new Boat()
+                {
+                    Type = boatType,
+                    Length = length,
+                    BoatId = id
+                };
+                database.addBoat(newBoat, _ownerPersonalId).Wait();
+            }
         }
 
         private int generateBoatId()
@@ -51,10 +69,8 @@ namespace Model
             int newBoatId;
   	        newBoatId = a.Next(0, 100000000);
 
-            while(_boatIds.Contains(newBoatId))
+            while(database.boatIdExist(newBoatId, _ownerPersonalId).Result)
     	        newBoatId = a.Next(0, 100000000);
-
-            _boatIds.Add(newBoatId);
 
             return newBoatId;
         }
