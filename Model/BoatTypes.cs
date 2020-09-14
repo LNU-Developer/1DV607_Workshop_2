@@ -1,4 +1,4 @@
-namespace workshop_2
+namespace EnumBoatTypes
 {
   public enum BoatTypes
   {

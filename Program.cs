@@ -1,4 +1,6 @@
 ﻿using System;
+using EnumBoatTypes;
+using Model;
 
 namespace workshop_2
 {

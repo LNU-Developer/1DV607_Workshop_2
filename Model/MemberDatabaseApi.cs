@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 
-namespace workshop_2
+namespace Model
 {
-    class Database
+    class MemberDatabaseApi
     {
 
         private FirestoreDb _db;
@@ -124,7 +124,7 @@ namespace workshop_2
             }
         }
 
-        public Database(string projectId, string serviceAccountPath)
+        public MemberDatabaseApi(string projectId, string serviceAccountPath)
         {
             ServiceAccountPath = serviceAccountPath;
             ProjectId = projectId;

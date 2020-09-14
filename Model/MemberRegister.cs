@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace workshop_2
+namespace Model
 {
     class MemberRegister
     {
-        Database database = new Database(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
+        MemberDatabaseApi database = new MemberDatabaseApi(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
         public IReadOnlyList<Member> Members
         {
             get

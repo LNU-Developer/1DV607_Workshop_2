@@ -2,7 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using Google.Cloud.Firestore;
 
-namespace workshop_2
+namespace Model
 {
     [FirestoreData]
     class Member

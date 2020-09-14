@@ -1,7 +1,8 @@
 using System;
 using Google.Cloud.Firestore;
+using EnumBoatTypes;
 
-namespace workshop_2
+namespace Model
 {
     [FirestoreData]
     class Boat {

@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using EnumBoatTypes;
 
-namespace workshop_2
+namespace Model
 {
     class BoatRegister
     {
