@@ -67,14 +67,11 @@ namespace Model
             CollectionReference  colRef = _db.Collection("members");
             Query query = colRef.WhereEqualTo("MemberId", id);
             QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+            Member member = null;
             foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
             {
-                return documentSnapshot.ConvertTo<Member>();
+                member = documentSnapshot.ConvertTo<Member>();
             }
-
-            DocumentReference docRef = _db.Collection("members").Document();
-            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
-            Member member = snapshot.ConvertTo<Member>();
             return member;
         }
 
