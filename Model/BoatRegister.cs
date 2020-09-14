@@ -18,7 +18,12 @@ namespace workshop_2
 
         public void addBoat(BoatTypes boatType, double length)
            {
-            Boat newBoat = new Boat(boatType, length, generateBoatId());
+            Boat newBoat = new Boat()
+            {
+                Type = boatType,
+                Length = length,
+                BoatId = generateBoatId()
+            };
             _boats.Add(newBoat);
         }
 

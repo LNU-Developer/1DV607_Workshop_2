@@ -1,17 +1,25 @@
 using System;
+using Google.Cloud.Firestore;
 
 namespace workshop_2
 {
+    [FirestoreData]
     class Boat {
         private BoatTypes _boatType;
         private double _length;
         private int _boatId;
 
+        [FirestoreProperty (ConverterType = typeof(FirestoreEnumNameConverter<BoatTypes>))]
         public BoatTypes Type
         {
             get => _boatType;
-            set => _boatType = value;
+            set
+            {
+                _boatType = Enum.IsDefined(typeof(BoatTypes), value) ? value : throw new ArgumentException(nameof(value));
+            }
         }
+
+        [FirestoreProperty]
         public double Length
         {
             get => _length;
@@ -23,6 +31,8 @@ namespace workshop_2
                 _length = value;
             }
         }
+
+        [FirestoreProperty]
         public int BoatId
         {
             get
@@ -37,13 +47,6 @@ namespace workshop_2
 
                 _boatId=value;
             }
-        }
-        public Boat(BoatTypes boatType, double length, int boatId)
-        {
-
-            Type = Enum.IsDefined(typeof(BoatTypes), boatType) ? boatType : throw new ArgumentException(nameof(boatType));
-            _length = length;
-            _boatId = boatId;
         }
 
          public override string ToString()

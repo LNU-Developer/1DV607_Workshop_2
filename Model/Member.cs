@@ -7,7 +7,6 @@ namespace workshop_2
     [FirestoreData]
     class Member
     {
-        //Fields
         private string _firstName;
         private string _lastName;
         private string _personalId;
@@ -15,7 +14,6 @@ namespace workshop_2
 
         private BoatRegister _boatRegister;
 
-        //Properties
         public string FullName
         {
              get
@@ -95,8 +93,6 @@ namespace workshop_2
                 return _boatRegister;
              }
         }
-
-        //Method
 
         //Lunas Algorithm
         private bool IsSwedishSsn(string identity)
