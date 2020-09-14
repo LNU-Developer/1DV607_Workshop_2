@@ -49,7 +49,7 @@ namespace workshop_2
             else
             {
                 throw new ArgumentException(
-                        $"{nameof(id)} already exists. Unable to register new member.");
+                        $"{nameof(id)} member doesn't exists.");
             }
         }
 

@@ -17,7 +17,6 @@ namespace workshop_2
                 Console.WriteLine(i.FullName);
             }
 
-
             //Adding boats to member
             member1.BoatRegister.addBoat(BoatTypes.Sailboat, 4.5);
             member1.BoatRegister.addBoat(BoatTypes.Kayak, 7.3);

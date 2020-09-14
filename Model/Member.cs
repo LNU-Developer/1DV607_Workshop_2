@@ -13,7 +13,7 @@ namespace workshop_2
         private string _personalId;
         private int _memberId;
 
-        private BoatRegister _boatRegister = new BoatRegister();
+        private BoatRegister _boatRegister;
 
         //Properties
         public string FullName
@@ -69,6 +69,7 @@ namespace workshop_2
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
                 _personalId=value;
+                _boatRegister = new BoatRegister(value);
             }
         }
         [FirestoreProperty]
