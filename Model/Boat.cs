@@ -2,7 +2,7 @@ using System;
 using Google.Cloud.Firestore;
 using EnumBoatTypes;
 
-namespace Model
+namespace BoatHandler
 {
     [FirestoreData]
     class Boat {

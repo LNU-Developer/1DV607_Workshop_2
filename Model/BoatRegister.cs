@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using EnumBoatTypes;
 
-namespace Model
+namespace BoatHandler
 {
     class BoatRegister
     {

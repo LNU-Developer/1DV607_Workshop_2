@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 
-namespace Model
+namespace MembersHandler
 {
     class MemberDatabaseApi
     {

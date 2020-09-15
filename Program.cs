@@ -1,6 +1,6 @@
 ﻿using System;
 using EnumBoatTypes;
-using Model;
+using MembersHandler;
 
 namespace workshop_2
 {
