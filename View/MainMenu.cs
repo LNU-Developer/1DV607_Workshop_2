@@ -17,7 +17,7 @@ namespace workshop_2
             return Int32.Parse(input);
         }
 
-         public void readInput(int input)
+         public void handleInput(int input)
         {
             if(input == 1)
             {
@@ -32,6 +32,7 @@ namespace workshop_2
         private void registerMember()
         {
             //TODO: Handling wrong inputs from user
+            //TODO: Output to user if member with same personal id number allready exists
             string firstName;
             string lastName;
             string pId;
@@ -50,8 +51,23 @@ namespace workshop_2
 
             Register.addMember(firstName, lastName, pId);
 
-            Member member = Register.getMemberBySsn(pId);
-            Console.WriteLine(member.FirstName);
+            // Checks if Member is registered
+            int count = 0;
+            foreach (Member hello in Register.Members)
+            {
+                if(hello.PersonalId == pId)
+                {
+                    count++;
+                }
+            }
+
+            if(count == 1) {
+                Console.WriteLine("Registered member successfully");
+            }
+            else
+            {
+                Console.WriteLine("Try again");
+            }
 
             // Console.WriteLine("Are these credentials correct:");
             // Console.WriteLine("First name: " + firstName);
@@ -59,6 +75,8 @@ namespace workshop_2
             // Console.WriteLine("Personal id number: " + pId);
             // Console.WriteLine("y/n");
             // input = Console.ReadLine();
+            // Member member = Register.getMemberBySsn(pId);
+            //Console.WriteLine("Your member id is: " + member.MemberId);
 
             // TODO: If Pid is in database console.write = Registered member successfully
             // Else - try again?
