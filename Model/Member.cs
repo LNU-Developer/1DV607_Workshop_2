@@ -95,6 +95,7 @@ namespace MembersHandler
              }
         }
 
+        // TODO - Find way to remove below methods from Member.cs
         //Lunas Algorithm
         private bool IsSwedishSsn(string identity)
         {

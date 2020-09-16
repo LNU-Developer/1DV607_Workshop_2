@@ -44,6 +44,12 @@ namespace workshop_2
             pId = Console.ReadLine();
 
             // IsSwedishSsn?
+            if(!Register.IsSwedishSsn(pId))
+            {
+                Console.Clear();
+                Console.WriteLine("This is not a correct personal number.");
+                startProgram();
+            }
 
             if(doesPIdExistInRegister(pId))
             {
