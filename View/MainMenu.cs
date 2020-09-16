@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using MembersHandler;
+using BoatHandler;
 
 namespace workshop_2
 {
@@ -8,12 +10,14 @@ namespace workshop_2
 
         //TODO: Kolla ska vissa metoder finnas i MemberRegister i model istället? (doesPIdExistInRegister)
         public MemberRegister Register { get; }
+        public BoatRegister BRegister { get; }
         public int startProgram()
         {
-            Console.WriteLine("Welcome to the Boat Club!");
+            Console.WriteLine("\nWelcome to the Boat Club!");
             Console.WriteLine("Please choose what you want to do next (1-4):");
             Console.WriteLine("1. Register member");
             Console.WriteLine("2. Delete member");
+            Console.WriteLine("3. Show member list");
 
             string input = Console.ReadLine();
             //TODO: Handling wrong inputs from user before return
@@ -29,7 +33,19 @@ namespace workshop_2
             else if(input == 2)
             {
                 deleteMember();
-            } 
+            }
+            else if(input == 3)
+            {
+                showMemberList();
+            }
+             else if(input == 4)
+            {
+                showCompactList();
+            }
+             else if(input == 5)
+            {
+                showVerboseList();
+            }
         }
 
         private void registerMember()
@@ -40,28 +56,28 @@ namespace workshop_2
             string lastName;
             string pId;
 
-            Console.WriteLine("Please enter your personal id number in 10 digits:");
+            Console.WriteLine("\nPlease enter your personal id number in 10 digits:");
             pId = Console.ReadLine();
 
             // IsSwedishSsn?
             if(!Register.IsSwedishSsn(pId))
             {
                 Console.Clear();
-                Console.WriteLine("This is not a correct personal number.");
+                Console.WriteLine("\nThis is not a correct personal number.");
                 startProgram();
             }
 
             if(doesPIdExistInRegister(pId))
             {
                 Console.Clear();
-                Console.WriteLine("A member with this personal number allready exists in the register.");
+                Console.WriteLine("\nA member with this personal number already exists in the register.");
                 startProgram();
             }
 
-            Console.WriteLine("Please enter first name:");
+            Console.WriteLine("\nPlease enter first name:");
             firstName = Console.ReadLine();
 
-            Console.WriteLine("Please enter last name:");
+            Console.WriteLine("\nPlease enter last name:");
             lastName = Console.ReadLine();
 
             Register.addMember(firstName, lastName, pId);
@@ -69,7 +85,7 @@ namespace workshop_2
             if(doesPIdExistInRegister(pId))
             {
                 Console.Clear();
-                Console.WriteLine("Member registered successfully");
+                Console.WriteLine("Member registered successfully!\n");
                 startProgram();
             }
             else
@@ -128,7 +144,7 @@ namespace workshop_2
             if(!doesPIdExistInRegister(pId))
             {
                 Console.Clear();
-                Console.WriteLine("Member deleted successfully");
+                Console.WriteLine("Member deleted successfully!\n");
                 startProgram();
             }
             else
@@ -139,6 +155,74 @@ namespace workshop_2
             }
 
         }
+        private void showMemberList()
+        {
+            Console.Clear();
+            Console.WriteLine("Choose which type of list you want to view:");
+            Console.WriteLine("4. Compact list");
+            Console.WriteLine("5. Verbose list");
+
+            handleInput(Int32.Parse(Console.ReadLine()));
+            //TODO: Handling wrong inputs from user
+        
+        }
+
+        private void showCompactList()
+        {
+            Console.Clear();
+            Console.WriteLine("Compact list\n");
+            
+            foreach (Member member in Register.Members)
+            {
+            BoatRegister boatRegister = new BoatRegister(member.PersonalId);
+
+               Console.ForegroundColor = ConsoleColor.DarkMagenta;
+               Console.WriteLine("Fullname: " + member.FullName);
+               Console.WriteLine("Member id: " + member.MemberId);
+               
+               int count = 0;
+               foreach (Boat boat in boatRegister.Boats)
+               {
+                   count += 1;
+                   
+               }
+               Console.WriteLine("Number of boats: " + count);
+               Console.ResetColor();
+               Console.WriteLine("═══════════════════════════════════════════");
+            }
+        }
+
+        private void showVerboseList()
+        {
+            Console.Clear();
+            Console.WriteLine("Verbose list\n");
+            
+            foreach (Member member in Register.Members)
+            {
+               BoatRegister boatRegister = new BoatRegister(member.PersonalId);
+
+               Console.ForegroundColor = ConsoleColor.DarkMagenta;
+               Console.WriteLine("Fullname: " + member.FullName);
+               Console.WriteLine("Personal id: " + member.PersonalId);
+               Console.WriteLine("Member id: " + member.MemberId);
+               Console.WriteLine("Boatinformation:");
+
+               int count = 0;
+               foreach (Boat boat in boatRegister.Boats)
+               {
+                   count += 1;
+                   Console.WriteLine();
+                   Console.WriteLine(count + ". Boat type: " + boat.Type);
+                   Console.WriteLine("   Boat length: " + boat.Length);
+                   Console.WriteLine("   Boat id: " + boat.BoatId);
+                   Console.WriteLine("__________");
+               }
+          
+               Console.ResetColor();
+               Console.WriteLine("═══════════════════════════════════════════");
+            }               
+        }
+       
 
         public MainMenu(MemberRegister register)
         {
