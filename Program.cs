@@ -13,9 +13,9 @@ namespace workshop_2
             DotNetEnv.Env.Load();
 
             MemberRegister register = new MemberRegister();
-
-            string hello = MainMenu.startProgram();
-            MainMenu.readInput(hello);
+            MainMenu menu = new MainMenu(register);
+            string hello = menu.startProgram();
+            menu.readInput(hello);
             // Member member1 = register.getMemberBySsn("9510101349");
             // Console.WriteLine(member1.FirstName);
             // register.addMember("Musse", "Pigg", "9510101349");
