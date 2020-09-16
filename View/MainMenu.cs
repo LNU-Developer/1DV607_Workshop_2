@@ -34,6 +34,7 @@ namespace workshop_2
 
         private void registerMember()
         {
+            //TODO: Handling wrong inputs from user
             string firstName;
             string lastName;
             string pId;
@@ -54,24 +55,19 @@ namespace workshop_2
 
             Member member = Register.getMemberBySsn(pId);
             Console.WriteLine(member.FirstName);
+
             // Console.WriteLine("Are these credentials correct:");
             // Console.WriteLine("First name: " + firstName);
             // Console.WriteLine("Last name: " + lastName);
             // Console.WriteLine("Personal id number: " + pId);
             // Console.WriteLine("y/n");
             // input = Console.ReadLine();
-            
-            // if (input = "y")
-            // {
-
-            // }
-
         }
 
         private void deleteMember()
         {
+            //TODO: Handling wrong inputs from user
             string pId;
-            // string input;
 
             Console.WriteLine("You choose to delete a member");
 
@@ -80,6 +76,8 @@ namespace workshop_2
 
             Register.deleteMemberBySsn(pId);
 
+            // TODO: If Pid is no longer i database console.write = Deleted member successfully
+            // Else - try again?
         }
 
         public MainMenu(MemberRegister register)
