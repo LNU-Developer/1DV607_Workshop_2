@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using MembersHandler;
 using BoatHandler;
 
@@ -10,7 +9,7 @@ namespace workshop_2
 
         //TODO: Kolla ska vissa metoder finnas i MemberRegister i model istället? (doesPIdExistInRegister)
         public MemberRegister Register { get; }
-        public BoatRegister BRegister { get; }
+
         public int startProgram()
         {
             Console.WriteLine("\nWelcome to the Boat Club!");
@@ -18,6 +17,7 @@ namespace workshop_2
             Console.WriteLine("1. Register member");
             Console.WriteLine("2. Delete member");
             Console.WriteLine("3. Show member list");
+            Console.WriteLine("4. Update member information");
 
             string input = Console.ReadLine();
             //TODO: Handling wrong inputs from user before return
@@ -38,11 +38,16 @@ namespace workshop_2
             {
                 showMemberList();
             }
-             else if(input == 4)
+            else if(input == 4)
+            {
+                Console.Clear();
+                Console.WriteLine("Update member");
+            }
+             else if(input == 8)
             {
                 showCompactList();
             }
-             else if(input == 5)
+             else if(input == 9)
             {
                 showVerboseList();
             }
@@ -85,7 +90,9 @@ namespace workshop_2
             if(doesPIdExistInRegister(pId))
             {
                 Console.Clear();
-                Console.WriteLine("Member registered successfully!\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Member registered successfully!");
+                Console.ResetColor();
                 startProgram();
             }
             else
@@ -144,7 +151,9 @@ namespace workshop_2
             if(!doesPIdExistInRegister(pId))
             {
                 Console.Clear();
-                Console.WriteLine("Member deleted successfully!\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Member deleted successfully!");
+                Console.ResetColor();
                 startProgram();
             }
             else
@@ -159,8 +168,8 @@ namespace workshop_2
         {
             Console.Clear();
             Console.WriteLine("Choose which type of list you want to view:");
-            Console.WriteLine("4. Compact list");
-            Console.WriteLine("5. Verbose list");
+            Console.WriteLine("8. Compact list");
+            Console.WriteLine("9. Verbose list");
 
             handleInput(Int32.Parse(Console.ReadLine()));
             //TODO: Handling wrong inputs from user
