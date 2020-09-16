@@ -6,30 +6,27 @@ namespace workshop_2
  class MainMenu
     {
         public MemberRegister Register {get;}
-         public string startProgram()
+         public int startProgram()
         {
             Console.WriteLine("Welcome to the Boat Club!");
             Console.WriteLine("Please choose what you want to do next (1-4):");
             Console.WriteLine("1. Register member");
             Console.WriteLine("2. Delete member");
-            string choice = Console.ReadLine();
-            return choice;
+            string input = Console.ReadLine();
+            //TODO: Handling wrong inputs from user before return
+            return Int32.Parse(input);
         }
 
-         public void readInput(string input)
+         public void readInput(int input)
         {
-            if(Int32.Parse(input) == 1)
+            if(input == 1)
             {
                 registerMember();
             } 
-            else if(Int32.Parse(input) == 2)
+            else if(input == 2)
             {
                 deleteMember();
             } 
-            else 
-            {
-                Console.WriteLine("Not a valid option");
-            }
         }
 
         private void registerMember()
@@ -62,6 +59,9 @@ namespace workshop_2
             // Console.WriteLine("Personal id number: " + pId);
             // Console.WriteLine("y/n");
             // input = Console.ReadLine();
+
+            // TODO: If Pid is in database console.write = Registered member successfully
+            // Else - try again?
         }
 
         private void deleteMember()

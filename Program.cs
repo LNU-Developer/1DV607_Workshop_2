@@ -14,7 +14,7 @@ namespace workshop_2
 
             MemberRegister register = new MemberRegister();
             MainMenu menu = new MainMenu(register);
-            string hello = menu.startProgram();
+            int hello = menu.startProgram();
             menu.readInput(hello);
             // Member member1 = register.getMemberBySsn("9510101349");
             // Console.WriteLine(member1.FirstName);
