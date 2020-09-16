@@ -5,8 +5,10 @@ namespace workshop_2
 {
  class MainMenu
     {
-        public MemberRegister Register {get;}
-         public int startProgram()
+
+        //TODO: Kolla ska vissa metoder finnas i MemberRegister i model istället? (doesPIdExistInRegister)
+        public MemberRegister Register { get; }
+        public int startProgram()
         {
             Console.WriteLine("Welcome to the Boat Club!");
             Console.WriteLine("Please choose what you want to do next (1-4):");
@@ -18,7 +20,7 @@ namespace workshop_2
             return Int32.Parse(input);
         }
 
-         public void handleInput(int input)
+        public void handleInput(int input)
         {
             if(input == 1)
             {
@@ -33,7 +35,7 @@ namespace workshop_2
         private void registerMember()
         {
             //TODO: Handling wrong inputs from user
-            //TODO: Output to user if member with same personal id number allready exists
+
             string firstName;
             string lastName;
             string pId;
@@ -41,14 +43,14 @@ namespace workshop_2
             Console.WriteLine("Please enter your personal id number in 10 digits:");
             pId = Console.ReadLine();
 
+            // IsSwedishSsn?
+
             if(doesPIdExistInRegister(pId))
             {
                 Console.Clear();
                 Console.WriteLine("A member with this personal number allready exists in the register.");
                 startProgram();
             }
-
-            //TODO: Check here if it is a real PID??
 
             Console.WriteLine("Please enter first name:");
             firstName = Console.ReadLine();
@@ -61,7 +63,7 @@ namespace workshop_2
             if(doesPIdExistInRegister(pId))
             {
                 Console.Clear();
-                Console.WriteLine("Registered member successfully");
+                Console.WriteLine("Member registered successfully");
                 startProgram();
             }
             else
@@ -109,16 +111,27 @@ namespace workshop_2
             //TODO: Handling wrong inputs from user
             //TODO: Delete by pid or memberid
             string pId;
-
-            Console.WriteLine("You choose to delete a member");
+            Console.Clear();
 
             Console.WriteLine("Please enter personal id number on the member you want to delete:");
             pId = Console.ReadLine();
 
+            //TODO: Are you sure you want to delete this member: Visa memberInfo.
             Register.deleteMemberBySsn(pId);
 
-            // TODO: If Pid is no longer i database console.write = Deleted member successfully
-            // Else - try again?
+            if(!doesPIdExistInRegister(pId))
+            {
+                Console.Clear();
+                Console.WriteLine("Member deleted successfully");
+                startProgram();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Something went wrong. Try again:");
+                startProgram();
+            }
+
         }
 
         public MainMenu(MemberRegister register)
