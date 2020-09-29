@@ -62,6 +62,18 @@ namespace BoatHandler
             }
         }
 
+        public bool isBoat(int id)
+        {
+            if(database.boatIdExist(id, _ownerPersonalId).Result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private int generateBoatId()
         {
             Random a = new Random();

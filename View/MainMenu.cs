@@ -46,11 +46,15 @@ namespace workshop_2
                 }
                 else
                 {
+                    Console.Clear();
+                    Console.WriteLine("\nWrong input provided. Please pick a number from the list");
                     return false;
                 }
             }
             catch
             {
+                Console.Clear();
+                Console.WriteLine("\nWrong input provided. Please pick a number from the list");
                 return false;
             }
 
@@ -78,14 +82,15 @@ namespace workshop_2
                     startProgram();
                 break;
                 case 5:
-                addBoatToMember();
-                startProgram();
+                    addBoatToMember();
+                    startProgram();
                 break;
                 case 6:
-                startProgram();
+                    deleteBoatFromMember();
+                    startProgram();
                 break;
                 case 7:
-                startProgram();
+                    startProgram();
                 break;
                 case 8:
                     showCompactList();
@@ -99,8 +104,6 @@ namespace workshop_2
                     Environment.Exit(0);
                 break;
                 default:
-                    Console.Clear();
-                    Console.WriteLine("Wrong input provided. Please pick a number from the below list");
                     startProgram();
                 break;
             }
@@ -214,6 +217,7 @@ namespace workshop_2
 
         private void addBoatToMember()
         {
+            //TODO: Fetch by member id or SSN
             string pId;
 
             Console.WriteLine("Please enter personal id number on the member you want to add a boat to:");
@@ -244,11 +248,8 @@ namespace workshop_2
             Console.WriteLine("4. Other");
 
             string boatTypeString = Console.ReadLine();
-            if(!isCorrectMenuInput(boatTypeString, 1, 4))
-            {
-                Console.WriteLine("Wrong input provided. Please pick a number from the list");
-                addBoatToMember();
-            }
+            if(!isCorrectMenuInput(boatTypeString, 1, 4)) addBoatToMember();
+
             BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
             Console.WriteLine("Please type in the length of the boat:");
             string lengthString = Console.ReadLine();
@@ -262,12 +263,98 @@ namespace workshop_2
             Console.WriteLine("Successfully added the " + boatType + " to the selected member.");
         }
 
+        private void deleteBoatFromMember()
+        {
+            //TODO: Fetch by member id or SSN
+            string pId;
+
+            Console.WriteLine("Please enter personal id number on the member you want to remove a boat from:");
+            pId = Console.ReadLine();
+
+            //TODO: Fix Personal ID wrong input handling
+            if(!Register.IsSwedishSsn(pId))
+            {
+                Console.Clear();
+                Console.WriteLine("\nThis is not a correct personal number.");
+                deleteBoatFromMember();
+            }
+
+            if(!doesPIdExistInRegister(pId))
+            {
+                Console.Clear();
+                Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
+                deleteBoatFromMember();
+            }
+
+            Member selectedMember =  Register.getMemberBySsn(pId);
+            BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
+
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            int count = 0;
+            foreach (Boat boat in boatRegister.Boats)
+            {
+                   count += 1;
+                   Console.WriteLine();
+                   Console.WriteLine(count + ". Boat type: " + boat.Type);
+                   Console.WriteLine("   Boat length: " + boat.Length);
+                   Console.WriteLine("   Boat id: " + boat.BoatId);
+                   Console.WriteLine("__________");
+            }
+            Console.ResetColor();
+            Console.WriteLine("Please enter the ID of the boat you want to remove.");
+            string idString = Console.ReadLine();
+            if(convertToInt(idString) == 0)
+            {
+                //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
+                Console.WriteLine("Wrong input provided. Please enter a number above zero.");
+                deleteBoatFromMember();
+            }
+            int id = convertToInt(idString);
+            if(boatRegister.isBoat(id))
+            {
+                boatRegister.deleteBoat(id);
+                Console.WriteLine("Successfully deleted the boat with the id " + idString + " from the selected member.");
+            }
+            else
+            {
+                Console.WriteLine("Error when trying to delete. The boat with the id " + idString + " doesn't exist.");
+            }
+
+        }
+
+        private int convertToInt(string input)
+        {
+            try
+            {
+                 int number = Convert.ToInt32(input);
+                 if(number > 0)
+                 {
+                    return number;
+                 }
+                 else
+                 {
+                     return 0;
+                 }
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         private double convertToDouble(string input)
         {
             try
             {
                  double length = Convert.ToDouble(input);
-                 return length;
+                 if(length > 0)
+                 {
+                     return length;
+                 }
+                 else
+                 {
+                     return 0;
+                 }
             }
             catch
             {
@@ -281,10 +368,15 @@ namespace workshop_2
             Console.WriteLine("Choose which type of list you want to view:");
             Console.WriteLine("8. Compact list");
             Console.WriteLine("9. Verbose list");
-
-            handleInput(Int32.Parse(Console.ReadLine()));
-            //TODO: Handling wrong inputs from user
-
+            string input = Console.ReadLine();
+            if(!isCorrectMenuInput(input, 8, 9))
+            {
+                handleInput(10);
+            }
+            else
+            {
+                handleInput(Int32.Parse(input));
+            }
         }
 
         private void showCompactList()
