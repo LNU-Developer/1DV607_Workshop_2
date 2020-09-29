@@ -18,43 +18,86 @@ namespace workshop_2
             Console.WriteLine("2. Delete member");
             Console.WriteLine("3. Show member list");
             Console.WriteLine("4. Update member information");
+            Console.WriteLine("5. Add boat to member");
+            Console.WriteLine("6. Remove boat from member");
+            Console.WriteLine("7. Update boat information");
             Console.WriteLine("0. Exit program");
 
             string input = Console.ReadLine();
-            //TODO: Handling wrong inputs from user before return
-            handleInput(Int32.Parse(input));
+            if(!isCorrectNumberInput(input))
+            {
+                handleInput(10);
+            }
+            else
+            {
+                handleInput(Int32.Parse(input));
+            }
+
         }
 
-        public void handleInput(int input)
+        private bool isCorrectNumberInput(string input)
         {
-            if(input == 1)
+            try
             {
-                registerMember();
-            } 
-            else if(input == 2)
-            {
-                deleteMember();
+                if(Int32.Parse(input) > 0 && Int32.Parse(input) < 10 && Int32.Parse(input) != 8 && Int32.Parse(input) != 9)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else if(input == 3)
+            catch
             {
-                showMemberList();
+                return false;
             }
-            else if(input == 4)
+
+        }
+
+        private void handleInput(int input)
+        {
+            switch(input)
             {
-                Console.Clear();
-                Console.WriteLine("Update member");
-            }
-             else if(input == 8)
-            {
-                showCompactList();
-            }
-             else if(input == 9)
-            {
-                showVerboseList();
-            } 
-             else if(input == 0)
-            {
-                Environment.Exit(0);
+                case 1:
+                    registerMember();
+                    startProgram();
+                break;
+                case 2:
+                    deleteMember();
+                    startProgram();
+                break;
+                case 3:
+                    showMemberList();
+                    startProgram();
+                break;
+                case 4:
+                    Console.Clear();
+                    Console.WriteLine("Update member");
+                    startProgram();
+                break;
+                case 5:
+                break;
+                case 6:
+                break;
+                case 7:
+                break;
+                case 8:
+                    showCompactList();
+                    startProgram();
+                break;
+                case 9:
+                    showVerboseList();
+                    startProgram();
+                break;
+                case 0:
+                    Environment.Exit(0);
+                break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Wrong input provided. Please pick a number from the below list");
+                    startProgram();
+                break;
             }
         }
 
@@ -74,14 +117,12 @@ namespace workshop_2
             {
                 Console.Clear();
                 Console.WriteLine("\nThis is not a correct personal number.");
-                startProgram();
             }
 
             if(doesPIdExistInRegister(pId))
             {
                 Console.Clear();
                 Console.WriteLine("\nA member with this personal number already exists in the register.");
-                startProgram();
             }
 
             Console.WriteLine("\nPlease enter first name:");
@@ -98,13 +139,11 @@ namespace workshop_2
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Member registered successfully!");
                 Console.ResetColor();
-                startProgram();
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine("Something went wrong. Try again:");
-                startProgram();
             }
 
 
@@ -137,7 +176,7 @@ namespace workshop_2
             else
             {
                 return false;
-            } 
+            }
         }
 
         private void deleteMember()
@@ -159,13 +198,11 @@ namespace workshop_2
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Member deleted successfully!");
                 Console.ResetColor();
-                startProgram();
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine("Something went wrong. Try again:");
-                startProgram();
             }
 
         }
@@ -178,14 +215,14 @@ namespace workshop_2
 
             handleInput(Int32.Parse(Console.ReadLine()));
             //TODO: Handling wrong inputs from user
-        
+
         }
 
         private void showCompactList()
         {
             Console.Clear();
             Console.WriteLine("Compact list\n");
-            
+
             foreach (Member member in Register.Members)
             {
             BoatRegister boatRegister = new BoatRegister(member.PersonalId);
@@ -193,12 +230,12 @@ namespace workshop_2
                Console.ForegroundColor = ConsoleColor.DarkMagenta;
                Console.WriteLine("Fullname: " + member.FullName);
                Console.WriteLine("Member id: " + member.MemberId);
-               
+
                int count = 0;
                foreach (Boat boat in boatRegister.Boats)
                {
                    count += 1;
-                   
+
                }
                Console.WriteLine("Number of boats: " + count);
                Console.ResetColor();
@@ -210,7 +247,7 @@ namespace workshop_2
         {
             Console.Clear();
             Console.WriteLine("Verbose list\n");
-            
+
             foreach (Member member in Register.Members)
             {
                BoatRegister boatRegister = new BoatRegister(member.PersonalId);
@@ -231,12 +268,12 @@ namespace workshop_2
                    Console.WriteLine("   Boat id: " + boat.BoatId);
                    Console.WriteLine("__________");
                }
-          
+
                Console.ResetColor();
                Console.WriteLine("═══════════════════════════════════════════");
-            }               
+            }
         }
-       
+
 
         public MainMenu(MemberRegister register)
         {
