@@ -1,6 +1,7 @@
 using System;
 using MembersHandler;
 using BoatHandler;
+using System.Collections.Generic;
 
 namespace workshop_2
 {
@@ -205,6 +206,8 @@ namespace workshop_2
         {
             Console.Clear();
             Console.WriteLine("Verbose list\n");
+
+            //TODO: Create methods getMembers and getBoats instead of having these foreachloops in this method
             
             foreach (Member member in Register.Members)
             {
@@ -231,7 +234,7 @@ namespace workshop_2
                Console.WriteLine("═══════════════════════════════════════════");
             }               
         }
-       
+
 
         public MainMenu(MemberRegister register)
         {
