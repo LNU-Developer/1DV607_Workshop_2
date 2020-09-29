@@ -1,4 +1,5 @@
 using System;
+using MembersHandler;
 
 namespace workshop_2
 
@@ -66,6 +67,54 @@ namespace workshop_2
             catch
             {
                 return 0;
+            }
+        }
+
+        public static bool isCorrectInputOfSsn (string id, bool idExists = false)
+        {
+            MemberRegister Register = new MemberRegister();
+             //TODO: Fix Personal ID wrong input handling
+            if(!Register.IsSwedishSsn(id))
+            {
+                Console.Clear();
+                Console.WriteLine("\nThis is not a correct personal number.");
+                return false;
+            }
+
+            if(!doesPIdExistInRegister(id) && !idExists)
+            {
+                Console.Clear();
+                Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
+                return false;
+            }
+            else if(doesPIdExistInRegister(id) && idExists)
+            {
+                Console.Clear();
+                Console.WriteLine("\nA member with this personal number already exists in the register.");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool doesPIdExistInRegister(string pId)
+        {
+            MemberRegister Register = new MemberRegister();
+            int count = 0;
+            foreach (Member member in Register.Members)
+            {
+                if(member.PersonalId == pId)
+                {
+                    count++;
+                }
+            }
+
+            if(count == 1) {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
