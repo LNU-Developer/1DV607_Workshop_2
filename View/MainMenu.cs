@@ -1,7 +1,6 @@
 using System;
 using MembersHandler;
 using BoatHandler;
-using System.Collections.Generic;
 
 namespace workshop_2
 {
@@ -11,18 +10,19 @@ namespace workshop_2
         //TODO: Kolla ska vissa metoder finnas i MemberRegister i model istället? (doesPIdExistInRegister)
         public MemberRegister Register { get; }
 
-        public int startProgram()
+        public void startProgram()
         {
             Console.WriteLine("\nWelcome to the Boat Club!");
-            Console.WriteLine("Please choose what you want to do next (1-4):");
+            Console.WriteLine("Please choose what you want to do next (0-4):");
             Console.WriteLine("1. Register member");
             Console.WriteLine("2. Delete member");
             Console.WriteLine("3. Show member list");
             Console.WriteLine("4. Update member information");
+            Console.WriteLine("0. Exit program");
 
             string input = Console.ReadLine();
             //TODO: Handling wrong inputs from user before return
-            return Int32.Parse(input);
+            handleInput(Int32.Parse(input));
         }
 
         public void handleInput(int input)
@@ -51,6 +51,10 @@ namespace workshop_2
              else if(input == 9)
             {
                 showVerboseList();
+            } 
+             else if(input == 0)
+            {
+                Environment.Exit(0);
             }
         }
 
@@ -206,8 +210,6 @@ namespace workshop_2
         {
             Console.Clear();
             Console.WriteLine("Verbose list\n");
-
-            //TODO: Create methods getMembers and getBoats instead of having these foreachloops in this method
             
             foreach (Member member in Register.Members)
             {
@@ -234,7 +236,7 @@ namespace workshop_2
                Console.WriteLine("═══════════════════════════════════════════");
             }               
         }
-
+       
 
         public MainMenu(MemberRegister register)
         {
