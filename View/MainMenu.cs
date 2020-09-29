@@ -1,6 +1,7 @@
 using System;
 using MembersHandler;
 using BoatHandler;
+using EnumBoatTypes;
 
 namespace workshop_2
 {
@@ -24,7 +25,7 @@ namespace workshop_2
             Console.WriteLine("0. Exit program");
 
             string input = Console.ReadLine();
-            if(!isCorrectNumberInput(input))
+            if(!isCorrectMenuInput(input, 0, 9))
             {
                 handleInput(10);
             }
@@ -35,11 +36,11 @@ namespace workshop_2
 
         }
 
-        private bool isCorrectNumberInput(string input)
+        private bool isCorrectMenuInput(string input , int minValue, int maxValue)
         {
             try
             {
-                if(Int32.Parse(input) > 0 && Int32.Parse(input) < 10 && Int32.Parse(input) != 8 && Int32.Parse(input) != 9)
+                if(Int32.Parse(input) >= minValue && Int32.Parse(input) <= maxValue && Int32.Parse(input) != 8 && Int32.Parse(input) != 9)
                 {
                     return true;
                 }
@@ -77,10 +78,14 @@ namespace workshop_2
                     startProgram();
                 break;
                 case 5:
+                addBoatToMember();
+                startProgram();
                 break;
                 case 6:
+                startProgram();
                 break;
                 case 7:
+                startProgram();
                 break;
                 case 8:
                     showCompactList();
@@ -206,6 +211,70 @@ namespace workshop_2
             }
 
         }
+
+        private void addBoatToMember()
+        {
+            string pId;
+
+            Console.WriteLine("Please enter personal id number on the member you want to add a boat to:");
+            pId = Console.ReadLine();
+
+            //TODO: Fix Personal ID wrong input handling
+            if(!Register.IsSwedishSsn(pId))
+            {
+                Console.Clear();
+                Console.WriteLine("\nThis is not a correct personal number.");
+                addBoatToMember();
+            }
+
+            if(!doesPIdExistInRegister(pId))
+            {
+                Console.Clear();
+                Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
+                addBoatToMember();
+            }
+
+            Member selectedMember =  Register.getMemberBySsn(pId);
+            BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
+
+            Console.WriteLine("Please pick from the selected boat types:");
+            Console.WriteLine("1. Sailboat");
+            Console.WriteLine("2. Motorsailer");
+            Console.WriteLine("3. Kayak");
+            Console.WriteLine("4. Other");
+
+            string boatTypeString = Console.ReadLine();
+            if(!isCorrectMenuInput(boatTypeString, 1, 4))
+            {
+                Console.WriteLine("Wrong input provided. Please pick a number from the list");
+                addBoatToMember();
+            }
+            BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
+            Console.WriteLine("Please type in the length of the boat:");
+            string lengthString = Console.ReadLine();
+            if(convertToDouble(lengthString) == 0)
+            {
+                //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
+                Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
+                addBoatToMember();
+            }
+            boatRegister.addBoat(boatType, convertToDouble(lengthString));
+            Console.WriteLine("Successfully added the " + boatType + " to the selected member.");
+        }
+
+        private double convertToDouble(string input)
+        {
+            try
+            {
+                 double length = Convert.ToDouble(input);
+                 return length;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         private void showMemberList()
         {
             Console.Clear();
