@@ -1,5 +1,4 @@
 ﻿using System;
-using EnumBoatTypes;
 using MembersHandler;
 
 namespace workshop_2

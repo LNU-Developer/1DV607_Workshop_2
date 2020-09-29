@@ -6,7 +6,7 @@ using EnumBoatTypes;
 namespace workshop_2
 {
  class MainMenu
-    {
+{
 
         //TODO: Kolla ska vissa metoder finnas i MemberRegister i model istället? (doesPIdExistInRegister)
         public MemberRegister Register { get; }
@@ -25,37 +25,13 @@ namespace workshop_2
             Console.WriteLine("0. Exit program");
 
             string input = Console.ReadLine();
-            if(!isCorrectMenuInput(input, 0, 9))
+            if(!InputHandler.isCorrectMenuInput(input, 0, 9))
             {
                 handleInput(10);
             }
             else
             {
                 handleInput(Int32.Parse(input));
-            }
-
-        }
-
-        private bool isCorrectMenuInput(string input , int minValue, int maxValue)
-        {
-            try
-            {
-                if(Int32.Parse(input) >= minValue && Int32.Parse(input) <= maxValue && Int32.Parse(input) != 8 && Int32.Parse(input) != 9)
-                {
-                    return true;
-                }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("\nWrong input provided. Please pick a number from the list");
-                    return false;
-                }
-            }
-            catch
-            {
-                Console.Clear();
-                Console.WriteLine("\nWrong input provided. Please pick a number from the list");
-                return false;
             }
 
         }
@@ -120,18 +96,7 @@ namespace workshop_2
             Console.WriteLine("\nPlease enter your personal id number in 10 digits:");
             pId = Console.ReadLine();
 
-            // IsSwedishSsn?
-            if(!Register.IsSwedishSsn(pId))
-            {
-                Console.Clear();
-                Console.WriteLine("\nThis is not a correct personal number.");
-            }
-
-            if(doesPIdExistInRegister(pId))
-            {
-                Console.Clear();
-                Console.WriteLine("\nA member with this personal number already exists in the register.");
-            }
+            if(!isCorrectInputOfSsn(pId, true)) registerMember();
 
             Console.WriteLine("\nPlease enter first name:");
             firstName = Console.ReadLine();
@@ -189,13 +154,14 @@ namespace workshop_2
 
         private void deleteMember()
         {
-            //TODO: Handling wrong inputs from user
             //TODO: Delete by pid or memberid
             string pId;
             Console.Clear();
 
             Console.WriteLine("Please enter personal id number on the member you want to delete:");
             pId = Console.ReadLine();
+
+            if(!isCorrectInputOfSsn(pId)) deleteMember();
 
             //TODO: Are you sure you want to delete this member: Visa memberInfo.
             Register.deleteMemberBySsn(pId);
@@ -223,20 +189,7 @@ namespace workshop_2
             Console.WriteLine("Please enter personal id number on the member you want to add a boat to:");
             pId = Console.ReadLine();
 
-            //TODO: Fix Personal ID wrong input handling
-            if(!Register.IsSwedishSsn(pId))
-            {
-                Console.Clear();
-                Console.WriteLine("\nThis is not a correct personal number.");
-                addBoatToMember();
-            }
-
-            if(!doesPIdExistInRegister(pId))
-            {
-                Console.Clear();
-                Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
-                addBoatToMember();
-            }
+            if(!isCorrectInputOfSsn(pId)) addBoatToMember();
 
             Member selectedMember =  Register.getMemberBySsn(pId);
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
@@ -248,18 +201,18 @@ namespace workshop_2
             Console.WriteLine("4. Other");
 
             string boatTypeString = Console.ReadLine();
-            if(!isCorrectMenuInput(boatTypeString, 1, 4)) addBoatToMember();
+            if(!InputHandler.isCorrectMenuInput(boatTypeString, 1, 4)) addBoatToMember();
 
             BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
             Console.WriteLine("Please type in the length of the boat:");
             string lengthString = Console.ReadLine();
-            if(convertToDouble(lengthString) == 0)
+            if(InputHandler.convertToDouble(lengthString) == 0)
             {
                 //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
                 Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
                 addBoatToMember();
             }
-            boatRegister.addBoat(boatType, convertToDouble(lengthString));
+            boatRegister.addBoat(boatType, InputHandler.convertToDouble(lengthString));
             Console.WriteLine("Successfully added the " + boatType + " to the selected member.");
         }
 
@@ -271,20 +224,7 @@ namespace workshop_2
             Console.WriteLine("Please enter personal id number on the member you want to remove a boat from:");
             pId = Console.ReadLine();
 
-            //TODO: Fix Personal ID wrong input handling
-            if(!Register.IsSwedishSsn(pId))
-            {
-                Console.Clear();
-                Console.WriteLine("\nThis is not a correct personal number.");
-                deleteBoatFromMember();
-            }
-
-            if(!doesPIdExistInRegister(pId))
-            {
-                Console.Clear();
-                Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
-                deleteBoatFromMember();
-            }
+            if(!isCorrectInputOfSsn(pId)) deleteBoatFromMember();
 
             Member selectedMember =  Register.getMemberBySsn(pId);
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
@@ -303,13 +243,13 @@ namespace workshop_2
             Console.ResetColor();
             Console.WriteLine("Please enter the ID of the boat you want to remove.");
             string idString = Console.ReadLine();
-            if(convertToInt(idString) == 0)
+            if(InputHandler.convertToInt(idString) == 0)
             {
                 //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
                 Console.WriteLine("Wrong input provided. Please enter a number above zero.");
                 deleteBoatFromMember();
             }
-            int id = convertToInt(idString);
+            int id = InputHandler.convertToInt(idString);
             if(boatRegister.isBoat(id))
             {
                 boatRegister.deleteBoat(id);
@@ -322,44 +262,30 @@ namespace workshop_2
 
         }
 
-        private int convertToInt(string input)
+        private bool isCorrectInputOfSsn (string id, bool idExists = false)
         {
-            try
+             //TODO: Fix Personal ID wrong input handling
+            if(!Register.IsSwedishSsn(id))
             {
-                 int number = Convert.ToInt32(input);
-                 if(number > 0)
-                 {
-                    return number;
-                 }
-                 else
-                 {
-                     return 0;
-                 }
+                Console.Clear();
+                Console.WriteLine("\nThis is not a correct personal number.");
+                return false;
             }
-            catch
-            {
-                return 0;
-            }
-        }
 
-        private double convertToDouble(string input)
-        {
-            try
+            if(!doesPIdExistInRegister(id) && !idExists)
             {
-                 double length = Convert.ToDouble(input);
-                 if(length > 0)
-                 {
-                     return length;
-                 }
-                 else
-                 {
-                     return 0;
-                 }
+                Console.Clear();
+                Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
+                return false;
             }
-            catch
+            else if(doesPIdExistInRegister(id) && idExists)
             {
-                return 0;
+                Console.Clear();
+                Console.WriteLine("\nA member with this personal number already exists in the register.");
+                return false;
             }
+
+            return true;
         }
 
         private void showMemberList()
@@ -369,7 +295,7 @@ namespace workshop_2
             Console.WriteLine("8. Compact list");
             Console.WriteLine("9. Verbose list");
             string input = Console.ReadLine();
-            if(!isCorrectMenuInput(input, 8, 9))
+            if(!InputHandler.isCorrectMenuInput(input, 8, 9))
             {
                 handleInput(10);
             }
