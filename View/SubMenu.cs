@@ -193,6 +193,62 @@ namespace workshop_2
 
         }
 
+    public void updateBoat()
+    // updateBoat(int id, BoatTypes boatType, double length)
+    {
+//TODO: Fetch by member id or SSN
+            string pId;
+
+            Console.WriteLine("Please enter personal id number on the member you want to update a boat in:");
+            pId = Console.ReadLine();
+
+            if(!InputHandler.isCorrectInputOfSsn(pId)) updateBoat();
+
+            Member selectedMember =  Register.getMemberBySsn(pId);
+            BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
+
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            int count = 0;
+            foreach (Boat boat in boatRegister.Boats)
+            {
+                   count += 1;
+                   Console.WriteLine();
+                   Console.WriteLine(count + ". Boat type: " + boat.Type);
+                   Console.WriteLine("   Boat length: " + boat.Length);
+                   Console.WriteLine("   Boat id: " + boat.BoatId);
+                   Console.WriteLine("__________");
+            }
+            Console.ResetColor();
+            Console.WriteLine("Please enter the ID of the boat you want to update.");
+            string idString = Console.ReadLine();
+
+
+            if(InputHandler.convertToInt(idString) == 0)
+            {
+                //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
+                Console.WriteLine("Wrong input provided. Please enter a number above zero.");
+                updateBoat();
+            }
+            int id = InputHandler.convertToInt(idString);
+
+            if(boatRegister.isBoat(id))
+            {
+                Console.WriteLine("Please enter the updated boattype.");
+                string boatTypeStrng = Console.ReadLine();
+                BoatTypes boatType = InputHandler.convertToBoatType(boatTypeStrng);
+
+                Console.WriteLine("Please enter the updated length.");
+                string lengthString = Console.ReadLine();
+                double length = InputHandler.convertToDouble(lengthString);
+
+                boatRegister.updateBoat(id, boatType, length);
+                Console.WriteLine("Successfully updated the boat with the id " + idString + " from the selected member.");
+            }
+            else
+            {
+                Console.WriteLine("Error when trying to update. The boat with the id " + idString + " doesn't exist.");
+            }
+    }
         public int showMemberList()
         {
             Console.Clear();

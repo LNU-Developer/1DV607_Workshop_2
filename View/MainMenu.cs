@@ -60,6 +60,7 @@ namespace workshop_2
                     startProgram();
                 break;
                 case 7:
+                    SubMenu.updateBoat();
                     startProgram();
                 break;
                 case 8:

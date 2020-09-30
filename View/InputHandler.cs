@@ -1,6 +1,7 @@
 using System;
 using Model;
 using Controller;
+using EnumBoatTypes;
 
 namespace workshop_2
 
@@ -117,6 +118,14 @@ namespace workshop_2
             {
                 return 0;
             }
+        }
+
+
+        public static BoatTypes convertToBoatType(string input)
+        {
+            BoatTypes boatType;
+            Enum.TryParse(input, out boatType);
+            return boatType;
         }
     }
 }
