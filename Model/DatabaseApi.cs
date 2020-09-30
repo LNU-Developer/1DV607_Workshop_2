@@ -7,7 +7,6 @@ namespace Model
 {
     class DatabaseApi
     {
-
         private FirestoreDb _db;
 
         private string ProjectId
@@ -17,13 +16,12 @@ namespace Model
                 _db=FirestoreDb.Create(value);
             }
         }
-
         private string ServiceAccountPath
         {
-            set
-            {
+           set
+           {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", value);
-            }
+           }
         }
 
         public async Task<bool> memberExist(string personalId)
@@ -50,7 +48,6 @@ namespace Model
                 return true;
             }
             return false;
-
         }
 
         public async Task<Member> fetchMemberBySsn(string personalId)
@@ -63,11 +60,11 @@ namespace Model
 
         public async Task<Member> fetchMemberById(int id)
         {
-
             CollectionReference  colRef = _db.Collection("members");
             Query query = colRef.WhereEqualTo("MemberId", id);
             QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
             Member member = null;
+            
             foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
             {
                 member = documentSnapshot.ConvertTo<Member>();
@@ -93,6 +90,7 @@ namespace Model
                 };
                 members.Add(member);
             }
+
             return members;
         }
 
@@ -137,7 +135,6 @@ namespace Model
 
         public async Task<Boat> fetchBoatById(int id)
         {
-
             CollectionReference  colRef = _db.Collection("boats");
             Query query = colRef.WhereEqualTo("BoatId", id);
             QuerySnapshot querySnapshot = await query.GetSnapshotAsync();

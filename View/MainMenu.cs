@@ -7,8 +7,10 @@ namespace workshop_2
 {
         public void startProgram()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nWelcome to the Boat Club!");
-            Console.WriteLine("Please choose what you want to do next (0-8):");
+            Console.WriteLine("Please choose what you want to do next (0-8):\n");
+            Console.ResetColor();
             Console.WriteLine("1. Register member");
             Console.WriteLine("2. Delete member");
             Console.WriteLine("3. Show member list");
@@ -36,12 +38,12 @@ namespace workshop_2
              SubMenu SubMenu = new SubMenu(Register);
              switch(input)
              {
-                 case 1:
+                case 1:
                     Console.Clear();
                     SubMenu.registerMember();
-                     startProgram();
-                 break;
-                 case 2:
+                    startProgram();
+                break;
+                case 2:
                     Console.Clear();
                     SubMenu.deleteMember();
                     startProgram();
@@ -52,14 +54,14 @@ namespace workshop_2
                     startProgram();
                 break;
                 case 4:
-                     Console.Clear();
-                     SubMenu.updateMember();
-                     startProgram();
+                    Console.Clear();
+                    SubMenu.updateMember();
+                    startProgram();
                 break;
                 case 5:
-                     Console.Clear();
-                     SubMenu.addBoatToMember();
-                     startProgram();
+                    Console.Clear();
+                    SubMenu.addBoatToMember();
+                    startProgram();
                 break;
                 case 6:
                     Console.Clear();

@@ -50,7 +50,7 @@ namespace Model
             }
         }
 
-         public override string ToString()
+        public override string ToString()
         {
             return $"Length: {Length} \nType: {Type} \nId: {_boatId} ";
         }

@@ -28,13 +28,11 @@ namespace workshop_2
                 Console.WriteLine("\nWrong input provided. Please pick a number from the list");
                 return false;
             }
-
         }
 
         public static bool isCorrectInputOfSsn (string id, bool idExists = false)
         {
             MemberRegister Register = new MemberRegister();
-             //TODO: Fix Personal ID wrong input handling
 
             if(!Register.IsSwedishSsn(id))
             {
@@ -59,6 +57,7 @@ namespace workshop_2
         public static bool doesPIdExistInRegister(string pId)
         {
             MemberRegister Register = new MemberRegister();
+
             int count = 0;
             foreach (Member member in Register.Members)
             {
@@ -81,15 +80,15 @@ namespace workshop_2
         {
             try
             {
-                 int number = Convert.ToInt32(input);
-                 if(number > 0)
-                 {
-                    return number;
-                 }
-                 else
-                 {
-                     return 0;
-                 }
+                int number = Convert.ToInt32(input);
+                if(number > 0)
+                {
+                   return number;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             catch
             {
@@ -101,21 +100,20 @@ namespace workshop_2
         {
             try
             {
-                 double length = Convert.ToDouble(input);
-                 if(length > 0)
-                 {
-                     return length;
-                 }
-                 else
-                 {
-                     return 0;
-                 }
+                double length = Convert.ToDouble(input);
+                if(length > 0)
+                {
+                    return length;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             catch
             {
                 return 0;
             }
         }
-
     }
 }

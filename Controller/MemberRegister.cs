@@ -37,7 +37,6 @@ namespace Controller
 
         public Member getMemberBySsn(string id)
         {
-
             id = id.Replace("-", "");
             id = id.Replace("+", "");
 
@@ -114,7 +113,7 @@ namespace Controller
             return newMemberId;
         }
 
-            //Lunas Algorithm
+        //Lunas Algorithm
         public bool IsSwedishSsn(string identity)
         {
             identity = identity.Replace("-", "");

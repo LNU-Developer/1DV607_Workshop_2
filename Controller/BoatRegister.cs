@@ -17,7 +17,7 @@ namespace Controller
         }
 
         public void addBoat(BoatTypes boatType, double length)
-           {
+        {
             Boat newBoat = new Boat()
             {
                 Type = boatType,
@@ -35,7 +35,8 @@ namespace Controller
             }
         }
 
-        public Boat getBoatById (int id) {
+        public Boat getBoatById (int id) 
+        {
             if(database.boatIdExist(id, _ownerPersonalId).Result)
             {
                 return database.fetchBoatById(id).Result;

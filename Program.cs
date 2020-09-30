@@ -8,13 +8,12 @@ namespace workshop_2
         {
             try
             {
-            DotNetEnv.Env.Load();
+                DotNetEnv.Env.Load();
 
-            MainMenu menu = new MainMenu();
-            menu.startProgram();
+                MainMenu menu = new MainMenu();
+                menu.startProgram();
 
-            Console.WriteLine("-------------------------------------");
-
+                Console.WriteLine("-------------------------------------");
             }
             catch (System.Exception)
             {

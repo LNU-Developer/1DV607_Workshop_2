@@ -22,6 +22,7 @@ namespace Model
                 return _firstName + " " + _lastName;
              }
         }
+
         [FirestoreProperty]
         public string FirstName
         {
@@ -38,6 +39,7 @@ namespace Model
                 _firstName=value;
             }
         }
+
         [FirestoreProperty]
         public string LastName
         {
@@ -54,6 +56,7 @@ namespace Model
                 _lastName=value;
             }
         }
+
         [FirestoreProperty]
         public string PersonalId
         {
@@ -71,6 +74,7 @@ namespace Model
                 _boatRegister = new BoatRegister(value);
             }
         }
+
         [FirestoreProperty]
         public int MemberId
         {
@@ -87,12 +91,12 @@ namespace Model
                 _memberId=value;
             }
         }
-         public BoatRegister BoatRegister
+        public BoatRegister BoatRegister
         {
-             get
-             {
-                return _boatRegister;
-             }
+            get
+            {
+               return _boatRegister;
+            }
         }
     }
 }
