@@ -194,9 +194,8 @@ namespace workshop_2
         }
 
     public void updateBoat()
-    // updateBoat(int id, BoatTypes boatType, double length)
     {
-//TODO: Fetch by member id or SSN
+        //TODO: Fetch by member id or SSN
             string pId;
 
             Console.WriteLine("Please enter personal id number on the member you want to update a boat in:");
@@ -218,6 +217,7 @@ namespace workshop_2
                    Console.WriteLine("   Boat id: " + boat.BoatId);
                    Console.WriteLine("__________");
             }
+
             Console.ResetColor();
             Console.WriteLine("Please enter the ID of the boat you want to update.");
             string idString = Console.ReadLine();
@@ -233,15 +233,26 @@ namespace workshop_2
 
             if(boatRegister.isBoat(id))
             {
-                Console.WriteLine("Please enter the updated boattype.");
-                string boatTypeStrng = Console.ReadLine();
-                BoatTypes boatType = InputHandler.convertToBoatType(boatTypeStrng);
+                Console.WriteLine("Please pick from the selected boat types:");
+                Console.WriteLine("1. Sailboat");
+                Console.WriteLine("2. Motorsailer");
+                Console.WriteLine("3. Kayak");
+                Console.WriteLine("4. Other");
 
-                Console.WriteLine("Please enter the updated length.");
+                string boatTypeString = Console.ReadLine();
+                if(!InputHandler.isCorrectMenuInput(boatTypeString, 1, 4)) addBoatToMember();
+
+                BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
+                Console.WriteLine("Please type in the length of the boat:");
                 string lengthString = Console.ReadLine();
-                double length = InputHandler.convertToDouble(lengthString);
-
-                boatRegister.updateBoat(id, boatType, length);
+                if(InputHandler.convertToDouble(lengthString) == 0)
+                {
+                    //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
+                    Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
+                    updateBoat();
+                }
+                
+                boatRegister.updateBoat(id, boatType, InputHandler.convertToDouble(lengthString));
                 Console.WriteLine("Successfully updated the boat with the id " + idString + " from the selected member.");
             }
             else

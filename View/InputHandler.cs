@@ -80,7 +80,7 @@ namespace workshop_2
             }
         }
 
-                public static int convertToInt(string input)
+        public static int convertToInt(string input)
         {
             try
             {
@@ -120,12 +120,5 @@ namespace workshop_2
             }
         }
 
-
-        public static BoatTypes convertToBoatType(string input)
-        {
-            BoatTypes boatType;
-            Enum.TryParse(input, out boatType);
-            return boatType;
-        }
     }
 }
