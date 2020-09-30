@@ -157,7 +157,7 @@ namespace workshop_2
             int id = InputHandler.convertToInt(idString);
             if(boatRegister.isBoat(id))
             {
-                boatRegister.deleteBoat(id);
+                boatRegister.deleteById(id);
                 Console.WriteLine("Successfully deleted the boat with the id " + idString + " from the selected member.");
             }
             else

@@ -27,7 +27,7 @@ namespace Controller
             database.addBoat(newBoat, _ownerPersonalId).Wait();
         }
 
-        public void deleteBoat(int id)
+        public override void deleteById(int id)
         {
             if(database.boatIdExist(id, _ownerPersonalId).Result)
             {

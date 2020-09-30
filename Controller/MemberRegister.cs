@@ -74,7 +74,7 @@ namespace Controller
             }
         }
 
-        public void deleteMemberByMemberId(int id)
+        public override void deleteById(int id)
         {
             if(database.memberIdExist(id).Result)
             {

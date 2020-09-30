@@ -9,5 +9,7 @@ namespace Controller
         public DatabaseApi database = new DatabaseApi(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
 
         public abstract int generateId();
+
+        public abstract void deleteById(int id);
     }
 }
