@@ -46,7 +46,9 @@ namespace workshop_2
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\nSomething went wrong. Try again:");
+                Console.ResetColor();
             }
 
             // string input;
@@ -72,16 +74,16 @@ namespace workshop_2
 
             if(!InputHandler.doesPIdExistInRegister(pId))
             {
-                // Console.Clear();
+        
                 Console.WriteLine("This personal number does not exist in the register. Please try again!");
                 updateMember();
             }
 
-            // Console.Clear();
+    
             Console.WriteLine("\nPlease enter an updated first name:");
             firstname = Console.ReadLine();
 
-            // Console.Clear();
+    
             Console.WriteLine("\nPlease enter an updated last name:");
             lastname = Console.ReadLine();
 
@@ -98,7 +100,7 @@ namespace workshop_2
         {
             //TODO: Delete by pid or memberid
             string pId;
-            // Console.Clear();
+    
 
             Console.WriteLine("Please enter personal id number on the member you want to delete:");
             pId = Console.ReadLine();
@@ -117,8 +119,9 @@ namespace workshop_2
             }
             else
             {
-                // Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Something went wrong. Try again:");
+                Console.ResetColor();
             }
 
         }
@@ -151,7 +154,9 @@ namespace workshop_2
             if(InputHandler.convertToDouble(lengthString) == 0)
             {
                 //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
+                Console.ResetColor();
                 addBoatToMember();
             }
             boatRegister.addBoat(boatType, InputHandler.convertToDouble(lengthString));
@@ -191,7 +196,9 @@ namespace workshop_2
             if(InputHandler.convertToInt(idString) == 0)
             {
                 //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wrong input provided. Please enter a number above zero.");
+                Console.ResetColor();
                 deleteBoatFromMember();
             }
             int id = InputHandler.convertToInt(idString);
@@ -207,7 +214,9 @@ namespace workshop_2
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error when trying to delete. The boat with the id " + idString + " doesn't exist.");
+                Console.ResetColor();
             }
 
         }
@@ -294,8 +303,6 @@ namespace workshop_2
 
             Member selectedMember =  Register.getMemberBySsn(pId);
 
-            // Console.Clear();
-
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("\nFull name: " + selectedMember.FirstName + " " +  selectedMember.LastName);
             Console.WriteLine("MemberId: " + selectedMember.MemberId);
@@ -321,7 +328,6 @@ namespace workshop_2
         }
         public int showMemberList()
         {
-            // Console.Clear();
             Console.WriteLine("Choose which type of list you want to view:");
             Console.WriteLine("9. Compact list");
             Console.WriteLine("10. Verbose list");
