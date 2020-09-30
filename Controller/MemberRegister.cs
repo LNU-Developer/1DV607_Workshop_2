@@ -116,6 +116,10 @@ namespace Controller
             identity = identity.Replace("-", "");
             identity = identity.Replace("+", "");
 
+            if (identity.Length == 12) {
+                identity = identity.Substring(2);
+            }
+
             double[] chars = new double[10];
 
             for (int i = 0; i<10; i=i+2)

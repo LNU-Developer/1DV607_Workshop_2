@@ -36,23 +36,23 @@ namespace workshop_2
         {
             MemberRegister Register = new MemberRegister();
              //TODO: Fix Personal ID wrong input handling
-
+            Console.Clear();
             if(!Register.IsSwedishSsn(id))
             {
-                Console.Clear();
+                // Console.Clear();
                 Console.WriteLine("\nThis is not a correct personal number.");
                 return false;
             }
 
             if(!doesPIdExistInRegister(id) && !idExists)
             {
-                Console.Clear();
+                // Console.Clear();
                 Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
                 return false;
             }
             else if(doesPIdExistInRegister(id) && idExists)
             {
-                Console.Clear();
+                // Console.Clear();
                 Console.WriteLine("\nA member with this personal number already exists in the register.");
                 return false;
             }

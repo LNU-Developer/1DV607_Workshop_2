@@ -268,7 +268,39 @@ namespace workshop_2
     }
         
         public void showMemberInfo() {
-            Console.WriteLine("showmemberinfo to be implemented");
+            string pId;
+
+            Console.WriteLine("Please enter personal id number on the member you want to show:");
+            pId = Console.ReadLine();
+
+            if(!InputHandler.isCorrectInputOfSsn(pId)) showMemberInfo();
+
+            Member selectedMember =  Register.getMemberBySsn(pId);
+
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("Full name: " + selectedMember.FirstName + " " +  selectedMember.LastName);
+            Console.WriteLine("MemberId: " + selectedMember.MemberId);
+
+             Console.WriteLine("Boatinformation:");
+
+            BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
+               int count = 0;
+               foreach (Boat boat in boatRegister.Boats)
+               {
+                   count += 1;
+                   Console.WriteLine();
+                   Console.WriteLine(count + ". Boat type: " + boat.Type);
+                   Console.WriteLine("   Boat length: " + boat.Length);
+                   Console.WriteLine("   Boat id: " + boat.BoatId);
+                   Console.WriteLine("__________");
+               }
+
+               
+               Console.ResetColor();
+               Console.WriteLine("═══════════════════════════════════════════");
+
         }
         public int showMemberList()
         {
@@ -322,7 +354,7 @@ namespace workshop_2
                BoatRegister boatRegister = new BoatRegister(member.PersonalId);
 
                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-               Console.WriteLine("Fullname: " + member.FullName);
+               Console.WriteLine("Full name: " + member.FullName);
                Console.WriteLine("Personal id: " + member.PersonalId);
                Console.WriteLine("Member id: " + member.MemberId);
                Console.WriteLine("Boatinformation:");
