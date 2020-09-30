@@ -62,7 +62,7 @@ namespace workshop_2
 
         }
 
-      public void updateMember()
+        public void updateMember()
         {
             string firstname;
             string lastname;
@@ -267,6 +267,9 @@ namespace workshop_2
             }
     }
         
+        public void showMemberInfo() {
+            Console.WriteLine("showmemberinfo to be implemented");
+        }
         public int showMemberList()
         {
             Console.Clear();

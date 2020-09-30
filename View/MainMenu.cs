@@ -16,7 +16,7 @@ namespace workshop_2
             Console.WriteLine("5. Add boat to member");
             Console.WriteLine("6. Remove boat from member");
             Console.WriteLine("7. Update boat information");
-            // Console.WriteLine("8. Show information about member");
+            Console.WriteLine("8. Show information about member");
             Console.WriteLine("0. Exit program");
 
             string input = Console.ReadLine();
@@ -38,6 +38,7 @@ namespace workshop_2
              {
                  case 1:
                     SubMenu.registerMember();
+                     startProgram();
                  break;
                  case 2:
                     SubMenu.deleteMember();
@@ -62,6 +63,10 @@ namespace workshop_2
                 break;
                 case 7:
                     SubMenu.updateBoat();
+                    startProgram();
+                break;
+                    case 8:
+                    SubMenu.showMemberInfo();
                     startProgram();
                 break;
                 case 9:
