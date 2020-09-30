@@ -44,7 +44,6 @@ namespace workshop_2
                 Console.WriteLine("Something went wrong. Try again:");
             }
 
-
             // string input;
             // Console.WriteLine("Are these credentials correct:");
             // Console.WriteLine("First name: " + firstName);
@@ -57,6 +56,26 @@ namespace workshop_2
 
         }
 
+      public void updateMember()
+        {
+            string firstname;
+            string lastname;
+            string pId;
+
+            Console.Clear();
+            Console.WriteLine("Please enter your personal id nr:");
+            pId = Console.ReadLine();
+
+            Console.Clear();
+            Console.WriteLine("Please enter an updated first name:");
+            firstname = Console.ReadLine();
+
+            Console.Clear();
+            Console.WriteLine("Please enter an updated last name:");
+            lastname = Console.ReadLine();
+
+            Register.updateMember(firstname, lastname, pId);
+        }
         public void deleteMember()
         {
             //TODO: Delete by pid or memberid

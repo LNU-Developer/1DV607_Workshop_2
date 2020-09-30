@@ -48,7 +48,7 @@ namespace workshop_2
                 break;
                 case 4:
                      Console.Clear();
-                     Console.WriteLine("Update member");
+                     SubMenu.updateMember();
                      startProgram();
                 break;
                 case 5:
