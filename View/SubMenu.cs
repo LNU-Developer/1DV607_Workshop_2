@@ -62,9 +62,15 @@ namespace workshop_2
             string lastname;
             string pId;
 
-            Console.Clear();
             Console.WriteLine("Please enter your personal id nr:");
             pId = Console.ReadLine();
+
+            if(!InputHandler.doesPIdExistInRegister(pId))
+            {
+                Console.Clear();
+                Console.WriteLine("This personal number does not exist in the register. Please try again!");
+                updateMember();
+            }
 
             Console.Clear();
             Console.WriteLine("Please enter an updated first name:");
@@ -76,6 +82,7 @@ namespace workshop_2
 
             Register.updateMember(firstname, lastname, pId);
         }
+
         public void deleteMember()
         {
             //TODO: Delete by pid or memberid
