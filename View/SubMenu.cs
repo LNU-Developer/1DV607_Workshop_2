@@ -155,7 +155,6 @@ namespace workshop_2
             string lengthString = Console.ReadLine();
             if(InputHandler.convertToDouble(lengthString) == 0)
             {
-                //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
                 Console.ResetColor();
@@ -199,30 +198,29 @@ namespace workshop_2
             string idString = Console.ReadLine();
             if(InputHandler.convertToInt(idString) == 0)
             {
-                //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wrong input provided. Please enter a number above zero.");
                 Console.ResetColor();
                 deleteBoatFromMember();
-            }
-            int id = InputHandler.convertToInt(idString);
-            if(boatRegister.isBoat(id))
-            {
-                boatRegister.deleteById(id);
+            } else {
+                int id = InputHandler.convertToInt(idString);
+                if(boatRegister.isBoat(id))
+                {
+                    boatRegister.deleteById(id);
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\nSuccessfully deleted the boat with the id " + idString + " from the selected member.");
-                Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nSuccessfully deleted the boat with the id " + idString + " from the selected member.");
+                    Console.ResetColor();
 
-                Console.WriteLine("\n═══════════════════════════════════════════");
+                    Console.WriteLine("\n═══════════════════════════════════════════");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error when trying to delete. The boat with the id " + idString + " doesn't exist.");
+                    Console.ResetColor();
+                }
             }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error when trying to delete. The boat with the id " + idString + " doesn't exist.");
-                Console.ResetColor();
-            }
-
         }
 
         public void updateBoat()
@@ -257,44 +255,44 @@ namespace workshop_2
 
             if(InputHandler.convertToInt(idString) == 0)
             {
-                //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
                 Console.WriteLine("Wrong input provided. Please enter a number above zero.");
                 updateBoat();
-            }
-            int id = InputHandler.convertToInt(idString);
+            } else {
+                int id = InputHandler.convertToInt(idString);
 
-            if(boatRegister.isBoat(id))
-            {
-                Console.WriteLine("\nPlease pick from the selected boat types:");
-                Console.WriteLine("1. Sailboat");
-                Console.WriteLine("2. Motorsailer");
-                Console.WriteLine("3. Kayak");
-                Console.WriteLine("4. Other");
-
-                string boatTypeString = Console.ReadLine();
-                if(!InputHandler.isCorrectMenuInput(boatTypeString, 1, 4)) addBoatToMember();
-
-                BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
-                Console.WriteLine("\nPlease type in the length of the boat:");
-                string lengthString = Console.ReadLine();
-                if(InputHandler.convertToDouble(lengthString) == 0)
+                if(boatRegister.isBoat(id))
                 {
-                    //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
-                    Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
-                    updateBoat();
-                }
-                
-                boatRegister.updateBoat(id, boatType, InputHandler.convertToDouble(lengthString));
+                    Console.WriteLine("\nPlease pick from the selected boat types:");
+                    Console.WriteLine("1. Sailboat");
+                    Console.WriteLine("2. Motorsailer");
+                    Console.WriteLine("3. Kayak");
+                    Console.WriteLine("4. Other");
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\nSuccessfully updated the boat with the id " + idString + " from the selected member.");
-                Console.ResetColor();
-                Console.WriteLine("\n═══════════════════════════════════════════");
-            }
-            else
-            {
-                Console.WriteLine("Error when trying to update. The boat with the id " + idString + " doesn't exist.");
-            }
+                    string boatTypeString = Console.ReadLine();
+                    if(!InputHandler.isCorrectMenuInput(boatTypeString, 1, 4)) addBoatToMember();
+
+                    BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
+                    Console.WriteLine("\nPlease type in the length of the boat:");
+                    string lengthString = Console.ReadLine();
+                    if(InputHandler.convertToDouble(lengthString) == 0)
+                    {
+                        //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
+                        Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
+                        updateBoat();
+                    }
+                    
+                    boatRegister.updateBoat(id, boatType, InputHandler.convertToDouble(lengthString));
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nSuccessfully updated the boat with the id " + idString + " from the selected member.");
+                    Console.ResetColor();
+                    Console.WriteLine("\n═══════════════════════════════════════════");
+                }
+                else
+                {
+                    Console.WriteLine("Error when trying to update. The boat with the id " + idString + " doesn't exist.");
+                }
+            }     
     }
         
         public void showMemberInfo() {
