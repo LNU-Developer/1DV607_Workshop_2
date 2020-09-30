@@ -8,7 +8,7 @@ namespace workshop_2
         public void startProgram()
         {
             Console.WriteLine("\nWelcome to the Boat Club!");
-            Console.WriteLine("Please choose what you want to do next (0-4):");
+            Console.WriteLine("Please choose what you want to do next (0-8):");
             Console.WriteLine("1. Register member");
             Console.WriteLine("2. Delete member");
             Console.WriteLine("3. Show member list");
@@ -16,12 +16,13 @@ namespace workshop_2
             Console.WriteLine("5. Add boat to member");
             Console.WriteLine("6. Remove boat from member");
             Console.WriteLine("7. Update boat information");
+            // Console.WriteLine("8. Show information about member");
             Console.WriteLine("0. Exit program");
 
             string input = Console.ReadLine();
-            if(!InputHandler.isCorrectMenuInput(input, 0, 9))
+            if(!InputHandler.isCorrectMenuInput(input, 0, 10))
             {
-                handleInput(10);
+                handleInput(11);
             }
             else
             {
@@ -63,11 +64,11 @@ namespace workshop_2
                     SubMenu.updateBoat();
                     startProgram();
                 break;
-                case 8:
+                case 9:
                     SubMenu.showCompactList();
                     startProgram();
                 break;
-                case 9:
+                case 10:
                     SubMenu.showVerboseList();
                     startProgram();
                 break;

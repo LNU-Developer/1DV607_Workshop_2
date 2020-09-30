@@ -271,12 +271,12 @@ namespace workshop_2
         {
             Console.Clear();
             Console.WriteLine("Choose which type of list you want to view:");
-            Console.WriteLine("8. Compact list");
-            Console.WriteLine("9. Verbose list");
+            Console.WriteLine("9. Compact list");
+            Console.WriteLine("10. Verbose list");
             string input = Console.ReadLine();
-            if(!InputHandler.isCorrectMenuInput(input, 8, 9))
+            if(!InputHandler.isCorrectMenuInput(input, 9, 10))
             {
-                return 10;
+                return 11;
             }
             else
             {
