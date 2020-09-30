@@ -18,6 +18,7 @@ namespace Controller
         {
             if(!database.memberExist(personalId).Result)
             {
+                if(!IsSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
                 Member newMember = new Member
                 {
                     FirstName = firstName,
@@ -36,6 +37,7 @@ namespace Controller
 
         public Member getMemberBySsn(string id)
         {
+
             id = id.Replace("-", "");
             id = id.Replace("+", "");
 
@@ -86,6 +88,8 @@ namespace Controller
         {
             if(database.memberExist(personalId).Result)
             {
+                if(!IsSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+
                 Member newMember = new Member
                 {
                     FirstName = firstName,

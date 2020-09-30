@@ -8,7 +8,7 @@ namespace workshop_2
     class SubMenu
     {
         //TODO: Kolla ska vissa metoder finnas i MemberRegister i model istället? (doesPIdExistInRegister)
-        public MemberRegister Register { get; }
+        public MemberRegister MemberRegister { get; }
 
         public void registerMember()
         {
@@ -35,7 +35,7 @@ namespace workshop_2
             Console.WriteLine("\nPlease enter last name:");
             lastName = Console.ReadLine();
 
-            Register.addMember(firstName, lastName, pId);
+            MemberRegister.addMember(firstName, lastName, pId);
 
             if(InputHandler.doesPIdExistInRegister(pId))
             {
@@ -74,20 +74,20 @@ namespace workshop_2
 
             if(!InputHandler.doesPIdExistInRegister(pId))
             {
-        
+
                 Console.WriteLine("This personal number does not exist in the register. Please try again!");
                 updateMember();
             }
 
-    
+
             Console.WriteLine("\nPlease enter an updated first name:");
             firstname = Console.ReadLine();
 
-    
+
             Console.WriteLine("\nPlease enter an updated last name:");
             lastname = Console.ReadLine();
 
-            Register.updateMember(firstname, lastname, pId);
+            MemberRegister.updateMember(firstname, lastname, pId);
 
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -101,7 +101,7 @@ namespace workshop_2
             //TODO: Delete by pid or memberid
             //TODO: Delete all boats aswell
             string pId;
-    
+
 
             Console.WriteLine("Please enter personal id number on the member you want to delete:");
             pId = Console.ReadLine();
@@ -109,7 +109,7 @@ namespace workshop_2
             if(!InputHandler.isCorrectInputOfSsn(pId)) deleteMember();
 
             //TODO: Are you sure you want to delete this member: Visa memberInfo.
-            Register.deleteMemberBySsn(pId);
+            MemberRegister.deleteMemberBySsn(pId);
 
             if(!InputHandler.doesPIdExistInRegister(pId))
             {
@@ -137,7 +137,7 @@ namespace workshop_2
 
             if(!InputHandler.isCorrectInputOfSsn(pId)) addBoatToMember();
 
-            Member selectedMember =  Register.getMemberBySsn(pId);
+            Member selectedMember =  MemberRegister.getMemberBySsn(pId);
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
 
             Console.WriteLine("\nPlease pick from the selected boat types:");
@@ -179,7 +179,7 @@ namespace workshop_2
 
             if(!InputHandler.isCorrectInputOfSsn(pId)) deleteBoatFromMember();
 
-            Member selectedMember =  Register.getMemberBySsn(pId);
+            Member selectedMember =  MemberRegister.getMemberBySsn(pId);
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -233,7 +233,7 @@ namespace workshop_2
 
             if(!InputHandler.isCorrectInputOfSsn(pId)) updateBoat();
 
-            Member selectedMember =  Register.getMemberBySsn(pId);
+            Member selectedMember =  MemberRegister.getMemberBySsn(pId);
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -280,7 +280,7 @@ namespace workshop_2
                         Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
                         updateBoat();
                     }
-                    
+
                     boatRegister.updateBoat(id, boatType, InputHandler.convertToDouble(lengthString));
 
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -292,9 +292,9 @@ namespace workshop_2
                 {
                     Console.WriteLine("Error when trying to update. The boat with the id " + idString + " doesn't exist.");
                 }
-            }     
+            }
     }
-        
+
         public void showMemberInfo() {
             string pId;
 
@@ -303,7 +303,7 @@ namespace workshop_2
 
             if(!InputHandler.isCorrectInputOfSsn(pId)) showMemberInfo();
 
-            Member selectedMember =  Register.getMemberBySsn(pId);
+            Member selectedMember =  MemberRegister.getMemberBySsn(pId);
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("\nFull name: " + selectedMember.FirstName + " " +  selectedMember.LastName);
@@ -323,7 +323,7 @@ namespace workshop_2
                    Console.WriteLine("__________");
                }
 
-               
+
                Console.ResetColor();
                Console.WriteLine("═══════════════════════════════════════════");
 
@@ -348,7 +348,7 @@ namespace workshop_2
         {
             Console.WriteLine("Compact list\n");
 
-            foreach (Member member in Register.Members)
+            foreach (Member member in MemberRegister.Members)
             {
             BoatRegister boatRegister = new BoatRegister(member.PersonalId);
 
@@ -367,13 +367,13 @@ namespace workshop_2
                Console.WriteLine("═══════════════════════════════════════════");
             }
         }
-        
+
         public void showVerboseList()
         {
 
             Console.WriteLine("Verbose list\n");
 
-            foreach (Member member in Register.Members)
+            foreach (Member member in MemberRegister.Members)
             {
                BoatRegister boatRegister = new BoatRegister(member.PersonalId);
 
@@ -398,10 +398,10 @@ namespace workshop_2
                Console.WriteLine("═══════════════════════════════════════════");
             }
         }
-        
-        public SubMenu(MemberRegister register)
+
+        public SubMenu(MemberRegister memberRegister)
         {
-            Register = register;
+            MemberRegister = memberRegister;
         }
     }
 
