@@ -345,7 +345,7 @@ namespace workshop_2
             BoatRegister boatRegister = new BoatRegister(member.PersonalId);
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("Fullname: " + member.FullName);
+            Console.WriteLine("Full name: " + member.FullName);
             Console.WriteLine("Member id: " + member.MemberId);
 
             int count = 0;
