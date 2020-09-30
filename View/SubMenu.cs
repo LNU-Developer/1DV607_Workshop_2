@@ -39,15 +39,14 @@ namespace workshop_2
 
             if(InputHandler.doesPIdExistInRegister(pId))
             {
-                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Member registered successfully!");
                 Console.ResetColor();
+                Console.WriteLine("\n═══════════════════════════════════════════");
             }
             else
             {
-                Console.Clear();
-                Console.WriteLine("Something went wrong. Try again:");
+                Console.WriteLine("\nSomething went wrong. Try again:");
             }
 
             // string input;
@@ -68,32 +67,38 @@ namespace workshop_2
             string lastname;
             string pId;
 
-            Console.WriteLine("Please enter your personal id nr:");
+            Console.WriteLine("\nPlease enter your personal id nr:");
             pId = Console.ReadLine();
 
             if(!InputHandler.doesPIdExistInRegister(pId))
             {
-                Console.Clear();
+                // Console.Clear();
                 Console.WriteLine("This personal number does not exist in the register. Please try again!");
                 updateMember();
             }
 
-            Console.Clear();
-            Console.WriteLine("Please enter an updated first name:");
+            // Console.Clear();
+            Console.WriteLine("\nPlease enter an updated first name:");
             firstname = Console.ReadLine();
 
-            Console.Clear();
-            Console.WriteLine("Please enter an updated last name:");
+            // Console.Clear();
+            Console.WriteLine("\nPlease enter an updated last name:");
             lastname = Console.ReadLine();
 
             Register.updateMember(firstname, lastname, pId);
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nMember updated successfully");
+            Console.ResetColor();
+            Console.WriteLine("\n═══════════════════════════════════════════");
         }
 
         public void deleteMember()
         {
             //TODO: Delete by pid or memberid
             string pId;
-            Console.Clear();
+            // Console.Clear();
 
             Console.WriteLine("Please enter personal id number on the member you want to delete:");
             pId = Console.ReadLine();
@@ -105,14 +110,14 @@ namespace workshop_2
 
             if(!InputHandler.doesPIdExistInRegister(pId))
             {
-                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Member deleted successfully!");
+                Console.WriteLine("\nMember deleted successfully!");
                 Console.ResetColor();
+                Console.WriteLine("\n═══════════════════════════════════════════");
             }
             else
             {
-                Console.Clear();
+                // Console.Clear();
                 Console.WriteLine("Something went wrong. Try again:");
             }
 
@@ -131,7 +136,7 @@ namespace workshop_2
             Member selectedMember =  Register.getMemberBySsn(pId);
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
 
-            Console.WriteLine("Please pick from the selected boat types:");
+            Console.WriteLine("\nPlease pick from the selected boat types:");
             Console.WriteLine("1. Sailboat");
             Console.WriteLine("2. Motorsailer");
             Console.WriteLine("3. Kayak");
@@ -141,7 +146,7 @@ namespace workshop_2
             if(!InputHandler.isCorrectMenuInput(boatTypeString, 1, 4)) addBoatToMember();
 
             BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
-            Console.WriteLine("Please type in the length of the boat:");
+            Console.WriteLine("\nPlease type in the length of the boat:");
             string lengthString = Console.ReadLine();
             if(InputHandler.convertToDouble(lengthString) == 0)
             {
@@ -150,7 +155,10 @@ namespace workshop_2
                 addBoatToMember();
             }
             boatRegister.addBoat(boatType, InputHandler.convertToDouble(lengthString));
-            Console.WriteLine("Successfully added the " + boatType + " to the selected member.");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nSuccessfully added the " + boatType + " to the selected member.");
+            Console.ResetColor();
+            Console.WriteLine("\n═══════════════════════════════════════════");
         }
 
         public void deleteBoatFromMember()
@@ -178,7 +186,7 @@ namespace workshop_2
                    Console.WriteLine("__________");
             }
             Console.ResetColor();
-            Console.WriteLine("Please enter the ID of the boat you want to remove.");
+            Console.WriteLine("\nPlease enter the ID of the boat you want to remove.");
             string idString = Console.ReadLine();
             if(InputHandler.convertToInt(idString) == 0)
             {
@@ -190,7 +198,12 @@ namespace workshop_2
             if(boatRegister.isBoat(id))
             {
                 boatRegister.deleteById(id);
-                Console.WriteLine("Successfully deleted the boat with the id " + idString + " from the selected member.");
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nSuccessfully deleted the boat with the id " + idString + " from the selected member.");
+                Console.ResetColor();
+
+                Console.WriteLine("\n═══════════════════════════════════════════");
             }
             else
             {
@@ -225,7 +238,7 @@ namespace workshop_2
             }
 
             Console.ResetColor();
-            Console.WriteLine("Please enter the ID of the boat you want to update.");
+            Console.WriteLine("\nPlease enter the ID of the boat you want to update.");
             string idString = Console.ReadLine();
 
 
@@ -239,7 +252,7 @@ namespace workshop_2
 
             if(boatRegister.isBoat(id))
             {
-                Console.WriteLine("Please pick from the selected boat types:");
+                Console.WriteLine("\nPlease pick from the selected boat types:");
                 Console.WriteLine("1. Sailboat");
                 Console.WriteLine("2. Motorsailer");
                 Console.WriteLine("3. Kayak");
@@ -249,7 +262,7 @@ namespace workshop_2
                 if(!InputHandler.isCorrectMenuInput(boatTypeString, 1, 4)) addBoatToMember();
 
                 BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
-                Console.WriteLine("Please type in the length of the boat:");
+                Console.WriteLine("\nPlease type in the length of the boat:");
                 string lengthString = Console.ReadLine();
                 if(InputHandler.convertToDouble(lengthString) == 0)
                 {
@@ -259,7 +272,11 @@ namespace workshop_2
                 }
                 
                 boatRegister.updateBoat(id, boatType, InputHandler.convertToDouble(lengthString));
-                Console.WriteLine("Successfully updated the boat with the id " + idString + " from the selected member.");
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nSuccessfully updated the boat with the id " + idString + " from the selected member.");
+                Console.ResetColor();
+                Console.WriteLine("\n═══════════════════════════════════════════");
             }
             else
             {
@@ -277,10 +294,10 @@ namespace workshop_2
 
             Member selectedMember =  Register.getMemberBySsn(pId);
 
-            Console.Clear();
+            // Console.Clear();
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("Full name: " + selectedMember.FirstName + " " +  selectedMember.LastName);
+            Console.WriteLine("\nFull name: " + selectedMember.FirstName + " " +  selectedMember.LastName);
             Console.WriteLine("MemberId: " + selectedMember.MemberId);
 
              Console.WriteLine("Boatinformation:");
@@ -304,7 +321,7 @@ namespace workshop_2
         }
         public int showMemberList()
         {
-            Console.Clear();
+            // Console.Clear();
             Console.WriteLine("Choose which type of list you want to view:");
             Console.WriteLine("9. Compact list");
             Console.WriteLine("10. Verbose list");
@@ -321,7 +338,6 @@ namespace workshop_2
 
         public void showCompactList()
         {
-            Console.Clear();
             Console.WriteLine("Compact list\n");
 
             foreach (Member member in Register.Members)
@@ -346,7 +362,7 @@ namespace workshop_2
         
         public void showVerboseList()
         {
-            Console.Clear();
+
             Console.WriteLine("Verbose list\n");
 
             foreach (Member member in Register.Members)
@@ -375,6 +391,10 @@ namespace workshop_2
             }
         }
         
+        // private void deleteAllMembersBoats()
+        // {
+
+        // }
         public SubMenu(MemberRegister register)
         {
             Register = register;

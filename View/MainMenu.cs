@@ -37,14 +37,17 @@ namespace workshop_2
              switch(input)
              {
                  case 1:
+                    Console.Clear();
                     SubMenu.registerMember();
                      startProgram();
                  break;
                  case 2:
+                    Console.Clear();
                     SubMenu.deleteMember();
                     startProgram();
                 break;
                 case 3:
+                    Console.Clear();
                     handleInput(SubMenu.showMemberList());
                     startProgram();
                 break;
@@ -54,26 +57,32 @@ namespace workshop_2
                      startProgram();
                 break;
                 case 5:
+                     Console.Clear();
                      SubMenu.addBoatToMember();
                      startProgram();
                 break;
                 case 6:
+                    Console.Clear();
                     SubMenu.deleteBoatFromMember();
                     startProgram();
                 break;
                 case 7:
+                    Console.Clear();
                     SubMenu.updateBoat();
                     startProgram();
                 break;
                     case 8:
+                    Console.Clear();
                     SubMenu.showMemberInfo();
                     startProgram();
                 break;
                 case 9:
+                    Console.Clear();
                     SubMenu.showCompactList();
                     startProgram();
                 break;
                 case 10:
+                    Console.Clear();
                     SubMenu.showVerboseList();
                     startProgram();
                 break;
