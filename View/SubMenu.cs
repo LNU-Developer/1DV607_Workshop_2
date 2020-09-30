@@ -21,7 +21,13 @@ namespace workshop_2
             Console.WriteLine("\nPlease enter your personal id number in 10 digits:");
             pId = Console.ReadLine();
 
+
             if(!InputHandler.isCorrectInputOfSsn(pId, true)) registerMember();
+
+            if (pId.Length == 12) {
+                pId = pId.Substring(2);
+            }
+
 
             Console.WriteLine("\nPlease enter first name:");
             firstName = Console.ReadLine();
@@ -193,7 +199,7 @@ namespace workshop_2
 
         }
 
-    public void updateBoat()
+        public void updateBoat()
     {
         //TODO: Fetch by member id or SSN
             string pId;
@@ -260,6 +266,7 @@ namespace workshop_2
                 Console.WriteLine("Error when trying to update. The boat with the id " + idString + " doesn't exist.");
             }
     }
+        
         public int showMemberList()
         {
             Console.Clear();
@@ -301,7 +308,7 @@ namespace workshop_2
                Console.WriteLine("═══════════════════════════════════════════");
             }
         }
-
+        
         public void showVerboseList()
         {
             Console.Clear();
@@ -332,6 +339,7 @@ namespace workshop_2
                Console.WriteLine("═══════════════════════════════════════════");
             }
         }
+        
         public SubMenu(MemberRegister register)
         {
             Register = register;

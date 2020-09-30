@@ -36,6 +36,7 @@ namespace workshop_2
         {
             MemberRegister Register = new MemberRegister();
              //TODO: Fix Personal ID wrong input handling
+
             if(!Register.IsSwedishSsn(id))
             {
                 Console.Clear();
