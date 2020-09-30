@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using EnumBoatTypes;
+using Model;
 
-namespace BoatHandler
+namespace Controller
 {
-    class BoatRegister
+    class BoatRegister : Register
     {
-
-        BoatDatabaseApi database = new BoatDatabaseApi(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
         private string _ownerPersonalId;
         public IReadOnlyList<Boat> Boats
         {
@@ -23,7 +22,7 @@ namespace BoatHandler
             {
                 Type = boatType,
                 Length = length,
-                BoatId = generateBoatId()
+                BoatId = generateId()
             };
             database.addBoat(newBoat, _ownerPersonalId).Wait();
         }
@@ -74,7 +73,7 @@ namespace BoatHandler
             }
         }
 
-        private int generateBoatId()
+        public override int generateId()
         {
             Random a = new Random();
 

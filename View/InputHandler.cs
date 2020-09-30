@@ -1,5 +1,6 @@
 using System;
-using MembersHandler;
+using Model;
+using Controller;
 
 namespace workshop_2
 
@@ -28,46 +29,6 @@ namespace workshop_2
                 return false;
             }
 
-        }
-
-        public static int convertToInt(string input)
-        {
-            try
-            {
-                 int number = Convert.ToInt32(input);
-                 if(number > 0)
-                 {
-                    return number;
-                 }
-                 else
-                 {
-                     return 0;
-                 }
-            }
-            catch
-            {
-                return 0;
-            }
-        }
-
-        public static double convertToDouble(string input)
-        {
-            try
-            {
-                 double length = Convert.ToDouble(input);
-                 if(length > 0)
-                 {
-                     return length;
-                 }
-                 else
-                 {
-                     return 0;
-                 }
-            }
-            catch
-            {
-                return 0;
-            }
         }
 
         public static bool isCorrectInputOfSsn (string id, bool idExists = false)
@@ -115,6 +76,46 @@ namespace workshop_2
             else
             {
                 return false;
+            }
+        }
+
+                public static int convertToInt(string input)
+        {
+            try
+            {
+                 int number = Convert.ToInt32(input);
+                 if(number > 0)
+                 {
+                    return number;
+                 }
+                 else
+                 {
+                     return 0;
+                 }
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public static double convertToDouble(string input)
+        {
+            try
+            {
+                 double length = Convert.ToDouble(input);
+                 if(length > 0)
+                 {
+                     return length;
+                 }
+                 else
+                 {
+                     return 0;
+                 }
+            }
+            catch
+            {
+                return 0;
             }
         }
     }

@@ -1,7 +1,7 @@
 using System;
-using MembersHandler;
-using BoatHandler;
+using Controller;
 using EnumBoatTypes;
+using Model;
 
 namespace workshop_2
 {

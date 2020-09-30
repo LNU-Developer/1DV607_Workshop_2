@@ -1,9 +1,9 @@
 using System;
 using System.Text.RegularExpressions;
 using Google.Cloud.Firestore;
-using BoatHandler;
+using Controller;
 
-namespace MembersHandler
+namespace Model
 {
     [FirestoreData]
     class Member

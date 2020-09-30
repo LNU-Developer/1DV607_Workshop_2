@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Model;
 
-namespace MembersHandler
+namespace Controller
 {
-    class MemberRegister
+    class MemberRegister : Register
     {
-        MemberDatabaseApi database = new MemberDatabaseApi(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
         public IReadOnlyList<Member> Members
         {
             get
@@ -23,7 +23,7 @@ namespace MembersHandler
                     FirstName = firstName,
                     LastName = lastName,
                     PersonalId = personalId,
-                    MemberId = generateMemberId()
+                    MemberId = generateId()
                 };
                 database.addMember(newMember).Wait();
             }
@@ -97,7 +97,7 @@ namespace MembersHandler
             }
         }
 
-        private int generateMemberId()
+        public override int generateId()
         {
             Random a = new Random();
 
@@ -109,7 +109,7 @@ namespace MembersHandler
 
             return newMemberId;
         }
-    
+
             //Lunas Algorithm
         public bool IsSwedishSsn(string identity)
         {
