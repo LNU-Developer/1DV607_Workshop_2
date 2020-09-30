@@ -99,6 +99,7 @@ namespace workshop_2
         public void deleteMember()
         {
             //TODO: Delete by pid or memberid
+            //TODO: Delete all boats aswell
             string pId;
     
 
@@ -150,6 +151,7 @@ namespace workshop_2
 
             BoatTypes boatType = (BoatTypes)Int32.Parse(boatTypeString);
             Console.WriteLine("\nPlease type in the length of the boat:");
+
             string lengthString = Console.ReadLine();
             if(InputHandler.convertToDouble(lengthString) == 0)
             {
@@ -158,12 +160,14 @@ namespace workshop_2
                 Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
                 Console.ResetColor();
                 addBoatToMember();
+            } else {
+                boatRegister.addBoat(boatType, InputHandler.convertToDouble(lengthString));
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nSuccessfully added the " + boatType + " to the selected member.");
+                Console.ResetColor();
+                Console.WriteLine("\n═══════════════════════════════════════════");
             }
-            boatRegister.addBoat(boatType, InputHandler.convertToDouble(lengthString));
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nSuccessfully added the " + boatType + " to the selected member.");
-            Console.ResetColor();
-            Console.WriteLine("\n═══════════════════════════════════════════");
+
         }
 
         public void deleteBoatFromMember()
@@ -397,10 +401,6 @@ namespace workshop_2
             }
         }
         
-        // private void deleteAllMembersBoats()
-        // {
-
-        // }
         public SubMenu(MemberRegister register)
         {
             Register = register;
