@@ -91,16 +91,20 @@ namespace workshop_2
         public void deleteMember()
         {
             //TODO: Delete by pid or memberid
-            //TODO: Delete all boats aswell
             string pId;
 
             Console.WriteLine("Please enter personal id number on the member you want to delete:");
             pId = Console.ReadLine();
 
-            if(!InputHandler.isCorrectInputOfSsn(pId)) deleteMember();
-
-            //TODO: Are you sure you want to delete this member: show member info.
-            MemberRegister.deleteMemberBySsn(pId);
+            if(!InputHandler.isCorrectInputOfSsn(pId))
+            {
+                deleteMember();
+            }
+            else 
+            {
+                //TODO: Are you sure you want to delete this member: show member info.
+                MemberRegister.deleteMemberBySsn(pId);
+            }
 
             if(!InputHandler.doesPIdExistInRegister(pId))
             {
