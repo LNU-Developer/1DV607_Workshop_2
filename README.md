@@ -1,6 +1,3 @@
-
-
-
 # BoatClub (Workshop 2)
 The grade 2 assignment for Workshop 2 in 1DV607 at LNU.
 
@@ -19,3 +16,8 @@ The grade 2 assignment for Workshop 2 in 1DV607 at LNU.
 - Navigate to the folder where you downloaded the repository
 - Run command `dotnet run`.
 - Interact with the menu and use the application.
+
+### General use (alternative)
+- Extract file "BoatClub.zip".
+- Run file "workshop_2.exe".
+- Enjoy!
