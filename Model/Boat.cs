@@ -49,10 +49,5 @@ namespace Model
                 _boatId=value;
             }
         }
-
-        public override string ToString()
-        {
-            return $"Length: {Length} \nType: {Type} \nId: {_boatId} ";
-        }
     }
 }
