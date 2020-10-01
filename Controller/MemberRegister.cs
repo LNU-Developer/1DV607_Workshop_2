@@ -119,7 +119,10 @@ namespace Controller
             identity = identity.Replace("-", "");
             identity = identity.Replace("+", "");
 
-            if (!Int32.TryParse(identity, out int j)) return false;
+            foreach (char c in identity)
+            {
+                if (c < '0' || c > '9') return false;
+            }
 
 
             if (identity.Length == 12) {
