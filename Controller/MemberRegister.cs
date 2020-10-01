@@ -119,6 +119,9 @@ namespace Controller
             identity = identity.Replace("-", "");
             identity = identity.Replace("+", "");
 
+            if (!Int32.TryParse(identity, out int j)) return false;
+
+
             if (identity.Length == 12) {
                 identity = identity.Substring(2);
             }
