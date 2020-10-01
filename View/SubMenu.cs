@@ -189,6 +189,14 @@ namespace workshop_2
                 Console.WriteLine("   Boat id: " + boat.BoatId);
                 Console.WriteLine("__________");
             }
+
+            if (count == 0) 
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("This member has no boats in register.");
+                return;
+            }
+
             Console.ResetColor();
             Console.WriteLine("\nPlease enter the ID of the boat you want to remove.");
             string idString = Console.ReadLine();
