@@ -229,6 +229,7 @@ namespace workshop_2
             if(!InputHandler.isCorrectInputOfSsn(pId)) updateBoat();
 
             Member selectedMember =  MemberRegister.getMemberBySsn(pId);
+
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -241,6 +242,13 @@ namespace workshop_2
                 Console.WriteLine("   Boat length: " + boat.Length);
                 Console.WriteLine("   Boat id: " + boat.BoatId);
                 Console.WriteLine("__________");
+            }
+
+            if (count == 0) 
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("This member has no boats in register.");
+                return;
             }
 
             Console.ResetColor();
@@ -290,7 +298,7 @@ namespace workshop_2
                     Console.WriteLine("Error when trying to update. The boat with the id " + idString + " doesn't exist.");
                 }
             }
-    }
+        }
 
         public void showMemberInfo() 
         {
