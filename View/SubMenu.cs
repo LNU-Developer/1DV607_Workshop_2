@@ -18,33 +18,36 @@ namespace workshop_2
             Console.WriteLine("\nPlease enter your personal id number in 10 digits:");
             pId = Console.ReadLine();
 
-            if(!InputHandler.isCorrectInputOfSsn(pId, true)) registerMember();
-
-            if (pId.Length == 12) {
-                pId = pId.Substring(2);
-            }
-
-            Console.WriteLine("\nPlease enter first name:");
-            firstName = Console.ReadLine();
-
-            Console.WriteLine("\nPlease enter last name:");
-            lastName = Console.ReadLine();
-
-            //TODO: Are these credentials correct: show credentials.
-            MemberRegister.addMember(firstName, lastName, pId);
-
-            if(InputHandler.doesPIdExistInRegister(pId))
+            if(!InputHandler.isCorrectInputOfSsn(pId, true)) 
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Member registered successfully!");
-                Console.ResetColor();
-                Console.WriteLine("\n═══════════════════════════════════════════");
+                registerMember();
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nSomething went wrong. Try again:");
-                Console.ResetColor();
+                if (pId.Length == 12) pId = pId.Substring(2);
+                
+                Console.WriteLine("\nPlease enter first name:");
+                firstName = Console.ReadLine();
+
+                Console.WriteLine("\nPlease enter last name:");
+                lastName = Console.ReadLine();
+
+                //TODO: Are these credentials correct: show credentials.
+                MemberRegister.addMember(firstName, lastName, pId);
+
+                if(InputHandler.doesPIdExistInRegister(pId))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Member registered successfully!");
+                    Console.ResetColor();
+                    Console.WriteLine("\n═══════════════════════════════════════════");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nSomething went wrong. Try again:");
+                    Console.ResetColor();
+                }
             }
 
             // string input;
