@@ -18,6 +18,7 @@ The grade 2 assignment for Workshop 2 in 1DV607 at LNU.
 - Interact with the menu and use the application.
 
 ### General use (alternative)
+- Download file from "https://drive.google.com/file/d/1WgFwh36VI1iytud1L5mcbQ__lsRr2RoL/view?usp=sharing"
 - Extract file "BoatClub.zip".
 - Run file "workshop_2.exe".
 - Enjoy!
