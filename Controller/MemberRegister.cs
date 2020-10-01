@@ -18,7 +18,7 @@ namespace Controller
         {
             if(!database.memberExist(personalId).Result)
             {
-                if(!IsSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+                if(!isSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
                 Member newMember = new Member
                 {
                     FirstName = firstName,
@@ -87,7 +87,7 @@ namespace Controller
         {
             if(database.memberExist(personalId).Result)
             {
-                if(!IsSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+                if(!isSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
 
                 Member newMember = new Member
                 {
@@ -114,7 +114,7 @@ namespace Controller
         }
 
         //Lunas Algorithm
-        public bool IsSwedishSsn(string identity)
+        public bool isSwedishSsn(string identity)
         {
             identity = identity.Replace("-", "");
             identity = identity.Replace("+", "");
@@ -127,11 +127,11 @@ namespace Controller
 
             for (int i = 0; i<10; i=i+2)
             {
-                chars[i] = SumDigits(Char.GetNumericValue(identity[i])*2);
+                chars[i] = sumDigits(Char.GetNumericValue(identity[i])*2);
             }
             for (int i = 1; i<10; i=i+2)
             {
-                chars[i] = SumDigits(Char.GetNumericValue(identity[i]));
+                chars[i] = sumDigits(Char.GetNumericValue(identity[i]));
             }
 
             double sum = 0;
@@ -165,7 +165,7 @@ namespace Controller
             }
         }
 
-        private double SumDigits(double number)
+        private double sumDigits(double number)
         {
             double sum = 0;
             string temp = number.ToString();

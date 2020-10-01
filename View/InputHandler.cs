@@ -34,7 +34,7 @@ namespace workshop_2
         {
             MemberRegister Register = new MemberRegister();
 
-            if(!Register.IsSwedishSsn(id))
+            if(!Register.isSwedishSsn(id))
             {
                 Console.WriteLine("\nThis is not a correct personal number.");
                 return false;
