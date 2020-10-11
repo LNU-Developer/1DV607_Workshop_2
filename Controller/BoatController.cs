@@ -31,8 +31,6 @@ namespace Controller.boat
         public void RemoveBoat(MemberRegister memberRegister, BoatView boatView)
         {
             //TODO: Fetch by member id or SSN
-
-            BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
             string pId = boatView.InputSsn();
 
             if(!InputHandler.IsCorrectInputOfSsn(pId)) RemoveBoat(memberRegister, boatView);

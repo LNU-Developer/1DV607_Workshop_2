@@ -34,22 +34,14 @@ namespace Controller
         {
             MemberRegister Register = new MemberRegister();
 
-            int count = 0;
             foreach (Member member in Register.Members)
             {
                 if(member.PersonalId == pId)
                 {
-                    count++;
+                    return true;
                 }
             }
-
-            if(count == 1) {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static int ConvertToInt(string input)
