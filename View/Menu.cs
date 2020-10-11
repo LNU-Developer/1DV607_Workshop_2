@@ -1,5 +1,4 @@
 using System;
-
 namespace workshop_2
 {
     class Menu
