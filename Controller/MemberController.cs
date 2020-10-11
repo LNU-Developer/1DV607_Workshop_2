@@ -73,10 +73,11 @@ namespace workshop_2
         {
             foreach (Member member in memberRegister.Members)
             {
-            BoatRegister boatRegister = new BoatRegister(member.PersonalId);
-            memberView.PrintMember(member.FullName, member.MemberId.ToString());
-            memberView.PrintBoatTotal(boatRegister.Boats.Count);
+                BoatRegister boatRegister = new BoatRegister(member.PersonalId);
+                memberView.PrintMember(member.FullName, member.MemberId.ToString());
+                memberView.PrintBoatTotal(boatRegister.Boats.Count);
             }
+            memberView.PrintEndOfInformation();
         }
         public void ShowVerboseMemberList(MemberRegister memberRegister, MemberView memberView)
         {

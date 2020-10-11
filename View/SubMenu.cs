@@ -11,18 +11,19 @@ namespace workshop_2
             Console.WriteLine("Choose which type of list you want to view:");
             Console.WriteLine("1. Compact list");
             Console.WriteLine("2. Verbose list");
+            Console.WriteLine("0. Go back");
             Console.WriteLine("═══════════════════════════════════════════");
         }
-        public Input GetInput()
+        public MenuInput GetInput()
         {
             switch (System.Console.ReadKey().KeyChar)
             {
                 case '1':
-                    return Input.ShowCompactMemberList;
+                    return MenuInput.ShowCompactMemberList;
                 case '2':
-                    return Input.ShowVerboseMemberList;
+                    return MenuInput.ShowVerboseMemberList;
                 default:
-                    return Input.Unknown;
+                    return MenuInput.Unknown;
             }
         }
     }

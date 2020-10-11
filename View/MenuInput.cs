@@ -1,6 +1,6 @@
 namespace workshop_2
 {
-    public enum Input
+    public enum MenuInput
     {
         RegisterMember = 1,
         DeleteMember,

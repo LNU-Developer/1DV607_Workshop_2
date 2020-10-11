@@ -17,7 +17,8 @@ namespace workshop_2
                 MainController controller = new MainController();
                 MemberRegister memberRegister = new MemberRegister();
                 MemberView memberView = new MemberView();
-                while (controller.Start(menu, subMenu, memberController, memberRegister, memberView, boatController));
+                BoatView boatView = new BoatView();
+                while (controller.Start(menu, subMenu, memberController, memberRegister, memberView, boatController, boatView));
             }
             catch (System.Exception)
             {

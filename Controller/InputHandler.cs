@@ -7,29 +7,6 @@ namespace workshop_2
 {
     static class InputHandler
     {
-        public static bool isCorrectMenuInput(string input , int minValue, int maxValue)
-        {
-            try
-            {
-                if(Int32.Parse(input) >= minValue && Int32.Parse(input) <= maxValue)
-                {
-                    return true;
-                }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("\nWrong input provided. Please pick a number from the list");
-                    return false;
-                }
-            }
-            catch
-            {
-                Console.Clear();
-                Console.WriteLine("\nWrong input provided. Please pick a number from the list");
-                return false;
-            }
-        }
-
         public static bool isCorrectInputOfSsn (string id, bool idExists = false)
         {
             MemberRegister Register = new MemberRegister();

@@ -5,7 +5,7 @@ namespace workshop_2
     {
         public void DisplayMenu()
         {
-            Console.WriteLine("═══════════════════════════════════════════");
+            Console.WriteLine("\n═══════════════════════════════════════════");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nWelcome to the Boat Club!");
             Console.WriteLine("Please choose what you want to do next (0-8):\n");
@@ -22,30 +22,30 @@ namespace workshop_2
             Console.WriteLine("═══════════════════════════════════════════");
         }
 
-        public Input GetInput()
+        public MenuInput GetInput()
         {
             switch (System.Console.ReadKey().KeyChar)
             {
                 case '1':
-                    return Input.RegisterMember;
+                    return MenuInput.RegisterMember;
                 case '2':
-                    return Input.DeleteMember;
+                    return MenuInput.DeleteMember;
                 case '3':
-                    return Input.ShowMemberList;
+                    return MenuInput.ShowMemberList;
                 case '4':
-                    return Input.UpdateMemberInformation;
+                    return MenuInput.UpdateMemberInformation;
                 case '5':
-                    return Input.AddBoat;
+                    return MenuInput.AddBoat;
                 case '6':
-                    return Input.RemoveBoat;
+                    return MenuInput.RemoveBoat;
                 case '7':
-                    return Input.UpdateBoat;
+                    return MenuInput.UpdateBoat;
                 case '8':
-                    return Input.ShowMemberInformation;
+                    return MenuInput.ShowMemberInformation;
                 case '0':
-                    return Input.Exit;
+                    return MenuInput.Exit;
                 default:
-                    return Input.Unknown;
+                    return MenuInput.Unknown;
             }
         }
     }

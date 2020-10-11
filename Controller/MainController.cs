@@ -3,47 +3,47 @@ namespace workshop_2
 {
     class MainController
     {
-        public bool Start(Menu menu, SubMenu subMenu, MemberController memberController , MemberRegister memberRegister, MemberView memberView, BoatController boatController)
+        public bool Start(Menu menu, SubMenu subMenu, MemberController memberController , MemberRegister memberRegister, MemberView memberView, BoatController boatController, BoatView boatView)
         {
             menu.DisplayMenu();
-            Input menuInput = menu.GetInput();
+            MenuInput menuInput = menu.GetInput();
             switch(menuInput)
             {
-                case Input.RegisterMember:
+                case MenuInput.RegisterMember:
                     memberController.AddMember(memberRegister, memberView);
                     break;
-                case Input.DeleteMember:
+                case MenuInput.DeleteMember:
                     memberController.DeleteMember(memberRegister, memberView);
                     break;
-                case Input.ShowMemberList:
+                case MenuInput.ShowMemberList:
                     subMenu.DisplayMenu();
-                    Input subMenuInput = subMenu.GetInput();
-                    if(subMenuInput == Input.ShowCompactMemberList)
+                    MenuInput subMenuInput = subMenu.GetInput();
+                    if(subMenuInput == MenuInput.ShowCompactMemberList)
                     {
                         memberController.ShowCompactMemberList(memberRegister, memberView);
                     }
-                    else if(subMenuInput ==Input.ShowVerboseMemberList)
+                    else if(subMenuInput == MenuInput.ShowVerboseMemberList)
                     {
                         memberController.ShowVerboseMemberList(memberRegister, memberView);
                     }
                     break;
-                case Input.UpdateMemberInformation:
+                case MenuInput.UpdateMemberInformation:
                     memberController.UpdateMember(memberRegister, memberView);
                     break;
-                case Input.AddBoat:
-                    boatController.AddBoat();
+                case MenuInput.AddBoat:
+                    boatController.AddBoat(memberRegister, boatView);
                     break;
-                case Input.RemoveBoat:
-                    boatController.RemoveBoat();
+                case MenuInput.RemoveBoat:
+                    boatController.RemoveBoat(memberRegister, boatView);
                     break;
-                case Input.UpdateBoat:
-                    boatController.UpdateBoat();
+                case MenuInput.UpdateBoat:
+                    boatController.UpdateBoat(memberRegister, boatView);
                     break;
-                case Input.ShowMemberInformation:
+                case MenuInput.ShowMemberInformation:
                     memberController.ShowMember(memberRegister, memberView);
                     break;
                 }
-            return menuInput != Input.Exit;
+            return menuInput != MenuInput.Exit;
         }
     }
 }
