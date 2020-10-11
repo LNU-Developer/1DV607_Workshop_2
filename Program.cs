@@ -1,4 +1,5 @@
 ﻿using System;
+using Controller;
 
 namespace workshop_2
 {
@@ -14,7 +15,9 @@ namespace workshop_2
                 MemberController memberController = new MemberController();
                 BoatController boatController = new BoatController();
                 MainController controller = new MainController();
-                while (controller.Start(menu, subMenu, memberController, boatController));
+                MemberRegister memberRegister = new MemberRegister();
+                MemberView memberView = new MemberView();
+                while (controller.Start(menu, subMenu, memberController, memberRegister, memberView, boatController));
             }
             catch (System.Exception)
             {

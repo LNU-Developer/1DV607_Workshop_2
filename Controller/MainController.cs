@@ -3,13 +3,10 @@ namespace workshop_2
 {
     class MainController
     {
-        public bool Start(Menu menu, SubMenu subMenu, MemberController memberController, BoatController boatController)
+        public bool Start(Menu menu, SubMenu subMenu, MemberController memberController , MemberRegister memberRegister, MemberView memberView, BoatController boatController)
         {
             menu.DisplayMenu();
             Input menuInput = menu.GetInput();
-            MemberRegister memberRegister = new MemberRegister();
-            MemberView memberView = new MemberView();
-
             switch(menuInput)
             {
                 case Input.RegisterMember:
