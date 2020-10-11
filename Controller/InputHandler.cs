@@ -1,28 +1,27 @@
 using System;
 using Model;
-using Controller;
 
-namespace workshop_2
+namespace Controller
 
 {
     static class InputHandler
     {
-        public static bool isCorrectInputOfSsn (string id, bool idExists = false)
+        public static bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             MemberRegister Register = new MemberRegister();
 
-            if(!Register.isSwedishSsn(id))
+            if(!Register.IsSwedishSsn(id))
             {
                 Console.WriteLine("\nThis is not a correct personal number.");
                 return false;
             }
 
-            if(!doesPIdExistInRegister(id) && !idExists)
+            if(!DoesPIdExistInRegister(id) && !idExists)
             {
                 Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
                 return false;
             }
-            else if(doesPIdExistInRegister(id) && idExists)
+            else if(DoesPIdExistInRegister(id) && idExists)
             {
                 Console.WriteLine("\nA member with this personal number already exists in the register.");
                 return false;
@@ -31,7 +30,7 @@ namespace workshop_2
             return true;
         }
 
-        public static bool doesPIdExistInRegister(string pId)
+        public static bool DoesPIdExistInRegister(string pId)
         {
             MemberRegister Register = new MemberRegister();
 
@@ -53,7 +52,7 @@ namespace workshop_2
             }
         }
 
-        public static int convertToInt(string input)
+        public static int ConvertToInt(string input)
         {
             try
             {
@@ -73,7 +72,7 @@ namespace workshop_2
             }
         }
 
-        public static double convertToDouble(string input)
+        public static double ConvertToDouble(string input)
         {
             try
             {

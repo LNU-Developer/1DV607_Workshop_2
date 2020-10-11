@@ -1,17 +1,17 @@
-using Controller;
 using Model;
-namespace workshop_2
+using View.member;
+namespace Controller.member
 {
     class MemberController
     {
         public void AddMember(MemberRegister memberRegister, MemberView memberView)
         {
-            string pId = memberView.FetchSsn();
+            string pId = memberView.InputSsn();
 
-            string firstName = memberView.FetchFirstName();
-            string lastName = memberView.FetchLastName();
+            string firstName = memberView.InputFirstName();
+            string lastName = memberView.InputLastName();
 
-            if(!InputHandler.isCorrectInputOfSsn(pId, true))
+            if(!InputHandler.IsCorrectInputOfSsn(pId, true))
             {
                 AddMember(memberRegister, memberView);
             }
@@ -20,53 +20,53 @@ namespace workshop_2
                 if (pId.Length == 12) pId = pId.Substring(2);
 
                 //TODO: Are these credentials correct: show credentials.
-                memberRegister.addMember(firstName, lastName, pId);
+                memberRegister.AddMember(firstName, lastName, pId);
 
-                if(InputHandler.doesPIdExistInRegister(pId))
+                if(InputHandler.DoesPIdExistInRegister(pId))
                 {
-                    memberView.ActionSuccess();
+                    memberView.PrintActionSuccess();
                 }
                 else
                 {
-                    memberView.ActionFail();
+                    memberView.PrintActionFail();
                 }
             }
         }
         public void DeleteMember(MemberRegister memberRegister, MemberView memberView)
         {
-            string pId = memberView.FetchSsn();
+            string pId = memberView.InputSsn();
 
-            if(!InputHandler.isCorrectInputOfSsn(pId))
+            if(!InputHandler.IsCorrectInputOfSsn(pId))
             {
                 DeleteMember(memberRegister, memberView);
             }
             else
             {
-                memberRegister.deleteMemberBySsn(pId);
+                memberRegister.DeleteMemberBySsn(pId);
             }
 
-            if(!InputHandler.doesPIdExistInRegister(pId))
+            if(!InputHandler.DoesPIdExistInRegister(pId))
             {
-                memberView.ActionSuccess();
+                memberView.PrintActionSuccess();
             }
             else
             {
-                memberView.ActionFail();
+                memberView.PrintActionFail();
             }
         }
         public void UpdateMember(MemberRegister memberRegister, MemberView memberView)
         {
-            string pId = memberView.FetchSsn();
-            if(!InputHandler.doesPIdExistInRegister(pId))
+            string pId = memberView.InputSsn();
+            if(!InputHandler.DoesPIdExistInRegister(pId))
             {
-                memberView.SsnNotExisting();
+                memberView.PrintSsnNotExisting();
                 UpdateMember(memberRegister, memberView);
             }
-            string firstName = memberView.FetchFirstName();
-            string lastName = memberView.FetchLastName();
+            string firstName = memberView.InputFirstName();
+            string lastName = memberView.InputLastName();
 
-            memberRegister.updateMember(firstName, lastName, pId);
-            memberView.ActionSuccess();
+            memberRegister.UpdateMember(firstName, lastName, pId);
+            memberView.PrintActionSuccess();
 
         }
         public void ShowCompactMemberList(MemberRegister memberRegister, MemberView memberView)
@@ -97,11 +97,11 @@ namespace workshop_2
         }
         public void ShowMember(MemberRegister memberRegister, MemberView memberView)
         {
-            string pId = memberView.FetchSsn();
+            string pId = memberView.InputSsn();
 
-            if(!InputHandler.isCorrectInputOfSsn(pId)) ShowMember(memberRegister, memberView);
+            if(!InputHandler.IsCorrectInputOfSsn(pId)) ShowMember(memberRegister, memberView);
 
-            Member selectedMember =  memberRegister.getMemberBySsn(pId);
+            Member selectedMember =  memberRegister.GetMemberBySsn(pId);
             memberView.PrintMember(selectedMember.FullName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
 
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);

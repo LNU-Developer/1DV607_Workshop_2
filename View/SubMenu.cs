@@ -1,6 +1,7 @@
 using System;
+using View.input;
 
-namespace workshop_2
+namespace View.menu
 {
     class SubMenu
     {

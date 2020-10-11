@@ -1,7 +1,6 @@
-﻿using System;
-using Controller;
+﻿using View.menu;
 
-namespace workshop_2
+namespace Controller
 {
     class Program
     {
@@ -10,15 +9,8 @@ namespace workshop_2
             try
             {
                 DotNetEnv.Env.Load();
-                Menu menu = new Menu();
-                SubMenu subMenu = new SubMenu();
-                MemberController memberController = new MemberController();
-                BoatController boatController = new BoatController();
                 MainController controller = new MainController();
-                MemberRegister memberRegister = new MemberRegister();
-                MemberView memberView = new MemberView();
-                BoatView boatView = new BoatView();
-                while (controller.Start(menu, subMenu, memberController, memberRegister, memberView, boatController, boatView));
+                while (controller.Start(new Menu(), new SubMenu()));
             }
             catch (System.Exception)
             {

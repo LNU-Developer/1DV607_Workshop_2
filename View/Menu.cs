@@ -1,11 +1,12 @@
 using System;
-namespace workshop_2
+using View.input;
+namespace View.menu
 {
     class Menu
     {
         public void DisplayMenu()
         {
-            Console.WriteLine("\n═══════════════════════════════════════════");
+            Console.WriteLine("═══════════════════════════════════════════");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nWelcome to the Boat Club!");
             Console.WriteLine("Please choose what you want to do next (0-8):\n");

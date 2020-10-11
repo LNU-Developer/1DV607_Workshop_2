@@ -1,4 +1,4 @@
-namespace workshop_2
+namespace View.input
 {
     public enum MenuInput
     {

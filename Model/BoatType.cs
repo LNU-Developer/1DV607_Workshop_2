@@ -1,6 +1,6 @@
-namespace EnumBoatTypes
+namespace Enum.boat.type
 {
-  public enum BoatTypes
+  public enum BoatType
   {
     Sailboat = 1,
     Motorsailer = 2,

@@ -24,7 +24,7 @@ namespace Model
            }
         }
 
-        public async Task<bool> memberExist(string personalId)
+        public async Task<bool> MemberExist(string personalId)
         {
             DocumentReference docRef = _db.Collection("members").Document(personalId);
             DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
@@ -38,7 +38,7 @@ namespace Model
             }
         }
 
-        public async Task<bool> memberIdExist(int memberId)
+        public async Task<bool> MemberIdExist(int memberId)
         {
             CollectionReference  colRef = _db.Collection("members");
             Query query = colRef.WhereEqualTo("MemberId", memberId);
@@ -50,7 +50,7 @@ namespace Model
             return false;
         }
 
-        public async Task<Member> fetchMemberBySsn(string personalId)
+        public async Task<Member> FetchMemberBySsn(string personalId)
         {
             DocumentReference docRef = _db.Collection("members").Document(personalId);
             DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
@@ -58,13 +58,13 @@ namespace Model
             return member;
         }
 
-        public async Task<Member> fetchMemberById(int id)
+        public async Task<Member> FetchMemberById(int id)
         {
             CollectionReference  colRef = _db.Collection("members");
             Query query = colRef.WhereEqualTo("MemberId", id);
             QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
             Member member = null;
-            
+
             foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
             {
                 member = documentSnapshot.ConvertTo<Member>();
@@ -72,7 +72,7 @@ namespace Model
             return member;
         }
 
-        public async Task<List<Member>> fetchAllMembers()
+        public async Task<List<Member>> FetchAllMembers()
         {
             Query allMembersQuery = _db.Collection("members");
             QuerySnapshot allMemberQuerySnapshot = await allMembersQuery.GetSnapshotAsync();
@@ -94,19 +94,19 @@ namespace Model
             return members;
         }
 
-        public async Task addMember(Member member)
+        public async Task AddMember(Member member)
         {
             DocumentReference docRef = _db.Collection("members").Document(member.PersonalId);
             await docRef.SetAsync(member);
         }
 
-        public async Task removeMemberBySsn(string personalId)
+        public async Task RemoveMemberBySsn(string personalId)
         {
             DocumentReference docRef = _db.Collection("members").Document(personalId);
             await docRef.DeleteAsync();
         }
 
-        public async Task removeMemberById(int id)
+        public async Task RemoveMemberById(int id)
         {
 
             CollectionReference  colRef = _db.Collection("members");
@@ -119,7 +119,7 @@ namespace Model
             }
         }
 
-        public async Task<bool> boatIdExist(int boatId, string personalId)
+        public async Task<bool> BoatIdExist(int boatId, string personalId)
         {
             DocumentReference docRef = _db.Collection("boats").Document(personalId).Collection("boats").Document(boatId.ToString());
             DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
@@ -133,7 +133,7 @@ namespace Model
             }
         }
 
-        public async Task<Boat> fetchBoatById(int id)
+        public async Task<Boat> FetchBoatById(int id)
         {
             CollectionReference  colRef = _db.Collection("boats");
             Query query = colRef.WhereEqualTo("BoatId", id);
@@ -146,7 +146,7 @@ namespace Model
             return boat;
         }
 
-        public async Task<List<Boat>> fetchAllBoatsForMember(string personalId)
+        public async Task<List<Boat>> FetchAllBoatsForMember(string personalId)
         {
             Query allMembersBoatsQuery = _db.Collection("boats").Document(personalId).Collection("boats");
             QuerySnapshot snapshot = await allMembersBoatsQuery.GetSnapshotAsync();
@@ -158,13 +158,13 @@ namespace Model
             return boats;
         }
 
-        public async Task addBoat(Boat boat, string personalId)
+        public async Task AddBoat(Boat boat, string personalId)
         {
             DocumentReference docRef = _db.Collection("boats").Document(personalId).Collection("boats").Document(boat.BoatId.ToString());
             await docRef.SetAsync(boat);
         }
 
-        public async Task removeBoatById(int id, string personalId)
+        public async Task RemoveBoatById(int id, string personalId)
         {
             DocumentReference docRef = _db.Collection("boats").Document(personalId).Collection("boats").Document(id.ToString());
             await docRef.DeleteAsync();

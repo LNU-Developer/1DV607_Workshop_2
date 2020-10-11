@@ -1,10 +1,22 @@
-using Controller;
-namespace workshop_2
+using View.menu;
+using View.member;
+using View.boat;
+using View.input;
+using Controller.member;
+using Controller.boat;
+using Model;
+
+namespace Controller
 {
     class MainController
     {
-        public bool Start(Menu menu, SubMenu subMenu, MemberController memberController , MemberRegister memberRegister, MemberView memberView, BoatController boatController, BoatView boatView)
+        public bool Start(Menu menu, SubMenu subMenu)
         {
+            MemberRegister memberRegister = new MemberRegister();
+            MemberController memberController = new MemberController();
+            BoatController boatController = new BoatController();
+            MemberView memberView = new MemberView();
+            BoatView boatView = new BoatView();
             menu.DisplayMenu();
             MenuInput menuInput = menu.GetInput();
             switch(menuInput)

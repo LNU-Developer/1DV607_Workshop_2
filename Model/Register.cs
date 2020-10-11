@@ -1,14 +1,13 @@
 using System;
-using Model;
 
-namespace Controller
+namespace Model
 {
     abstract class Register
     {
         public DatabaseApi database = new DatabaseApi(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
 
-        public abstract int generateId();
+        public abstract int GenerateId();
 
-        public abstract void deleteById(int id);
+        public abstract void DeleteById(int id);
     }
 }

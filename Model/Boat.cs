@@ -1,22 +1,22 @@
 using System;
 using Google.Cloud.Firestore;
-using EnumBoatTypes;
+using Enum.boat.type;
 
 namespace Model
 {
     [FirestoreData]
     class Boat {
-        private BoatTypes _boatType;
+        private BoatType _boatType;
         private double _length;
         private int _boatId;
 
-        [FirestoreProperty (ConverterType = typeof(FirestoreEnumNameConverter<BoatTypes>))]
-        public BoatTypes Type
+        [FirestoreProperty (ConverterType = typeof(FirestoreEnumNameConverter<BoatType>))]
+        public BoatType Type
         {
             get => _boatType;
             set
             {
-                _boatType = Enum.IsDefined(typeof(BoatTypes), value) ? value : throw new ArgumentException(nameof(value));
+                _boatType = BoatType.IsDefined(typeof(BoatType), value) ? value : throw new ArgumentException(nameof(value));
             }
         }
 

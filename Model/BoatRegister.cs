@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using EnumBoatTypes;
-using Model;
+using Enum.boat.type;
 
-namespace Controller
+namespace Model
 {
     class BoatRegister : Register
     {
@@ -12,34 +11,34 @@ namespace Controller
         {
             get
             {
-                return database.fetchAllBoatsForMember(_ownerPersonalId).Result.AsReadOnly();
+                return database.FetchAllBoatsForMember(_ownerPersonalId).Result.AsReadOnly();
             }
         }
 
-        public void addBoat(BoatTypes boatType, double length)
+        public void AddBoat(BoatType boatType, double length)
         {
             Boat newBoat = new Boat()
             {
                 Type = boatType,
                 Length = length,
-                BoatId = generateId()
+                BoatId = GenerateId()
             };
-            database.addBoat(newBoat, _ownerPersonalId).Wait();
+            database.AddBoat(newBoat, _ownerPersonalId).Wait();
         }
 
-        public override void deleteById(int id)
+        public override void DeleteById(int id)
         {
-            if(database.boatIdExist(id, _ownerPersonalId).Result)
+            if(database.BoatIdExist(id, _ownerPersonalId).Result)
             {
-                database.removeBoatById(id, _ownerPersonalId).Wait();
+                database.RemoveBoatById(id, _ownerPersonalId).Wait();
             }
         }
 
-        public Boat getBoatById (int id) 
+        public Boat GetBoatById (int id)
         {
-            if(database.boatIdExist(id, _ownerPersonalId).Result)
+            if(database.BoatIdExist(id, _ownerPersonalId).Result)
             {
-                return database.fetchBoatById(id).Result;
+                return database.FetchBoatById(id).Result;
             }
             else
             {
@@ -48,9 +47,9 @@ namespace Controller
             }
         }
 
-        public void updateBoat(int id, BoatTypes boatType, double length)
+        public void UpdateBoat(int id, BoatType boatType, double length)
         {
-            if(database.boatIdExist(id, _ownerPersonalId).Result)
+            if(database.BoatIdExist(id, _ownerPersonalId).Result)
             {
                 Boat newBoat = new Boat()
                 {
@@ -58,13 +57,13 @@ namespace Controller
                     Length = length,
                     BoatId = id
                 };
-                database.addBoat(newBoat, _ownerPersonalId).Wait();
+                database.AddBoat(newBoat, _ownerPersonalId).Wait();
             }
         }
 
-        public bool isBoat(int id)
+        public bool IsBoat(int id)
         {
-            if(database.boatIdExist(id, _ownerPersonalId).Result)
+            if(database.BoatIdExist(id, _ownerPersonalId).Result)
             {
                 return true;
             }
@@ -74,14 +73,14 @@ namespace Controller
             }
         }
 
-        public override int generateId()
+        public override int GenerateId()
         {
             Random a = new Random();
 
             int newBoatId;
   	        newBoatId = a.Next(0, 100000000);
 
-            while(database.boatIdExist(newBoatId, _ownerPersonalId).Result)
+            while(database.BoatIdExist(newBoatId, _ownerPersonalId).Result)
     	        newBoatId = a.Next(0, 100000000);
 
             return newBoatId;

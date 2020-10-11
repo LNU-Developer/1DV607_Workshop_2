@@ -1,7 +1,7 @@
 using System;
-using EnumBoatTypes;
+using Enum.boat.type;
 
-namespace workshop_2
+namespace View.menu
 {
     class BoatTypeMenu
     {
@@ -14,18 +14,18 @@ namespace workshop_2
             Console.WriteLine("4. Other");
         }
 
-        public BoatTypes GetInput()
+        public BoatType GetInput()
         {
             switch (System.Console.ReadKey().KeyChar)
             {
                 case '1':
-                    return BoatTypes.Kayak;
+                    return BoatType.Kayak;
                 case '2':
-                    return BoatTypes.Motorsailer;
+                    return BoatType.Motorsailer;
                 case '3':
-                    return BoatTypes.Sailboat;
+                    return BoatType.Sailboat;
                 default:
-                    return BoatTypes.Other;
+                    return BoatType.Other;
             }
         }
     }

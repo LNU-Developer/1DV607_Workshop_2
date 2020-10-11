@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Model;
 
-namespace Controller
+namespace Model
 {
     class MemberRegister : Register
     {
@@ -10,23 +9,23 @@ namespace Controller
         {
             get
             {
-                return database.fetchAllMembers().Result.AsReadOnly();
+                return database.FetchAllMembers().Result.AsReadOnly();
             }
         }
 
-        public void addMember(string firstName, string lastName, string personalId)
+        public void AddMember(string firstName, string lastName, string personalId)
         {
-            if(!database.memberExist(personalId).Result)
+            if(!database.MemberExist(personalId).Result)
             {
-                if(!isSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+                if(!IsSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
                 Member newMember = new Member
                 {
                     FirstName = firstName,
                     LastName = lastName,
                     PersonalId = personalId,
-                    MemberId = generateId()
+                    MemberId = GenerateId()
                 };
-                database.addMember(newMember).Wait();
+                database.AddMember(newMember).Wait();
             }
             else
             {
@@ -35,7 +34,7 @@ namespace Controller
             }
         }
 
-        public Member getMemberBySsn(string id)
+        public Member GetMemberBySsn(string id)
         {
             id = id.Replace("-", "");
             id = id.Replace("+", "");
@@ -43,9 +42,9 @@ namespace Controller
             if (id.Length == 12)
                 id = id.Substring(2, 10);
 
-            if(database.memberExist(id).Result)
+            if(database.MemberExist(id).Result)
             {
-                return database.fetchMemberBySsn(id).Result;
+                return database.FetchMemberBySsn(id).Result;
             }
             else
             {
@@ -54,11 +53,11 @@ namespace Controller
             }
         }
 
-        public Member getMemberByMemberId(int id)
+        public Member GetMemberByMemberId(int id)
         {
-            if(database.memberIdExist(id).Result)
+            if(database.MemberIdExist(id).Result)
             {
-                return database.fetchMemberById(id).Result;
+                return database.FetchMemberById(id).Result;
             }
             else
             {
@@ -67,54 +66,54 @@ namespace Controller
             }
         }
 
-        public void deleteMemberBySsn(string id)
+        public void DeleteMemberBySsn(string id)
         {
-            if(database.memberExist(id).Result)
+            if(database.MemberExist(id).Result)
             {
-                database.removeMemberBySsn(id).Wait();
+                database.RemoveMemberBySsn(id).Wait();
             }
         }
 
-        public override void deleteById(int id)
+        public override void DeleteById(int id)
         {
-            if(database.memberIdExist(id).Result)
+            if(database.MemberIdExist(id).Result)
             {
-                database.removeMemberById(id).Wait();
+                database.RemoveMemberById(id).Wait();
             }
         }
 
-        public void updateMember(string firstName, string lastName, string personalId)
+        public void UpdateMember(string firstName, string lastName, string personalId)
         {
-            if(database.memberExist(personalId).Result)
+            if(database.MemberExist(personalId).Result)
             {
-                if(!isSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+                if(!IsSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
 
                 Member newMember = new Member
                 {
                     FirstName = firstName,
                     LastName = lastName,
                     PersonalId = personalId,
-                    MemberId = getMemberBySsn(personalId).MemberId
+                    MemberId = GetMemberBySsn(personalId).MemberId
                 };
-                database.addMember(newMember).Wait();
+                database.AddMember(newMember).Wait();
             }
         }
 
-        public override int generateId()
+        public override int GenerateId()
         {
             Random a = new Random();
 
             int newMemberId;
   	        newMemberId = a.Next(0, 100000000);
 
-            while(database.memberIdExist(newMemberId).Result)
+            while(database.MemberIdExist(newMemberId).Result)
     	        newMemberId = a.Next(0, 100000000);
 
             return newMemberId;
         }
 
         //Lunas Algorithm
-        public bool isSwedishSsn(string identity)
+        public bool IsSwedishSsn(string identity)
         {
             identity = identity.Replace("-", "");
             identity = identity.Replace("+", "");
@@ -132,11 +131,11 @@ namespace Controller
 
             for (int i = 0; i<10; i=i+2)
             {
-                chars[i] = sumDigits(Char.GetNumericValue(identity[i])*2);
+                chars[i] = SumDigits(Char.GetNumericValue(identity[i])*2);
             }
             for (int i = 1; i<10; i=i+2)
             {
-                chars[i] = sumDigits(Char.GetNumericValue(identity[i]));
+                chars[i] = SumDigits(Char.GetNumericValue(identity[i]));
             }
 
             double sum = 0;
@@ -170,7 +169,7 @@ namespace Controller
             }
         }
 
-        private double sumDigits(double number)
+        private double SumDigits(double number)
         {
             double sum = 0;
             string temp = number.ToString();

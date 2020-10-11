@@ -1,51 +1,44 @@
 using System;
-using EnumBoatTypes;
 
-namespace workshop_2
+namespace View.boat
 {
-    class BoatView
+    class BoatView : MainView
     {
-        public string FetchSsn()
-        {
-            Console.WriteLine("\nPlease enter a social security number (10 digits):");
-            return Console.ReadLine();
-        }
-
-        public string FetchBoatLength()
+        public string InputBoatLength()
         {
             Console.WriteLine("\nPlease type in the length of the boat:");
             return Console.ReadLine();
         }
-        public string FetchBoatId()
+        public string InputBoatId()
         {
             Console.WriteLine("\nPlease enter the ID of the boat you want to select.");
             return Console.ReadLine();
         }
-        public void NotADoubleAboveZero()
+        public void PrintNotADoubleAboveZero()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
             Console.ResetColor();
         }
-        public void NotAnIntAboveZero()
+        public void PrintNotAnIntAboveZero()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Wrong input provided. Please enter a number above zero.");
             Console.ResetColor();
         }
 
-        public void NoBoatsFound()
+        public void PrintNoBoatsFound()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("This member has no boats in register.");
         }
-        public void ActionFail()
+        public override void PrintActionFail()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\nThe boat doesn't exist.");
             Console.ResetColor();
         }
-        public void ActionSuccess()
+        public override void PrintActionSuccess()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Action completed successfully!");
@@ -53,28 +46,11 @@ namespace workshop_2
             Console.WriteLine("\n═══════════════════════════════════════════");
         }
 
-        public void SsnNotExisting()
+        public void PrintSsnNotExisting()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nThis social security number was not found in the register. Please try again!");
             Console.ResetColor();
-        }
-
-        public void PrintBoatInformation (int reference, BoatTypes type, double length, int id)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine();
-            Console.WriteLine(reference + ". Boat type: " + type);
-            Console.WriteLine("   Boat length: " + length);
-            Console.WriteLine("   Boat id: " + id);
-            Console.WriteLine("__________");
-        }
-
-        public void PrintEndOfInformation()
-        {
-            Console.WriteLine("END OF INFORMATION");
-            Console.ResetColor();
-            Console.WriteLine("═══════════════════════════════════════════");
         }
     }
 }
