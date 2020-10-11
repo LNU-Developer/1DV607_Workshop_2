@@ -11,8 +11,10 @@ namespace workshop_2
                 DotNetEnv.Env.Load();
                 Menu menu = new Menu();
                 SubMenu subMenu = new SubMenu();
+                MemberController memberController = new MemberController();
+                BoatController boatController = new BoatController();
                 MainController controller = new MainController();
-                while (controller.Start(menu, subMenu));
+                while (controller.Start(menu, subMenu, memberController, boatController));
             }
             catch (System.Exception)
             {
