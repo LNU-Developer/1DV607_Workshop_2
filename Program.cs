@@ -9,11 +9,10 @@ namespace workshop_2
             try
             {
                 DotNetEnv.Env.Load();
-
-                MainMenu menu = new MainMenu();
-                menu.startProgram();
-
-                Console.WriteLine("-------------------------------------");
+                Menu menu = new Menu();
+                SubMenu subMenu = new SubMenu();
+                MainController controller = new MainController();
+                while (controller.Start(menu, subMenu));
             }
             catch (System.Exception)
             {
