@@ -8,7 +8,7 @@ namespace Controller
 {
     class InputChecker
     {
-        private MemberRegister Register = new MemberRegister();
+        private MemberRegister _memberRegister;
         private WrongInputMessages wrongInput = new WrongInputMessages();
 
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
@@ -35,7 +35,7 @@ namespace Controller
 
         public bool DoesPIdExistInRegister(string pId)
         {
-            foreach (Member member in Register.Members)
+            foreach (Member member in _memberRegister.Members)
             {
                 if(member.PersonalId == pId)
                 {
@@ -183,6 +183,11 @@ namespace Controller
                 sum = sum + Char.GetNumericValue(temp[i]);
             }
             return sum;
+        }
+    
+        public InputChecker(MemberRegister memberRegister)
+        {
+            _memberRegister = memberRegister;
         }
     }
 }

@@ -7,13 +7,13 @@ namespace Controller.member
     {
         private MemberView _memberView;
         private MemberRegister _memberRegister;
-        private InputChecker inputChecker = new InputChecker();
+        private InputChecker _inputChecker;
         private WrongInputMessages wrongInput = new WrongInputMessages();
         public void AddMember()
         {
             string pId = _memberView.InputSsn();
 
-            if(!inputChecker.IsCorrectInputOfSsn(pId, true))
+            if(!_inputChecker.IsCorrectInputOfSsn(pId, true))
             {
                 AddMember();
             }
@@ -28,7 +28,7 @@ namespace Controller.member
                 //TODO: Are these credentials correct: show credentials.
                 _memberRegister.AddMember(firstName, lastName, pId);
 
-                if(inputChecker.DoesPIdExistInRegister(pId))
+                if(_inputChecker.DoesPIdExistInRegister(pId))
                 {
                     _memberView.PrintActionSuccess();
                 }
@@ -42,7 +42,7 @@ namespace Controller.member
         {
             string pId = _memberView.InputSsn();
 
-            if(!inputChecker.IsCorrectInputOfSsn(pId))
+            if(!_inputChecker.IsCorrectInputOfSsn(pId))
             {
                 DeleteMember();
             }
@@ -51,7 +51,7 @@ namespace Controller.member
                 _memberRegister.DeleteMemberBySsn(pId);
             }
 
-            if(!inputChecker.DoesPIdExistInRegister(pId))
+            if(!_inputChecker.DoesPIdExistInRegister(pId))
             {
                 _memberView.PrintActionSuccess();
             }
@@ -64,7 +64,7 @@ namespace Controller.member
         {
             string pId = _memberView.InputSsn();
             
-            if(!inputChecker.DoesPIdExistInRegister(pId))
+            if(!_inputChecker.DoesPIdExistInRegister(pId))
             {
                 wrongInput.PrintSsnNotExisting();
                 UpdateMember();
@@ -107,7 +107,7 @@ namespace Controller.member
         {
             string pId = _memberView.InputSsn();
 
-            if(!inputChecker.IsCorrectInputOfSsn(pId)) ShowMember();
+            if(!_inputChecker.IsCorrectInputOfSsn(pId)) ShowMember();
 
             Member selectedMember =  _memberRegister.GetMemberBySsn(pId);
             _memberView.PrintMember(selectedMember.FirstName, selectedMember.LastName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
@@ -125,11 +125,11 @@ namespace Controller.member
 
         private string ValidateName(string name, bool isFirstName = true)
         {
-            if(!inputChecker.IsCorrectNameInput(name) && isFirstName)
+            if(!_inputChecker.IsCorrectNameInput(name) && isFirstName)
             {
                 name = _memberView.InputFirstName();
             }
-            else if(!inputChecker.IsCorrectNameInput(name) && !isFirstName)
+            else if(!_inputChecker.IsCorrectNameInput(name) && !isFirstName)
             {
                 name = _memberView.InputLastName();
             }

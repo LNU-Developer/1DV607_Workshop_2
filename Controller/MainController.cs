@@ -13,10 +13,11 @@ namespace Controller
         public bool Start(Menu menu, SubMenu subMenu)
         {
             MemberRegister memberRegister = new MemberRegister();
+            InputChecker inputChecker = new InputChecker(memberRegister);
             MemberView memberView = new MemberView();
             MemberController memberController = new MemberController(memberView, memberRegister);
             BoatView boatView = new BoatView();
-            BoatController boatController = new BoatController(boatView, memberRegister);
+            BoatController boatController = new BoatController(boatView, memberRegister, inputChecker);
             menu.DisplayMenu();
             MenuChoice menuChoice = menu.GetInput();
             switch(menuChoice)
