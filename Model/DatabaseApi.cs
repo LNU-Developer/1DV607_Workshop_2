@@ -8,7 +8,6 @@ namespace Model
     class DatabaseApi
     {
         private FirestoreDb _db;
-
         private string ProjectId
         {
             set
@@ -23,7 +22,6 @@ namespace Model
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", value);
            }
         }
-
         public async Task<bool> MemberExist(string personalId)
         {
             DocumentReference docRef = _db.Collection("members").Document(personalId);

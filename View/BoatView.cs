@@ -31,6 +31,7 @@ namespace View.boat
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("This member has no boats in register.");
+            Console.ResetColor();
         }
         public override void PrintActionFail()
         {

@@ -63,6 +63,7 @@ namespace Controller.member
         public void UpdateMember()
         {
             string pId = _memberView.InputSsn();
+            
             if(!inputChecker.DoesPIdExistInRegister(pId))
             {
                 wrongInput.PrintSsnNotExisting();

@@ -14,7 +14,6 @@ namespace Model
 
         private BoatRegister _boatRegister;
 
-
         [FirestoreProperty]
         public string FirstName
         {

@@ -7,10 +7,7 @@ namespace Model
     {
         public IReadOnlyList<Member> Members
         {
-            get
-            {
-                return Database.FetchAllMembers().Result.AsReadOnly();
-            }
+            get { return Database.FetchAllMembers().Result.AsReadOnly(); }
         }
 
         public void AddMember(string firstName, string lastName, string personalId)

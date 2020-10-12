@@ -9,10 +9,7 @@ namespace Model
         private string _ownerPersonalId;
         public IReadOnlyList<Boat> Boats
         {
-            get
-            {
-                return Database.FetchAllBoatsForMember(_ownerPersonalId).Result.AsReadOnly();
-            }
+            get { return Database.FetchAllBoatsForMember(_ownerPersonalId).Result.AsReadOnly(); }
         }
 
         public void AddBoat(BoatType boatType, double length)
@@ -81,8 +78,10 @@ namespace Model
   	        newBoatId = a.Next(0, 100000000);
 
             while(Database.BoatIdExist(newBoatId, _ownerPersonalId).Result)
-    	        newBoatId = a.Next(0, 100000000);
-
+            {
+                newBoatId = a.Next(0, 100000000);
+            }
+    	        
             return newBoatId;
         }
 

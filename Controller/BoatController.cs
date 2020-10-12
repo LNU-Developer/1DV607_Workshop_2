@@ -13,7 +13,7 @@ namespace Controller.boat
         public void AddBoat()
         {
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
-            //TODO: Fetch by member id or SSN
+            
             string pId = _boatView.InputSsn();
 
             if(!inputChecker.IsCorrectInputOfSsn(pId)) AddBoat();
@@ -34,7 +34,6 @@ namespace Controller.boat
         }
         public void RemoveBoat()
         {
-            //TODO: Fetch by member id or SSN
             string pId = _boatView.InputSsn();
 
             if(!inputChecker.IsCorrectInputOfSsn(pId)) RemoveBoat();
@@ -57,6 +56,7 @@ namespace Controller.boat
             }
 
             string idString = _boatView.InputBoatId();
+
             if(inputChecker.ConvertToInt(idString) == 0)
             {
                 _boatView.PrintNotADoubleAboveZero();
@@ -76,7 +76,6 @@ namespace Controller.boat
         }
         public void UpdateBoat()
         {
-            //TODO: Fetch by member id or SSN
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
             string pId = _boatView.InputSsn();
 

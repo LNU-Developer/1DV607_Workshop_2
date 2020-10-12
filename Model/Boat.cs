@@ -13,7 +13,7 @@ namespace Model
         [FirestoreProperty (ConverterType = typeof(FirestoreEnumNameConverter<BoatType>))]
         public BoatType Type
         {
-            get => _boatType;
+            get { return _boatType; }
             set
             {
                 _boatType = BoatType.IsDefined(typeof(BoatType), value) ? value : throw new ArgumentException(nameof(value));
@@ -23,7 +23,7 @@ namespace Model
         [FirestoreProperty]
         public double Length
         {
-            get => _length;
+            get { return _length; }
             set
             {
                 if (value < 0 )
@@ -36,10 +36,7 @@ namespace Model
         [FirestoreProperty]
         public int BoatId
         {
-            get
-            {
-                return _boatId;
-            }
+            get { return _boatId; }
             set
             {
                 if (value < 0 )
