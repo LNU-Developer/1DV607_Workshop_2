@@ -5,7 +5,7 @@ namespace Controller.member
     class MemberController
     {
 
-        private InputHandler inputHandler = new InputHandler();
+        private InputController inputController = new InputController();
         public void AddMember(MemberRegister memberRegister, MemberView memberView)
         {
             string pId = memberView.InputSsn();
@@ -13,7 +13,7 @@ namespace Controller.member
             string firstName = memberView.InputFirstName();
             string lastName = memberView.InputLastName();
 
-            if(!inputHandler.IsCorrectInputOfSsn(pId, true))
+            if(!inputController.IsCorrectInputOfSsn(pId, true))
             {
                 AddMember(memberRegister, memberView);
             }
@@ -24,7 +24,7 @@ namespace Controller.member
                 //TODO: Are these credentials correct: show credentials.
                 memberRegister.AddMember(firstName, lastName, pId);
 
-                if(inputHandler.DoesPIdExistInRegister(pId))
+                if(inputController.DoesPIdExistInRegister(pId))
                 {
                     memberView.PrintActionSuccess();
                 }
@@ -38,7 +38,7 @@ namespace Controller.member
         {
             string pId = memberView.InputSsn();
 
-            if(!inputHandler.IsCorrectInputOfSsn(pId))
+            if(!inputController.IsCorrectInputOfSsn(pId))
             {
                 DeleteMember(memberRegister, memberView);
             }
@@ -47,7 +47,7 @@ namespace Controller.member
                 memberRegister.DeleteMemberBySsn(pId);
             }
 
-            if(!inputHandler.DoesPIdExistInRegister(pId))
+            if(!inputController.DoesPIdExistInRegister(pId))
             {
                 memberView.PrintActionSuccess();
             }
@@ -59,7 +59,7 @@ namespace Controller.member
         public void UpdateMember(MemberRegister memberRegister, MemberView memberView)
         {
             string pId = memberView.InputSsn();
-            if(!inputHandler.DoesPIdExistInRegister(pId))
+            if(!inputController.DoesPIdExistInRegister(pId))
             {
                 memberView.PrintSsnNotExisting();
                 UpdateMember(memberRegister, memberView);
@@ -101,7 +101,7 @@ namespace Controller.member
         {
             string pId = memberView.InputSsn();
 
-            if(!inputHandler.IsCorrectInputOfSsn(pId)) ShowMember(memberRegister, memberView);
+            if(!inputController.IsCorrectInputOfSsn(pId)) ShowMember(memberRegister, memberView);
 
             Member selectedMember =  memberRegister.GetMemberBySsn(pId);
             memberView.PrintMember(selectedMember.FullName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);

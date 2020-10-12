@@ -5,7 +5,7 @@ using View.input;
 namespace Controller
 
 {
-    class InputHandler
+    class InputController
     {
         private MemberRegister Register = new MemberRegister();
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
