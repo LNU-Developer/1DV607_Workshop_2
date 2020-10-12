@@ -5,7 +5,6 @@ namespace Controller.member
 {
     class MemberController
     {
-
         private InputController inputController = new InputController();
         private WrongInput wrongInput = new WrongInput();
         public void AddMember(MemberRegister memberRegister, MemberView memberView)
@@ -78,7 +77,9 @@ namespace Controller.member
             {
                 wrongInput.PrintSsnNotExisting();
                 UpdateMember(memberRegister, memberView);
-            } else {
+            } 
+            else
+            {
                 string firstName = memberView.InputFirstName();
 
                 if(firstName.Length < 1)

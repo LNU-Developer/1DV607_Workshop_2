@@ -5,7 +5,9 @@ namespace View.input
     {
         public void NotCorrectPId()
         {
-            Console.WriteLine("\nThis is not a correct personal number.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nThis is not a social security number.");
+            Console.ResetColor();
         }
 
         public void PrintSsnNotExisting()
@@ -17,13 +19,16 @@ namespace View.input
 
         public void MemberAlreadyExists()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nA member with this personal number already exists in the register.");
-
+            Console.ResetColor();
         }
 
         public void NoName()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\nYou didn't enter a name. Please try again.");
+            Console.ResetColor();
         }
     }
 }
