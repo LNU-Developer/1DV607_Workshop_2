@@ -1,29 +1,30 @@
 using System;
 using Model;
+using View.input;
 
 namespace Controller
 
 {
     class InputHandler
     {
+        private MemberRegister Register = new MemberRegister();
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
-            MemberRegister Register = new MemberRegister();
-
+            WrongInput wrongInput = new WrongInput();
             if(!Register.IsSwedishSsn(id))
             {
-                Console.WriteLine("\nThis is not a correct personal number.");
+                wrongInput.NotCorrectPId();
                 return false;
             }
 
             if(!DoesPIdExistInRegister(id) && !idExists)
             {
-                Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
+                 wrongInput.MemberDoesNotExists();
                 return false;
             }
             else if(DoesPIdExistInRegister(id) && idExists)
             {
-                Console.WriteLine("\nA member with this personal number already exists in the register.");
+                wrongInput.MemberAlreadyExists();
                 return false;
             }
 
@@ -32,8 +33,6 @@ namespace Controller
 
         public bool DoesPIdExistInRegister(string pId)
         {
-            MemberRegister Register = new MemberRegister();
-
             foreach (Member member in Register.Members)
             {
                 if(member.PersonalId == pId)
