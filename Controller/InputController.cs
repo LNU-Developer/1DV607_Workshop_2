@@ -21,7 +21,7 @@ namespace Controller
 
             if(!DoesPIdExistInRegister(id) && !idExists)
             {
-                 wrongInput.MemberDoesNotExists();
+                wrongInput.PrintSsnNotExisting();
                 return false;
             }
             else if(DoesPIdExistInRegister(id) && idExists)

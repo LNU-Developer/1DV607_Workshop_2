@@ -29,13 +29,6 @@ namespace View.member
             Console.WriteLine("\n═══════════════════════════════════════════");
         }
 
-        public void PrintSsnNotExisting()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nThis social security number was not found in the register. Please try again!");
-            Console.ResetColor();
-        }
-
         public void PrintMember(string fullName, string memberId, string ssn = "")
         {
             Console.WriteLine("\n═══════════════════════════════════════════");

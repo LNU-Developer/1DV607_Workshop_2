@@ -7,7 +7,7 @@ namespace Controller.member
     {
 
         private InputController inputController = new InputController();
-            private WrongInput wrongInput = new WrongInput();
+        private WrongInput wrongInput = new WrongInput();
         public void AddMember(MemberRegister memberRegister, MemberView memberView)
         {
             string pId = memberView.InputSsn();
@@ -76,15 +76,28 @@ namespace Controller.member
             string pId = memberView.InputSsn();
             if(!inputController.DoesPIdExistInRegister(pId))
             {
-                memberView.PrintSsnNotExisting();
+                wrongInput.PrintSsnNotExisting();
                 UpdateMember(memberRegister, memberView);
+            } else {
+                string firstName = memberView.InputFirstName();
+
+                if(firstName.Length < 1)
+                {
+                    wrongInput.NoName();
+                    firstName = memberView.InputFirstName();
+                }
+
+                string lastName = memberView.InputLastName();
+
+                if(lastName.Length < 1)
+                {
+                    wrongInput.NoName();
+                    lastName = memberView.InputLastName();
+                }
+
+                memberRegister.UpdateMember(firstName, lastName, pId);
+                memberView.PrintActionSuccess();
             }
-            string firstName = memberView.InputFirstName();
-            string lastName = memberView.InputLastName();
-
-            memberRegister.UpdateMember(firstName, lastName, pId);
-            memberView.PrintActionSuccess();
-
         }
         public void ShowCompactMemberList(MemberRegister memberRegister, MemberView memberView)
         {

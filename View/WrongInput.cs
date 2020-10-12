@@ -8,9 +8,11 @@ namespace View.input
             Console.WriteLine("\nThis is not a correct personal number.");
         }
 
-        public void MemberDoesNotExists()
+        public void PrintSsnNotExisting()
         {
-            Console.WriteLine("\nA member with this personal id doesn't exist in the register.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nThis social security number was not found in the register. Please try again!");
+            Console.ResetColor();
         }
 
         public void MemberAlreadyExists()
