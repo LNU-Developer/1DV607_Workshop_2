@@ -123,7 +123,12 @@ namespace Model
                 if (c < '0' || c > '9') return false;
             }
 
-            if (identity.Length == 12) {
+            if (identity.Length < 10)
+            {
+                return false;
+            }
+            else if (identity.Length == 12)
+            {
                 identity = identity.Substring(2);
             }
 
