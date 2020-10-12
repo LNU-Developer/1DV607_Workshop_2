@@ -5,13 +5,13 @@ namespace Controller.member
 {
     class MemberController
     {
-        private InputController inputController = new InputController();
+        private InputChecker inputChecker = new InputChecker();
         private WrongInput wrongInput = new WrongInput();
         public void AddMember(MemberRegister memberRegister, MemberView memberView)
         {
             string pId = memberView.InputSsn();
 
-            if(!inputController.IsCorrectInputOfSsn(pId, true))
+            if(!inputChecker.IsCorrectInputOfSsn(pId, true))
             {
                 AddMember(memberRegister, memberView);
             }
@@ -21,14 +21,14 @@ namespace Controller.member
 
                 string firstName = memberView.InputFirstName();
 
-                if(!inputController.isCorrectNameInput(firstName))
+                if(!inputChecker.isCorrectNameInput(firstName))
                 {
                     firstName = memberView.InputFirstName();
                 }
 
                 string lastName = memberView.InputLastName();
 
-                if(!inputController.isCorrectNameInput(lastName))
+                if(!inputChecker.isCorrectNameInput(lastName))
                 {
                     lastName = memberView.InputLastName();
                 }
@@ -36,7 +36,7 @@ namespace Controller.member
                 //TODO: Are these credentials correct: show credentials.
                 memberRegister.AddMember(firstName, lastName, pId);
 
-                if(inputController.DoesPIdExistInRegister(pId))
+                if(inputChecker.DoesPIdExistInRegister(pId))
                 {
                     memberView.PrintActionSuccess();
                 }
@@ -50,7 +50,7 @@ namespace Controller.member
         {
             string pId = memberView.InputSsn();
 
-            if(!inputController.IsCorrectInputOfSsn(pId))
+            if(!inputChecker.IsCorrectInputOfSsn(pId))
             {
                 DeleteMember(memberRegister, memberView);
             }
@@ -59,7 +59,7 @@ namespace Controller.member
                 memberRegister.DeleteMemberBySsn(pId);
             }
 
-            if(!inputController.DoesPIdExistInRegister(pId))
+            if(!inputChecker.DoesPIdExistInRegister(pId))
             {
                 memberView.PrintActionSuccess();
             }
@@ -71,7 +71,7 @@ namespace Controller.member
         public void UpdateMember(MemberRegister memberRegister, MemberView memberView)
         {
             string pId = memberView.InputSsn();
-            if(!inputController.DoesPIdExistInRegister(pId))
+            if(!inputChecker.DoesPIdExistInRegister(pId))
             {
                 wrongInput.PrintSsnNotExisting();
                 UpdateMember(memberRegister, memberView);
@@ -80,14 +80,14 @@ namespace Controller.member
             {
                 string firstName = memberView.InputFirstName();
 
-                if(!inputController.isCorrectNameInput(firstName))
+                if(!inputChecker.isCorrectNameInput(firstName))
                 {
                     firstName = memberView.InputFirstName();
                 }
 
                 string lastName = memberView.InputLastName();
 
-                if(!inputController.isCorrectNameInput(lastName))
+                if(!inputChecker.isCorrectNameInput(lastName))
                 {
                     lastName = memberView.InputLastName();
                 }
@@ -126,7 +126,7 @@ namespace Controller.member
         {
             string pId = memberView.InputSsn();
 
-            if(!inputController.IsCorrectInputOfSsn(pId)) ShowMember(memberRegister, memberView);
+            if(!inputChecker.IsCorrectInputOfSsn(pId)) ShowMember(memberRegister, memberView);
 
             Member selectedMember =  memberRegister.GetMemberBySsn(pId);
             memberView.PrintMember(selectedMember.FullName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);

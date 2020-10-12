@@ -6,7 +6,7 @@ using View.input;
 namespace Controller
 
 {
-    class InputController
+    class InputChecker
     {
         private MemberRegister Register = new MemberRegister();
         private SsnRegister SsnRegister = new SsnRegister();
