@@ -6,7 +6,7 @@ namespace Model
     class MemberRegister : Register
     {
 
-        private SsnRegister SsnRegister = new SsnRegister();
+        private SsnChecker ssnChecker = new SsnChecker();
         public IReadOnlyList<Member> Members
         {
             get
@@ -19,7 +19,7 @@ namespace Model
         {
             if(!Database.MemberExist(personalId).Result)
             {
-                if(!SsnRegister.ValidatePidInput(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+                if(!ssnChecker.ValidatePidInput(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
                 Member newMember = new Member
                 {
                     FirstName = firstName,
@@ -88,7 +88,7 @@ namespace Model
         {
             if(Database.MemberExist(personalId).Result)
             {
-                if(!SsnRegister.ValidatePidInput(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+                if(!ssnChecker.ValidatePidInput(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
 
                 Member newMember = new Member
                 {

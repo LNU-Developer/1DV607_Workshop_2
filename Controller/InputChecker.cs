@@ -9,12 +9,12 @@ namespace Controller
     class InputChecker
     {
         private MemberRegister Register = new MemberRegister();
-        private SsnRegister SsnRegister = new SsnRegister();
+        private SsnChecker ssnChecker = new SsnChecker();
         private WrongInput wrongInput = new WrongInput();
 
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
-            if(!SsnRegister.ValidatePidInput(id))
+            if(!ssnChecker.ValidatePidInput(id))
             {
                 wrongInput.NotCorrectPId();
                 return false;

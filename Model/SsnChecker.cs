@@ -2,7 +2,7 @@ using System;
 
 namespace Model
 {
-    class SsnRegister
+    class SsnChecker
     {
         public bool ValidatePidInput(string _identity)
         {
