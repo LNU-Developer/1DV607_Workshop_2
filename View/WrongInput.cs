@@ -18,5 +18,10 @@ namespace View.input
             Console.WriteLine("\nA member with this personal number already exists in the register.");
 
         }
+
+        public string NoFirstName()
+        {
+            return "\nPlease enter a correct name:";
+        }
     }
 }

@@ -1,15 +1,25 @@
 using System;
 using Enum.boat.type;
-using View;
+using View.input;
 
 namespace View.member
 {
     class MemberView : MainView
     {
+        private WrongInput wrongInput = new WrongInput();
         public string InputFirstName()
         {
             Console.WriteLine("\nPlease enter first name:");
-            return Console.ReadLine();
+            string input = Console.ReadLine();
+
+            if (input == "")
+            {
+                return wrongInput.NoFirstName();
+            } 
+            else
+            {
+                return input; 
+            } 
         }
         public string InputLastName()
         {
