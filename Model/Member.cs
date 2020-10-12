@@ -14,21 +14,11 @@ namespace Model
 
         private BoatRegister _boatRegister;
 
-        public string FullName
-        {
-             get
-             {
-                return _firstName + " " + _lastName;
-             }
-        }
 
         [FirestoreProperty]
         public string FirstName
         {
-            get
-            {
-                return _firstName;
-            }
+            get { return _firstName; }
             set
             {
                 if (value.Length < 1 )
@@ -42,10 +32,7 @@ namespace Model
         [FirestoreProperty]
         public string LastName
         {
-            get
-            {
-                return _lastName;
-            }
+            get { return _lastName; }
             set
             {
                 if (value.Length < 1 )
@@ -59,10 +46,7 @@ namespace Model
         [FirestoreProperty]
         public string PersonalId
         {
-            get
-            {
-                return _personalId;
-            }
+            get { return _personalId; }
             set
             {
                 string pattern = @"^(19|20)?(\d{6}([-+]|)\d{4}|(?!19|20)\d{10})$";
@@ -77,10 +61,7 @@ namespace Model
         [FirestoreProperty]
         public int MemberId
         {
-            get
-            {
-                return _memberId;
-            }
+            get { return _memberId; }
             set
             {
                 if (value < 0 )
@@ -92,10 +73,7 @@ namespace Model
         }
         public BoatRegister BoatRegister
         {
-            get
-            {
-               return _boatRegister;
-            }
+            get { return _boatRegister; }
         }
     }
 }

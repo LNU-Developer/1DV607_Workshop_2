@@ -81,7 +81,7 @@ namespace Controller.member
             foreach (Member member in _memberRegister.Members)
             {
                 BoatRegister boatRegister = new BoatRegister(member.PersonalId);
-                _memberView.PrintMember(member.FullName, member.MemberId.ToString());
+                _memberView.PrintMember(member.FirstName, member.LastName, member.MemberId.ToString());
                 _memberView.PrintBoatTotal(boatRegister.Boats.Count);
             }
             _memberView.PrintEndOfInformation();
@@ -91,7 +91,7 @@ namespace Controller.member
             foreach (Member member in _memberRegister.Members)
             {
                BoatRegister boatRegister = new BoatRegister(member.PersonalId);
-               _memberView.PrintMember(member.FullName, member.MemberId.ToString(), member.PersonalId);
+               _memberView.PrintMember(member.FirstName, member.LastName, member.MemberId.ToString(), member.PersonalId);
 
                int count = 0;
                foreach (Boat boat in boatRegister.Boats)
@@ -109,7 +109,7 @@ namespace Controller.member
             if(!inputChecker.IsCorrectInputOfSsn(pId)) ShowMember();
 
             Member selectedMember =  _memberRegister.GetMemberBySsn(pId);
-            _memberView.PrintMember(selectedMember.FullName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
+            _memberView.PrintMember(selectedMember.FirstName, selectedMember.LastName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
 
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
 

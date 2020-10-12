@@ -29,11 +29,11 @@ namespace View.member
             Console.WriteLine("\n═══════════════════════════════════════════");
         }
 
-        public void PrintMember(string fullName, string memberId, string ssn = "")
+        public void PrintMember(string firstName, string lastName, string memberId, string ssn = "")
         {
             Console.WriteLine("\n═══════════════════════════════════════════");
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("Full name: " + fullName);
+            Console.WriteLine("Full name: " + firstName + " " + lastName);
             Console.WriteLine("Member id: " + memberId);
             if(ssn != "")
             {
