@@ -136,10 +136,11 @@ namespace Controller.member
             return name;
         }
 
-        public MemberController(MemberView memberView, MemberRegister memberRegister)
+        public MemberController(MemberView memberView, MemberRegister memberRegister, InputChecker inputChecker)
         {
             _memberView = memberView;
             _memberRegister = memberRegister;
+            _inputChecker = inputChecker;
         }
     }
 }

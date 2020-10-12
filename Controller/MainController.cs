@@ -15,7 +15,7 @@ namespace Controller
             MemberRegister memberRegister = new MemberRegister();
             InputChecker inputChecker = new InputChecker(memberRegister);
             MemberView memberView = new MemberView();
-            MemberController memberController = new MemberController(memberView, memberRegister);
+            MemberController memberController = new MemberController(memberView, memberRegister, inputChecker);
             BoatView boatView = new BoatView();
             BoatController boatController = new BoatController(boatView, memberRegister, inputChecker);
             menu.DisplayMenu();
