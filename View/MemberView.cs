@@ -9,11 +9,21 @@ namespace View.member
         public string InputFirstName()
         {
             Console.WriteLine("\nPlease enter first name:");
+            string input = Console.ReadLine();
+            if(input.Length < 1)
+            {
+                Console.WriteLine("\nYou didn't enter a name. Please try again.");
+            }
             return Console.ReadLine();
         }
         public string InputLastName()
         {
             Console.WriteLine("\nPlease enter last name:");
+            string input = Console.ReadLine();
+            if(input.Length < 1)
+            {
+                Console.WriteLine("\nYou didn't enter a name. Please try again.");
+            }
             return Console.ReadLine();
         }
         public override void PrintActionFail()
