@@ -5,27 +5,24 @@ namespace Model
     class SsnRegister
     {
         //Lunas Algorithm
-        public bool IsSwedishSsn(string identity)
+        public bool validatePidInput(string identity)
         {
-            if (!IdentityIsOk(identity))
+            if (PIdInputIsCorrectFormat(identity) && isSwedishSsn(identity))
             {
-                return false;
-            }
-            else if (!ValidateIsOk(identity))
-            {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
             
         }
 
-        private bool IdentityIsOk(string identity) {
+        private bool PIdInputIsCorrectFormat(string identity) {
             identity = identity.Replace("-", "");
             identity = identity.Replace("+", "");
 
+            // Check so every character in identity is a number between 0 and 9
             foreach (char c in identity)
             {
                 if (c < '0' || c > '9') return false;
@@ -42,7 +39,7 @@ namespace Model
             return true;
         }
 
-        private bool ValidateIsOk(string identity)
+        private bool isSwedishSsn(string identity)
         {
             double[] chars = new double[10];
 

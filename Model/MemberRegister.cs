@@ -19,7 +19,7 @@ namespace Model
         {
             if(!database.MemberExist(personalId).Result)
             {
-                if(!SsnRegister.IsSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+                if(!SsnRegister.validatePidInput(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
                 Member newMember = new Member
                 {
                     FirstName = firstName,
@@ -88,7 +88,7 @@ namespace Model
         {
             if(database.MemberExist(personalId).Result)
             {
-                if(!SsnRegister.IsSwedishSsn(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
+                if(!SsnRegister.validatePidInput(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
 
                 Member newMember = new Member
                 {
