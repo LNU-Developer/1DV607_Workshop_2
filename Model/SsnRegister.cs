@@ -7,21 +7,9 @@ namespace Model
         //Lunas Algorithm
         public bool IsSwedishSsn(string identity)
         {
-            identity = identity.Replace("-", "");
-            identity = identity.Replace("+", "");
-
-            foreach (char c in identity)
-            {
-                if (c < '0' || c > '9') return false;
-            }
-
-            if (identity.Length < 10)
+            if (!IdentityIsOk(identity))
             {
                 return false;
-            }
-            else if (identity.Length == 12)
-            {
-                identity = identity.Substring(2);
             }
 
             double[] chars = new double[10];
@@ -66,7 +54,27 @@ namespace Model
             }
         }
 
-              private double SumDigits(double number)
+        private bool IdentityIsOk(string identity) {
+            identity = identity.Replace("-", "");
+            identity = identity.Replace("+", "");
+
+            foreach (char c in identity)
+            {
+                if (c < '0' || c > '9') return false;
+            }
+
+            if (identity.Length < 10)
+            {
+                return false;
+            }
+            else if (identity.Length == 12)
+            {
+                identity = identity.Substring(2);
+            }
+            return true;
+        }
+
+        private double SumDigits(double number)
         {
             double sum = 0;
             string temp = number.ToString();
@@ -78,6 +86,6 @@ namespace Model
         }
     }
 
-    }
+}
 
     
