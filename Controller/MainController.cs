@@ -13,46 +13,46 @@ namespace Controller
         public bool Start(Menu menu, SubMenu subMenu)
         {
             MemberRegister memberRegister = new MemberRegister();
-            MemberController memberController = new MemberController();
-            BoatController boatController = new BoatController();
             MemberView memberView = new MemberView();
+            MemberController memberController = new MemberController(memberView, memberRegister);
             BoatView boatView = new BoatView();
+            BoatController boatController = new BoatController(boatView, memberRegister);
             menu.DisplayMenu();
             MenuChoice menuChoice = menu.GetInput();
             switch(menuChoice)
             {
                 case MenuChoice.RegisterMember:
-                    memberController.AddMember(memberRegister, memberView);
+                    memberController.AddMember();
                     break;
                 case MenuChoice.DeleteMember:
-                    memberController.DeleteMember(memberRegister, memberView);
+                    memberController.DeleteMember();
                     break;
                 case MenuChoice.ShowMemberList:
                     subMenu.DisplayMenu();
                     MenuChoice subMenuChoice = subMenu.GetInput();
                     if(subMenuChoice == MenuChoice.ShowCompactMemberList)
                     {
-                        memberController.ShowCompactMemberList(memberRegister, memberView);
+                        memberController.ShowCompactMemberList();
                     }
                     else if(subMenuChoice == MenuChoice.ShowVerboseMemberList)
                     {
-                        memberController.ShowVerboseMemberList(memberRegister, memberView);
+                        memberController.ShowVerboseMemberList();
                     }
                     break;
                 case MenuChoice.UpdateMemberInformation:
-                    memberController.UpdateMember(memberRegister, memberView);
+                    memberController.UpdateMember();
                     break;
                 case MenuChoice.AddBoat:
-                    boatController.AddBoat(memberRegister, boatView);
+                    boatController.AddBoat();
                     break;
                 case MenuChoice.RemoveBoat:
-                    boatController.RemoveBoat(memberRegister, boatView);
+                    boatController.RemoveBoat();
                     break;
                 case MenuChoice.UpdateBoat:
-                    boatController.UpdateBoat(memberRegister, boatView);
+                    boatController.UpdateBoat();
                     break;
                 case MenuChoice.ShowMemberInformation:
-                    memberController.ShowMember(memberRegister, memberView);
+                    memberController.ShowMember();
                     break;
                 }
             return menuChoice != MenuChoice.Exit;

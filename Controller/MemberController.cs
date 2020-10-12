@@ -5,131 +5,111 @@ namespace Controller.member
 {
     class MemberController
     {
+        private MemberView _memberView;
+        private MemberRegister _memberRegister;
         private InputChecker inputChecker = new InputChecker();
         private WrongInput wrongInput = new WrongInput();
-        public void AddMember(MemberRegister memberRegister, MemberView memberView)
+        public void AddMember()
         {
-            string pId = memberView.InputSsn();
+            string pId = _memberView.InputSsn();
 
             if(!inputChecker.IsCorrectInputOfSsn(pId, true))
             {
-                AddMember(memberRegister, memberView);
+                AddMember();
             }
             else
             {
                 if (pId.Length == 12) pId = pId.Substring(2);
 
-                string firstName = memberView.InputFirstName();
+                string firstName = ValidateName(_memberView.InputFirstName());
 
-                if(!inputChecker.isCorrectNameInput(firstName))
-                {
-                    firstName = memberView.InputFirstName();
-                }
-
-                string lastName = memberView.InputLastName();
-
-                if(!inputChecker.isCorrectNameInput(lastName))
-                {
-                    lastName = memberView.InputLastName();
-                }
+                string lastName = ValidateName(_memberView.InputLastName(), false);
 
                 //TODO: Are these credentials correct: show credentials.
-                memberRegister.AddMember(firstName, lastName, pId);
+                _memberRegister.AddMember(firstName, lastName, pId);
 
                 if(inputChecker.DoesPIdExistInRegister(pId))
                 {
-                    memberView.PrintActionSuccess();
+                    _memberView.PrintActionSuccess();
                 }
                 else
                 {
-                    memberView.PrintActionFail();
+                    _memberView.PrintActionFail();
                 }
             }
         }
-        public void DeleteMember(MemberRegister memberRegister, MemberView memberView)
+        public void DeleteMember()
         {
-            string pId = memberView.InputSsn();
+            string pId = _memberView.InputSsn();
 
             if(!inputChecker.IsCorrectInputOfSsn(pId))
             {
-                DeleteMember(memberRegister, memberView);
+                DeleteMember();
             }
             else
             {
-                memberRegister.DeleteMemberBySsn(pId);
+                _memberRegister.DeleteMemberBySsn(pId);
             }
 
             if(!inputChecker.DoesPIdExistInRegister(pId))
             {
-                memberView.PrintActionSuccess();
+                _memberView.PrintActionSuccess();
             }
             else
             {
-                memberView.PrintActionFail();
+                _memberView.PrintActionFail();
             }
         }
-        public void UpdateMember(MemberRegister memberRegister, MemberView memberView)
+        public void UpdateMember()
         {
-            string pId = memberView.InputSsn();
+            string pId = _memberView.InputSsn();
             if(!inputChecker.DoesPIdExistInRegister(pId))
             {
                 wrongInput.PrintSsnNotExisting();
-                UpdateMember(memberRegister, memberView);
-            } 
+                UpdateMember();
+            }
             else
             {
-                string firstName = memberView.InputFirstName();
-
-                if(!inputChecker.isCorrectNameInput(firstName))
-                {
-                    firstName = memberView.InputFirstName();
-                }
-
-                string lastName = memberView.InputLastName();
-
-                if(!inputChecker.isCorrectNameInput(lastName))
-                {
-                    lastName = memberView.InputLastName();
-                }
-
-                memberRegister.UpdateMember(firstName, lastName, pId);
-                memberView.PrintActionSuccess();
+                string firstName = ValidateName(_memberView.InputFirstName());
+                string lastName = ValidateName(_memberView.InputLastName(), false);
+                _memberRegister.UpdateMember(firstName, lastName, pId);
+                _memberView.PrintActionSuccess();
             }
         }
-        public void ShowCompactMemberList(MemberRegister memberRegister, MemberView memberView)
+        public void ShowCompactMemberList()
         {
-            foreach (Member member in memberRegister.Members)
+            foreach (Member member in _memberRegister.Members)
             {
                 BoatRegister boatRegister = new BoatRegister(member.PersonalId);
-                memberView.PrintMember(member.FullName, member.MemberId.ToString());
-                memberView.PrintBoatTotal(boatRegister.Boats.Count);
+                _memberView.PrintMember(member.FullName, member.MemberId.ToString());
+                _memberView.PrintBoatTotal(boatRegister.Boats.Count);
             }
-            memberView.PrintEndOfInformation();
+            _memberView.PrintEndOfInformation();
         }
-        public void ShowVerboseMemberList(MemberRegister memberRegister, MemberView memberView)
+        public void ShowVerboseMemberList()
         {
-            foreach (Member member in memberRegister.Members)
+            foreach (Member member in _memberRegister.Members)
             {
                BoatRegister boatRegister = new BoatRegister(member.PersonalId);
-               memberView.PrintMember(member.FullName, member.MemberId.ToString(), member.PersonalId);
+               _memberView.PrintMember(member.FullName, member.MemberId.ToString(), member.PersonalId);
 
                int count = 0;
                foreach (Boat boat in boatRegister.Boats)
                {
                    count += 1;
-                   memberView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
+                   _memberView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
                }
             }
-            memberView.PrintEndOfInformation();
+            _memberView.PrintEndOfInformation();
         }
-        public void ShowMember(MemberRegister memberRegister, MemberView memberView)
+        public void ShowMember()
         {
-            string pId = memberView.InputSsn();
+            string pId = _memberView.InputSsn();
 
-            if(!inputChecker.IsCorrectInputOfSsn(pId)) ShowMember(memberRegister, memberView);
+            if(!inputChecker.IsCorrectInputOfSsn(pId)) ShowMember();
 
-            Member selectedMember =  memberRegister.GetMemberBySsn(pId);
-            memberView.PrintMember(selectedMember.FullName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
+            Member selectedMember =  _memberRegister.GetMemberBySsn(pId);
+            _memberView.PrintMember(selectedMember.FullName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
 
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
 
@@ -137,9 +117,28 @@ namespace Controller.member
             foreach (Boat boat in boatRegister.Boats)
             {
                 count += 1;
-                memberView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
+                _memberView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
             }
-            memberView.PrintEndOfInformation();
+            _memberView.PrintEndOfInformation();
+        }
+
+        private string ValidateName(string name, bool isFirstName = true)
+        {
+            if(!inputChecker.isCorrectNameInput(name) && isFirstName)
+            {
+                name = _memberView.InputFirstName();
+            }
+            else if(!inputChecker.isCorrectNameInput(name) && !isFirstName)
+            {
+                name = _memberView.InputLastName();
+            }
+            return name;
+        }
+
+        public MemberController(MemberView memberView, MemberRegister memberRegister)
+        {
+            _memberView = memberView;
+            _memberRegister = memberRegister;
         }
     }
 }

@@ -6,41 +6,43 @@ namespace Controller.boat
 {
     class BoatController
     {
-        
+        private BoatView _boatView;
+        private MemberRegister _memberRegister;
+
         private InputChecker inputChecker = new InputChecker();
-        public void AddBoat(MemberRegister memberRegister, BoatView boatView)
+        public void AddBoat()
         {
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
             //TODO: Fetch by member id or SSN
-            string pId = boatView.InputSsn();
+            string pId = _boatView.InputSsn();
 
-            if(!inputChecker.IsCorrectInputOfSsn(pId)) AddBoat(memberRegister, boatView);
+            if(!inputChecker.IsCorrectInputOfSsn(pId)) AddBoat();
 
-            BoatRegister boatRegister = new BoatRegister(memberRegister.GetMemberBySsn(pId).PersonalId);
+            BoatRegister boatRegister = new BoatRegister(_memberRegister.GetMemberBySsn(pId).PersonalId);
             boatTypeMenu.DisplayMenu();
             BoatType boatType = boatTypeMenu.GetInput();
 
-            string lengthString = boatView.InputBoatLength();
+            string lengthString = _boatView.InputBoatLength();
             if(inputChecker.ConvertToDouble(lengthString) == 0)
             {
-                boatView.PrintNotADoubleAboveZero();
-                AddBoat(memberRegister, boatView);
+                _boatView.PrintNotADoubleAboveZero();
+                AddBoat();
             } else {
                 boatRegister.AddBoat(boatType, inputChecker.ConvertToDouble(lengthString));
-                boatView.PrintActionSuccess();
+                _boatView.PrintActionSuccess();
             }
         }
-        public void RemoveBoat(MemberRegister memberRegister, BoatView boatView)
+        public void RemoveBoat()
         {
             //TODO: Fetch by member id or SSN
-            string pId = boatView.InputSsn();
+            string pId = _boatView.InputSsn();
 
-            if(!inputChecker.IsCorrectInputOfSsn(pId)) RemoveBoat(memberRegister, boatView);
-            BoatRegister boatRegister = new BoatRegister(memberRegister.GetMemberBySsn(pId).PersonalId);
+            if(!inputChecker.IsCorrectInputOfSsn(pId)) RemoveBoat();
+            BoatRegister boatRegister = new BoatRegister(_memberRegister.GetMemberBySsn(pId).PersonalId);
 
             if(boatRegister.Boats.Count == 0)
             {
-                boatView.PrintNoBoatsFound();
+                _boatView.PrintNoBoatsFound();
                 return;
             }
             else
@@ -49,44 +51,44 @@ namespace Controller.boat
                 foreach (Boat boat in boatRegister.Boats)
                 {
                     count += 1;
-                    boatView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
+                    _boatView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
                 }
-                boatView.PrintEndOfInformation();
+                _boatView.PrintEndOfInformation();
             }
 
-            string idString = boatView.InputBoatId();
+            string idString = _boatView.InputBoatId();
             if(inputChecker.ConvertToInt(idString) == 0)
             {
-                boatView.PrintNotADoubleAboveZero();
-                RemoveBoat(memberRegister, boatView);
+                _boatView.PrintNotADoubleAboveZero();
+                RemoveBoat();
             } else {
                 int id = inputChecker.ConvertToInt(idString);
                 if(boatRegister.IsBoat(id))
                 {
                     boatRegister.DeleteById(id);
-                    boatView.PrintActionSuccess();
+                    _boatView.PrintActionSuccess();
                 }
                 else
                 {
-                    boatView.PrintActionFail();
+                    _boatView.PrintActionFail();
                 }
             }
         }
-        public void UpdateBoat(MemberRegister memberRegister, BoatView boatView)
+        public void UpdateBoat()
         {
             //TODO: Fetch by member id or SSN
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
-            string pId = boatView.InputSsn();
+            string pId = _boatView.InputSsn();
 
-            if(!inputChecker.IsCorrectInputOfSsn(pId)) UpdateBoat(memberRegister, boatView);
+            if(!inputChecker.IsCorrectInputOfSsn(pId)) UpdateBoat();
 
-            Member selectedMember =  memberRegister.GetMemberBySsn(pId);
+            Member selectedMember =  _memberRegister.GetMemberBySsn(pId);
 
             BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
 
             if(boatRegister.Boats.Count == 0)
             {
-                boatView.PrintNoBoatsFound();
+                _boatView.PrintNoBoatsFound();
                 return;
             }
             else
@@ -95,17 +97,17 @@ namespace Controller.boat
                 foreach (Boat boat in boatRegister.Boats)
                 {
                     count += 1;
-                    boatView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
+                    _boatView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
                 }
-                boatView.PrintEndOfInformation();
+                _boatView.PrintEndOfInformation();
             }
 
-            string idString = boatView.InputBoatId();
+            string idString = _boatView.InputBoatId();
 
             if(inputChecker.ConvertToInt(idString) == 0)
             {
-                boatView.PrintNotAnIntAboveZero();
-                UpdateBoat(memberRegister, boatView);
+                _boatView.PrintNotAnIntAboveZero();
+                UpdateBoat();
             }
             else
             {
@@ -116,22 +118,29 @@ namespace Controller.boat
                     boatTypeMenu.DisplayMenu();
                     BoatType boatType = boatTypeMenu.GetInput();
 
-                    string lengthString = boatView.InputBoatLength();
+                    string lengthString = _boatView.InputBoatLength();
                     if(inputChecker.ConvertToDouble(lengthString) == 0)
                     {
                         //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
-                        boatView.PrintNotADoubleAboveZero();
-                        UpdateBoat(memberRegister, boatView);
+                        _boatView.PrintNotADoubleAboveZero();
+                        UpdateBoat();
                     }
 
                     boatRegister.UpdateBoat(id, boatType, inputChecker.ConvertToDouble(lengthString));
-                    boatView.PrintActionSuccess();
+                    _boatView.PrintActionSuccess();
                 }
                 else
                 {
-                    boatView.PrintActionFail();
+                    _boatView.PrintActionFail();
                 }
             }
         }
+
+        public BoatController (BoatView boatView, MemberRegister memberRegister)
+        {
+            _boatView = boatView;
+            _memberRegister = memberRegister;
+        }
+
     }
 }
