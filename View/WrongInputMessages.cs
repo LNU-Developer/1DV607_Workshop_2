@@ -1,19 +1,19 @@
 using System;
-namespace View.input
+namespace View
 {
-    class WrongInput
+    class WrongInputMessages
     {
         public void NotCorrectPId()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nThis is not a social security number.");
+            Console.WriteLine("\nThis is not a correct social security number.");
             Console.ResetColor();
         }
 
         public void PrintSsnNotExisting()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nThis social security number was not found in the register. Please try again!");
+            Console.WriteLine("\nThis social security number was not found in the register.");
             Console.ResetColor();
         }
 
@@ -24,17 +24,10 @@ namespace View.input
             Console.ResetColor();
         }
 
-        public void NoName()
+        public void NotCorrectName()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nYou didn't enter a name. Please try again.");
-            Console.ResetColor();
-        }
-
-        public void NameHasNumber()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nPlease don't put a number in your name.");
+            Console.WriteLine("\nYou didn't enter a correct name.");
             Console.ResetColor();
         }
     }

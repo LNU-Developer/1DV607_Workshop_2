@@ -1,6 +1,6 @@
 using Model;
 using View.member;
-using View.input;
+using View;
 namespace Controller.member
 {
     class MemberController
@@ -8,7 +8,7 @@ namespace Controller.member
         private MemberView _memberView;
         private MemberRegister _memberRegister;
         private InputChecker inputChecker = new InputChecker();
-        private WrongInput wrongInput = new WrongInput();
+        private WrongInputMessages wrongInput = new WrongInputMessages();
         public void AddMember()
         {
             string pId = _memberView.InputSsn();
@@ -124,11 +124,11 @@ namespace Controller.member
 
         private string ValidateName(string name, bool isFirstName = true)
         {
-            if(!inputChecker.isCorrectNameInput(name) && isFirstName)
+            if(!inputChecker.IsCorrectNameInput(name) && isFirstName)
             {
                 name = _memberView.InputFirstName();
             }
-            else if(!inputChecker.isCorrectNameInput(name) && !isFirstName)
+            else if(!inputChecker.IsCorrectNameInput(name) && !isFirstName)
             {
                 name = _memberView.InputLastName();
             }
