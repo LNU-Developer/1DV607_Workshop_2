@@ -8,10 +8,12 @@ namespace Controller
     class InputController
     {
         private MemberRegister Register = new MemberRegister();
+        private SsnRegister SsnRegister = new SsnRegister();
+
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             WrongInput wrongInput = new WrongInput();
-            if(!Register.IsSwedishSsn(id))
+            if(!SsnRegister.IsSwedishSsn(id))
             {
                 wrongInput.NotCorrectPId();
                 return false;
