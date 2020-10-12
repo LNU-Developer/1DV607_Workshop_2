@@ -7,7 +7,7 @@ namespace Controller.boat
     class BoatController
     {
         
-        private InputHandler inputHandler;
+        private InputHandler inputHandler = new InputHandler();
         public void AddBoat(MemberRegister memberRegister, BoatView boatView)
         {
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
@@ -132,11 +132,6 @@ namespace Controller.boat
                     boatView.PrintActionFail();
                 }
             }
-        }
-
-        public BoatController()
-        {
-            InputHandler inputHandler = new InputHandler();
         }
     }
 }

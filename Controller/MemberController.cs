@@ -5,7 +5,7 @@ namespace Controller.member
     class MemberController
     {
 
-        private InputHandler inputHandler;
+        private InputHandler inputHandler = new InputHandler();
         public void AddMember(MemberRegister memberRegister, MemberView memberView)
         {
             string pId = memberView.InputSsn();
@@ -115,11 +115,6 @@ namespace Controller.member
                 memberView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
             }
             memberView.PrintEndOfInformation();
-        }
-
-        public MemberController()
-        {
-            InputHandler inputHandler = new InputHandler();
         }
     }
 }
