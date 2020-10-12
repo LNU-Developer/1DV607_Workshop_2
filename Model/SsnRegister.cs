@@ -11,7 +11,39 @@ namespace Model
             {
                 return false;
             }
+            else if (!ValidateIsOk(identity))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
+        }
 
+        private bool IdentityIsOk(string identity) {
+            identity = identity.Replace("-", "");
+            identity = identity.Replace("+", "");
+
+            foreach (char c in identity)
+            {
+                if (c < '0' || c > '9') return false;
+            }
+
+            if (identity.Length < 10)
+            {
+                return false;
+            }
+            else if (identity.Length == 12)
+            {
+                identity = identity.Substring(2);
+            }
+            return true;
+        }
+
+        private bool ValidateIsOk(string identity)
+        {
             double[] chars = new double[10];
 
             for (int i = 0; i<10; i=i+2)
@@ -28,7 +60,6 @@ namespace Model
             {
                 sum = sum + chars[i];
             }
-
             string digitString = sum.ToString();
             double lastDigit = Char.GetNumericValue(digitString[digitString.Length-1]);
 
@@ -52,26 +83,7 @@ namespace Model
             {
                 return false;
             }
-        }
 
-        private bool IdentityIsOk(string identity) {
-            identity = identity.Replace("-", "");
-            identity = identity.Replace("+", "");
-
-            foreach (char c in identity)
-            {
-                if (c < '0' || c > '9') return false;
-            }
-
-            if (identity.Length < 10)
-            {
-                return false;
-            }
-            else if (identity.Length == 12)
-            {
-                identity = identity.Substring(2);
-            }
-            return true;
         }
 
         private double SumDigits(double number)
