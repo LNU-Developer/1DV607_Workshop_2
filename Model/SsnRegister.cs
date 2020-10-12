@@ -4,9 +4,10 @@ namespace Model
 {
     class SsnRegister
     {
-        public bool ValidatePidInput(string identity)
+        private string _identity;
+        public bool ValidatePidInput(string _identity)
         {
-            if (PIdInputIsCorrectFormat(identity) && IsSwedishSsn(identity))
+            if (PIdInputIsCorrectFormat() && IsSwedishSsn())
             {
                 return true;
             }
@@ -17,38 +18,38 @@ namespace Model
             
         }
 
-        private bool PIdInputIsCorrectFormat(string identity) {
-            identity = identity.Replace("-", "");
-            identity = identity.Replace("+", "");
+        private bool PIdInputIsCorrectFormat() {
+            _identity = _identity.Replace("-", "");
+            _identity = _identity.Replace("+", "");
 
             // Check so every character in identity is a number between 0 and 9
-            foreach (char c in identity)
+            foreach (char c in _identity)
             {
                 if (c < '0' || c > '9') return false;
             }
 
-            if (identity.Length < 10)
+            if (_identity.Length < 10)
             {
                 return false;
             }
-            else if (identity.Length == 12)
+            else if (_identity.Length == 12)
             {
-                identity = identity.Substring(2);
+                _identity = _identity.Substring(2);
             }
             return true;
         }
 
-        private bool IsSwedishSsn(string identity)
+        private bool IsSwedishSsn()
         {
             double[] chars = new double[10];
 
             for (int i = 0; i<10; i=i+2)
             {
-                chars[i] = SumDigits(Char.GetNumericValue(identity[i])*2);
+                chars[i] = SumDigits(Char.GetNumericValue(_identity[i])*2);
             }
             for (int i = 1; i<10; i=i+2)
             {
-                chars[i] = SumDigits(Char.GetNumericValue(identity[i]));
+                chars[i] = SumDigits(Char.GetNumericValue(_identity[i]));
             }
 
             double sum = 0;
@@ -71,7 +72,7 @@ namespace Model
                 checksum = lastDigitDiff;
             }
 
-            if (checksum == Char.GetNumericValue(identity[identity.Length-1]))
+            if (checksum == Char.GetNumericValue(_identity[_identity.Length-1]))
             {
                 return true;
             }
@@ -92,8 +93,12 @@ namespace Model
             }
             return sum;
         }
-    }
 
+       public SsnRegister(string identity)
+        {
+            _identity=identity;
+        }
+    }
 }
 
     
