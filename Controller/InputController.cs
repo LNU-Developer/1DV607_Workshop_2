@@ -13,7 +13,7 @@ namespace Controller
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             WrongInput wrongInput = new WrongInput();
-            if(!SsnRegister.validatePidInput(id))
+            if(!SsnRegister.ValidatePidInput(id))
             {
                 wrongInput.NotCorrectPId();
                 return false;

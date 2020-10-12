@@ -4,10 +4,9 @@ namespace Model
 {
     class SsnRegister
     {
-        //Lunas Algorithm
-        public bool validatePidInput(string identity)
+        public bool ValidatePidInput(string identity)
         {
-            if (PIdInputIsCorrectFormat(identity) && isSwedishSsn(identity))
+            if (PIdInputIsCorrectFormat(identity) && IsSwedishSsn(identity))
             {
                 return true;
             }
@@ -39,7 +38,7 @@ namespace Model
             return true;
         }
 
-        private bool isSwedishSsn(string identity)
+        private bool IsSwedishSsn(string identity)
         {
             double[] chars = new double[10];
 
