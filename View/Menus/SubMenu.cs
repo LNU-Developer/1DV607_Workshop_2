@@ -15,16 +15,16 @@ namespace View.menu
             Console.WriteLine("0. Go back");
             Console.WriteLine("═══════════════════════════════════════════");
         }
-        public MenuInput GetInput()
+        public MenuChoice GetInput()
         {
             switch (System.Console.ReadKey().KeyChar)
             {
                 case '1':
-                    return MenuInput.ShowCompactMemberList;
+                    return MenuChoice.ShowCompactMemberList;
                 case '2':
-                    return MenuInput.ShowVerboseMemberList;
+                    return MenuChoice.ShowVerboseMemberList;
                 default:
-                    return MenuInput.Unknown;
+                    return MenuChoice.Unknown;
             }
         }
     }

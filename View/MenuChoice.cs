@@ -1,6 +1,6 @@
 namespace View.input
 {
-    public enum MenuInput
+    public enum MenuChoice
     {
         RegisterMember = 1,
         DeleteMember,

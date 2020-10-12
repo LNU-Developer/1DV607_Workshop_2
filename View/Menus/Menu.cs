@@ -23,30 +23,30 @@ namespace View.menu
             Console.WriteLine("═══════════════════════════════════════════");
         }
 
-        public MenuInput GetInput()
+        public MenuChoice GetInput()
         {
             switch (System.Console.ReadKey().KeyChar)
             {
                 case '1':
-                    return MenuInput.RegisterMember;
+                    return MenuChoice.RegisterMember;
                 case '2':
-                    return MenuInput.DeleteMember;
+                    return MenuChoice.DeleteMember;
                 case '3':
-                    return MenuInput.ShowMemberList;
+                    return MenuChoice.ShowMemberList;
                 case '4':
-                    return MenuInput.UpdateMemberInformation;
+                    return MenuChoice.UpdateMemberInformation;
                 case '5':
-                    return MenuInput.AddBoat;
+                    return MenuChoice.AddBoat;
                 case '6':
-                    return MenuInput.RemoveBoat;
+                    return MenuChoice.RemoveBoat;
                 case '7':
-                    return MenuInput.UpdateBoat;
+                    return MenuChoice.UpdateBoat;
                 case '8':
-                    return MenuInput.ShowMemberInformation;
+                    return MenuChoice.ShowMemberInformation;
                 case '0':
-                    return MenuInput.Exit;
+                    return MenuChoice.Exit;
                 default:
-                    return MenuInput.Unknown;
+                    return MenuChoice.Unknown;
             }
         }
     }
