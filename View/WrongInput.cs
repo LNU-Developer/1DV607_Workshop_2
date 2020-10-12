@@ -19,7 +19,7 @@ namespace View.input
 
         }
 
-        public void NoFirstName()
+        public void NoName()
         {
             Console.WriteLine("\nYou didn't enter a name. Please try again.");
         }

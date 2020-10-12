@@ -12,22 +12,6 @@ namespace Controller.member
         {
             string pId = memberView.InputSsn();
 
-            string firstName = memberView.InputFirstName();
-            
-            if (firstName == "")
-            {
-                wrongInput.NoFirstName();
-                memberView.InputFirstName();
-            } 
-
-            string lastName = memberView.InputLastName();
-
-             if (lastName == "")
-            {
-                wrongInput.NoFirstName();
-                memberView.InputLastName();
-            } 
-
             if(!inputController.IsCorrectInputOfSsn(pId, true))
             {
                 AddMember(memberRegister, memberView);
@@ -35,6 +19,22 @@ namespace Controller.member
             else
             {
                 if (pId.Length == 12) pId = pId.Substring(2);
+
+                string firstName = memberView.InputFirstName();
+
+                if(firstName.Length < 1)
+                {
+                    wrongInput.NoName();
+                    firstName = memberView.InputFirstName();
+                }
+
+                string lastName = memberView.InputLastName();
+
+                if(lastName.Length < 1)
+                {
+                    wrongInput.NoName();
+                    lastName = memberView.InputFirstName();
+                }
 
                 //TODO: Are these credentials correct: show credentials.
                 memberRegister.AddMember(firstName, lastName, pId);
