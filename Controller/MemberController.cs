@@ -19,8 +19,14 @@ namespace Controller.member
                 wrongInput.NoFirstName();
                 memberView.InputFirstName();
             } 
-            
+
             string lastName = memberView.InputLastName();
+
+             if (lastName == "")
+            {
+                wrongInput.NoFirstName();
+                memberView.InputLastName();
+            } 
 
             if(!inputController.IsCorrectInputOfSsn(pId, true))
             {
