@@ -4,9 +4,9 @@ using Model;
 namespace Controller
 
 {
-    static class InputHandler
+    class InputHandler
     {
-        public static bool IsCorrectInputOfSsn (string id, bool idExists = false)
+        public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             MemberRegister Register = new MemberRegister();
 
@@ -30,7 +30,7 @@ namespace Controller
             return true;
         }
 
-        public static bool DoesPIdExistInRegister(string pId)
+        public bool DoesPIdExistInRegister(string pId)
         {
             MemberRegister Register = new MemberRegister();
 
@@ -44,7 +44,7 @@ namespace Controller
             return false;
         }
 
-        public static int ConvertToInt(string input)
+        public int ConvertToInt(string input)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace Controller
             }
         }
 
-        public static double ConvertToDouble(string input)
+        public double ConvertToDouble(string input)
         {
             try
             {
