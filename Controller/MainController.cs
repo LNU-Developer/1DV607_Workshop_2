@@ -1,3 +1,4 @@
+using View;
 using View.menu;
 using View.member;
 using View.boat;
@@ -13,9 +14,10 @@ namespace Controller
         public bool Start(Menu menu, SubMenu subMenu)
         {
             MemberRegister memberRegister = new MemberRegister();
-            InputChecker inputChecker = new InputChecker(memberRegister);
+            WrongInputMessages wrongInputMessages = new WrongInputMessages();
+            InputChecker inputChecker = new InputChecker(memberRegister, wrongInputMessages);
             MemberView memberView = new MemberView();
-            MemberController memberController = new MemberController(memberView, memberRegister, inputChecker);
+            MemberController memberController = new MemberController(memberView, memberRegister, inputChecker, wrongInputMessages);
             BoatView boatView = new BoatView();
             BoatController boatController = new BoatController(boatView, memberRegister, inputChecker);
             menu.DisplayMenu();

@@ -8,7 +8,7 @@ namespace Controller.member
         private MemberView _memberView;
         private MemberRegister _memberRegister;
         private InputChecker _inputChecker;
-        private WrongInputMessages wrongInput = new WrongInputMessages();
+        private WrongInputMessages _wrongInput;
         public void AddMember()
         {
             string pId = _memberView.InputSsn();
@@ -66,7 +66,7 @@ namespace Controller.member
             
             if(!_inputChecker.DoesPIdExistInRegister(pId))
             {
-                wrongInput.PrintSsnNotExisting();
+                _wrongInput.PrintSsnNotExisting();
                 UpdateMember();
             }
             else
@@ -136,11 +136,12 @@ namespace Controller.member
             return name;
         }
 
-        public MemberController(MemberView memberView, MemberRegister memberRegister, InputChecker inputChecker)
+        public MemberController(MemberView memberView, MemberRegister memberRegister, InputChecker inputChecker, WrongInputMessages wrongInputMessages)
         {
             _memberView = memberView;
             _memberRegister = memberRegister;
             _inputChecker = inputChecker;
+            _wrongInput = wrongInputMessages;
         }
     }
 }

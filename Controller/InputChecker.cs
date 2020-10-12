@@ -9,24 +9,24 @@ namespace Controller
     class InputChecker
     {
         private MemberRegister _memberRegister;
-        private WrongInputMessages wrongInput = new WrongInputMessages();
+        private WrongInputMessages _wrongInput;
 
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             if(!ValidatePidInput(id))
             {
-                wrongInput.NotCorrectPId();
+                _wrongInput.NotCorrectPId();
                 return false;
             }
 
             if(!DoesPIdExistInRegister(id) && !idExists)
             {
-                wrongInput.PrintSsnNotExisting();
+                _wrongInput.PrintSsnNotExisting();
                 return false;
             }
             else if(DoesPIdExistInRegister(id) && idExists)
             {
-                wrongInput.MemberAlreadyExists();
+                _wrongInput.MemberAlreadyExists();
                 return false;
             }
 
@@ -89,7 +89,7 @@ namespace Controller
         {
             if(input.Any(char.IsDigit) || input.Length < 1)
             {
-                wrongInput.NotCorrectName();
+                _wrongInput.NotCorrectName();
                 return false;
             }
             else {
@@ -185,9 +185,10 @@ namespace Controller
             return sum;
         }
     
-        public InputChecker(MemberRegister memberRegister)
+        public InputChecker(MemberRegister memberRegister, WrongInputMessages wrongInput)
         {
             _memberRegister = memberRegister;
+            _wrongInput = wrongInput;
         }
     }
 }
