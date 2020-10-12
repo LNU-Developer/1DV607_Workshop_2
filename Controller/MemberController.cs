@@ -1,16 +1,25 @@
 using Model;
 using View.member;
+using View.input;
 namespace Controller.member
 {
     class MemberController
     {
 
         private InputController inputController = new InputController();
+            private WrongInput wrongInput = new WrongInput();
         public void AddMember(MemberRegister memberRegister, MemberView memberView)
         {
             string pId = memberView.InputSsn();
 
             string firstName = memberView.InputFirstName();
+            
+            if (firstName == "")
+            {
+                wrongInput.NoFirstName();
+                memberView.InputFirstName();
+            } 
+            
             string lastName = memberView.InputLastName();
 
             if(!inputController.IsCorrectInputOfSsn(pId, true))
