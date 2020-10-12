@@ -21,18 +21,16 @@ namespace Controller.member
 
                 string firstName = memberView.InputFirstName();
 
-                if(firstName.Length < 1)
+                if(!inputController.isCorrectNameInput(firstName))
                 {
-                    wrongInput.NoName();
                     firstName = memberView.InputFirstName();
                 }
 
                 string lastName = memberView.InputLastName();
 
-                if(lastName.Length < 1)
+                if(!inputController.isCorrectNameInput(lastName))
                 {
-                    wrongInput.NoName();
-                    lastName = memberView.InputFirstName();
+                    lastName = memberView.InputLastName();
                 }
 
                 //TODO: Are these credentials correct: show credentials.
@@ -82,17 +80,15 @@ namespace Controller.member
             {
                 string firstName = memberView.InputFirstName();
 
-                if(firstName.Length < 1)
+                if(!inputController.isCorrectNameInput(firstName))
                 {
-                    wrongInput.NoName();
                     firstName = memberView.InputFirstName();
                 }
 
                 string lastName = memberView.InputLastName();
 
-                if(lastName.Length < 1)
+                if(!inputController.isCorrectNameInput(lastName))
                 {
-                    wrongInput.NoName();
                     lastName = memberView.InputLastName();
                 }
 

@@ -30,5 +30,12 @@ namespace View.input
             Console.WriteLine("\nYou didn't enter a name. Please try again.");
             Console.ResetColor();
         }
+
+        public void NameHasNumber()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nPlease don't put a number in your name.");
+            Console.ResetColor();
+        }
     }
 }

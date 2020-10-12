@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Model;
 using View.input;
 
@@ -9,10 +10,10 @@ namespace Controller
     {
         private MemberRegister Register = new MemberRegister();
         private SsnRegister SsnRegister = new SsnRegister();
+        private WrongInput wrongInput = new WrongInput();
 
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
-            WrongInput wrongInput = new WrongInput();
             if(!SsnRegister.ValidatePidInput(id))
             {
                 wrongInput.NotCorrectPId();
@@ -82,6 +83,23 @@ namespace Controller
             catch
             {
                 return 0;
+            }
+        }
+    
+        public bool isCorrectNameInput(string input)
+        {
+
+            if(input.Any(char.IsDigit))
+            {
+                wrongInput.NameHasNumber();
+                return false;
+            }
+            else if(input.Length < 1)
+            {
+                wrongInput.NoName();
+                return false;
+            } else {
+                return true;
             }
         }
     }
