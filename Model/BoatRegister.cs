@@ -11,7 +11,7 @@ namespace Model
         {
             get
             {
-                return database.FetchAllBoatsForMember(_ownerPersonalId).Result.AsReadOnly();
+                return Database.FetchAllBoatsForMember(_ownerPersonalId).Result.AsReadOnly();
             }
         }
 
@@ -23,22 +23,22 @@ namespace Model
                 Length = length,
                 BoatId = GenerateId()
             };
-            database.AddBoat(newBoat, _ownerPersonalId).Wait();
+            Database.AddBoat(newBoat, _ownerPersonalId).Wait();
         }
 
         public override void DeleteById(int id)
         {
-            if(database.BoatIdExist(id, _ownerPersonalId).Result)
+            if(Database.BoatIdExist(id, _ownerPersonalId).Result)
             {
-                database.RemoveBoatById(id, _ownerPersonalId).Wait();
+                Database.RemoveBoatById(id, _ownerPersonalId).Wait();
             }
         }
 
         public Boat GetBoatById (int id)
         {
-            if(database.BoatIdExist(id, _ownerPersonalId).Result)
+            if(Database.BoatIdExist(id, _ownerPersonalId).Result)
             {
-                return database.FetchBoatById(id).Result;
+                return Database.FetchBoatById(id).Result;
             }
             else
             {
@@ -49,7 +49,7 @@ namespace Model
 
         public void UpdateBoat(int id, BoatType boatType, double length)
         {
-            if(database.BoatIdExist(id, _ownerPersonalId).Result)
+            if(Database.BoatIdExist(id, _ownerPersonalId).Result)
             {
                 Boat newBoat = new Boat()
                 {
@@ -57,13 +57,13 @@ namespace Model
                     Length = length,
                     BoatId = id
                 };
-                database.AddBoat(newBoat, _ownerPersonalId).Wait();
+                Database.AddBoat(newBoat, _ownerPersonalId).Wait();
             }
         }
 
         public bool IsBoat(int id)
         {
-            if(database.BoatIdExist(id, _ownerPersonalId).Result)
+            if(Database.BoatIdExist(id, _ownerPersonalId).Result)
             {
                 return true;
             }
@@ -80,7 +80,7 @@ namespace Model
             int newBoatId;
   	        newBoatId = a.Next(0, 100000000);
 
-            while(database.BoatIdExist(newBoatId, _ownerPersonalId).Result)
+            while(Database.BoatIdExist(newBoatId, _ownerPersonalId).Result)
     	        newBoatId = a.Next(0, 100000000);
 
             return newBoatId;

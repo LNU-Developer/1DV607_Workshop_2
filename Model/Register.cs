@@ -4,8 +4,12 @@ namespace Model
 {
     abstract class Register
     {
-        public DatabaseApi database = new DatabaseApi(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
+     private DatabaseApi database = new DatabaseApi(Environment.GetEnvironmentVariable("projectId"), Environment.GetEnvironmentVariable("serviceAccountPath"));
 
+     public DatabaseApi Database
+     {
+         get { return database; }
+     }
         public abstract int GenerateId();
 
         public abstract void DeleteById(int id);

@@ -4,10 +4,9 @@ namespace Model
 {
     class SsnRegister
     {
-        private string _identity;
         public bool ValidatePidInput(string _identity)
         {
-            if (PIdInputIsCorrectFormat() && IsSwedishSsn())
+            if (PIdInputIsCorrectFormat(_identity) && IsSwedishSsn(_identity))
             {
                 return true;
             }
@@ -18,7 +17,7 @@ namespace Model
             
         }
 
-        private bool PIdInputIsCorrectFormat() {
+        private bool PIdInputIsCorrectFormat(string _identity) {
             _identity = _identity.Replace("-", "");
             _identity = _identity.Replace("+", "");
 
@@ -39,7 +38,7 @@ namespace Model
             return true;
         }
 
-        private bool IsSwedishSsn()
+        private bool IsSwedishSsn(string _identity)
         {
             double[] chars = new double[10];
 
@@ -92,11 +91,6 @@ namespace Model
                 sum = sum + Char.GetNumericValue(temp[i]);
             }
             return sum;
-        }
-
-       public SsnRegister(string identity)
-        {
-            _identity=identity;
         }
     }
 }

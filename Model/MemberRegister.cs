@@ -11,13 +11,13 @@ namespace Model
         {
             get
             {
-                return database.FetchAllMembers().Result.AsReadOnly();
+                return Database.FetchAllMembers().Result.AsReadOnly();
             }
         }
 
         public void AddMember(string firstName, string lastName, string personalId)
         {
-            if(!database.MemberExist(personalId).Result)
+            if(!Database.MemberExist(personalId).Result)
             {
                 if(!SsnRegister.ValidatePidInput(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
                 Member newMember = new Member
@@ -27,7 +27,7 @@ namespace Model
                     PersonalId = personalId,
                     MemberId = GenerateId()
                 };
-                database.AddMember(newMember).Wait();
+                Database.AddMember(newMember).Wait();
             }
             else
             {
@@ -44,9 +44,9 @@ namespace Model
             if (id.Length == 12)
                 id = id.Substring(2, 10);
 
-            if(database.MemberExist(id).Result)
+            if(Database.MemberExist(id).Result)
             {
-                return database.FetchMemberBySsn(id).Result;
+                return Database.FetchMemberBySsn(id).Result;
             }
             else
             {
@@ -57,9 +57,9 @@ namespace Model
 
         public Member GetMemberByMemberId(int id)
         {
-            if(database.MemberIdExist(id).Result)
+            if(Database.MemberIdExist(id).Result)
             {
-                return database.FetchMemberById(id).Result;
+                return Database.FetchMemberById(id).Result;
             }
             else
             {
@@ -70,23 +70,23 @@ namespace Model
 
         public void DeleteMemberBySsn(string id)
         {
-            if(database.MemberExist(id).Result)
+            if(Database.MemberExist(id).Result)
             {
-                database.RemoveMemberBySsn(id).Wait();
+                Database.RemoveMemberBySsn(id).Wait();
             }
         }
 
         public override void DeleteById(int id)
         {
-            if(database.MemberIdExist(id).Result)
+            if(Database.MemberIdExist(id).Result)
             {
-                database.RemoveMemberById(id).Wait();
+                Database.RemoveMemberById(id).Wait();
             }
         }
 
         public void UpdateMember(string firstName, string lastName, string personalId)
         {
-            if(database.MemberExist(personalId).Result)
+            if(Database.MemberExist(personalId).Result)
             {
                 if(!SsnRegister.ValidatePidInput(personalId)) throw new ArgumentOutOfRangeException( $"{nameof(personalId)} not a valid social security number. Please use the format xxYYMMDD-NNNN, xxYYMMDD+NNNN, YYMMDD-NNNN, YYMMDD-NNNN or YYMMDDNNN");
 
@@ -97,7 +97,7 @@ namespace Model
                     PersonalId = personalId,
                     MemberId = GetMemberBySsn(personalId).MemberId
                 };
-                database.AddMember(newMember).Wait();
+                Database.AddMember(newMember).Wait();
             }
         }
 
@@ -108,7 +108,7 @@ namespace Model
             int newMemberId;
   	        newMemberId = a.Next(0, 100000000);
 
-            while(database.MemberIdExist(newMemberId).Result)
+            while(Database.MemberIdExist(newMemberId).Result)
     	        newMemberId = a.Next(0, 100000000);
 
             return newMemberId;
