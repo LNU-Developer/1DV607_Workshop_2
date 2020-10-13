@@ -13,7 +13,7 @@ namespace Controller.member
         {
             string pId = _memberView.InputSsn();
 
-            if(!IsCorrectInputOfSsn(pId, true))
+            if(!IsCorrectInputOfSsn(pId))
             {
                 AddMember();
             }
@@ -146,6 +146,40 @@ namespace Controller.member
             else {
                 return true;
             }
+        }
+
+        public override bool IsCorrectInputOfSsn (string id)
+        {
+            if(!ValidatePidInput(id))
+            {
+                _memberViewWrongInputMessages.NotCorrectPId();
+                return false;
+            }
+
+            if(!DoesPIdExistInRegister(id))
+            {
+                _memberViewWrongInputMessages.PrintSsnNotExisting();
+                return false;
+            }
+            else if(DoesPIdExistInRegister(id))
+            {
+                _memberViewWrongInputMessages.MemberAlreadyExists();
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool DoesPIdExistInRegister(string pId)
+        {
+            foreach (Member member in _memberRegister.Members)
+            {
+                if(member.PersonalId == pId)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public MemberInputController(MemberRegister memberRegister)

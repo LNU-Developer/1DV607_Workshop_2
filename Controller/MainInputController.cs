@@ -7,41 +7,11 @@ namespace Controller
 {
     abstract class MainInputController
     {
-        public bool IsCorrectInputOfSsn (string id, bool idExists = false)
-        {
-            if(!ValidatePidInput(id))
-            {
-                _wrongInput.NotCorrectPId();
-                return false;
-            }
+        public abstract bool IsCorrectInputOfSsn (string id);
 
-            if(!DoesPIdExistInRegister(id) && !idExists)
-            {
-                _wrongInput.PrintSsnNotExisting();
-                return false;
-            }
-            else if(DoesPIdExistInRegister(id) && idExists)
-            {
-                _wrongInput.MemberAlreadyExists();
-                return false;
-            }
 
-            return true;
-        }
 
-        public bool DoesPIdExistInRegister(string pId)
-        {
-            foreach (Member member in _memberRegister.Members)
-            {
-                if(member.PersonalId == pId)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-                public bool ValidatePidInput(string _identity)
+        public bool ValidatePidInput(string _identity)
         {
             if (PIdInputIsCorrectFormat(_identity) && IsSwedishSsn(_identity))
             {

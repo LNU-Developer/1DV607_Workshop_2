@@ -4,13 +4,6 @@ namespace View.member
 {
     class MemberViewWrongInputMessages : WrongInputMessages
     {
-        public void NotCorrectPId()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\nThis is not a correct social security number.");
-            Console.ResetColor();
-        }
-
         public void MemberAlreadyExists()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

@@ -176,6 +176,28 @@ namespace Controller.boat
             }
         }
 
+         public override bool IsCorrectInputOfSsn (string id)
+        {
+            if(!ValidatePidInput(id))
+            {
+                _boatViewWrongInputMessages.NotCorrectPId();
+                return false;
+            }
+
+            // if(!DoesPIdExistInRegister(id) && !idExists)
+            // {
+            //     _boatViewWrongInputMessages.PrintSsnNotExisting();
+            //     return false;
+            // }
+            // else if(DoesPIdExistInRegister(id) && idExists)
+            // {
+            //     _boatViewWrongInputMessages.MemberAlreadyExists();
+            //     return false;
+            // }
+
+            return true;
+        }
+
         public BoatInputController (MemberRegister memberRegister)
         {
             _boatView = new BoatView();
