@@ -13,7 +13,6 @@ namespace View.menu
             Console.WriteLine("3. Kayak");
             Console.WriteLine("4. Other");
         }
-
         public BoatType GetInput()
         {
             switch (System.Console.ReadKey().KeyChar)

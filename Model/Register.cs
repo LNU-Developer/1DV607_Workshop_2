@@ -9,7 +9,7 @@ namespace Model
      {
          get { return database; }
      }
-        public abstract int GenerateId();
-        public abstract void DeleteById(int id);
+    public abstract int GenerateId();
+    public abstract void DeleteById(int id);
     }
 }

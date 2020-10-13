@@ -121,6 +121,27 @@ namespace Controller.member
             }
             _memberView.PrintEndOfInformation();
         }
+        public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
+        {
+            if(!ValidatePidInput(id))
+            {
+                _memberViewWrongInputMessages.NotCorrectPId();
+                return false;
+            }
+
+            if(!DoesPIdExistInRegister(id) && !idExists)
+            {
+                _memberViewWrongInputMessages.PrintSsnNotExisting();
+                return false;
+            }
+            else if(DoesPIdExistInRegister(id) && idExists)
+            {
+                _memberViewWrongInputMessages.MemberAlreadyExists();
+                return false;
+            }
+
+            return true;
+        }
         private string ValidateName(string name, bool isFirstName = true)
         {
             if(!IsCorrectNameInput(name) && isFirstName)
@@ -143,27 +164,6 @@ namespace Controller.member
             else {
                 return true;
             }
-        }
-        public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
-        {
-            if(!ValidatePidInput(id))
-            {
-                _memberViewWrongInputMessages.NotCorrectPId();
-                return false;
-            }
-
-            if(!DoesPIdExistInRegister(id) && !idExists)
-            {
-                _memberViewWrongInputMessages.PrintSsnNotExisting();
-                return false;
-            }
-            else if(DoesPIdExistInRegister(id) && idExists)
-            {
-                _memberViewWrongInputMessages.MemberAlreadyExists();
-                return false;
-            }
-
-            return true;
         }
         private bool DoesPIdExistInRegister(string pId)
         {

@@ -179,7 +179,7 @@ namespace Controller.boat
                 return 0;
             }
         }
-         public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
+        public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             if(!ValidatePidInput(id))
             {

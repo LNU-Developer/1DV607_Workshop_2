@@ -20,7 +20,6 @@ namespace View.member
             Console.WriteLine("\nSomething went wrong. Try again:");
             Console.ResetColor();
         }
-
         public void PrintMember(string firstName, string lastName, string memberId, string ssn = "")
         {
             Console.WriteLine("\n═══════════════════════════════════════════");
