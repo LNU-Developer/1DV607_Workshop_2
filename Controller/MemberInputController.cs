@@ -179,7 +179,7 @@ namespace Controller.member
         public MemberInputController(MemberRegister memberRegister)
         {
             _memberView = new MemberView();
-             _memberViewWrongInputMessages = new MemberViewWrongInputMessages();
+            _memberViewWrongInputMessages = new MemberViewWrongInputMessages();
             _memberRegister = memberRegister;
         }
     }
