@@ -134,9 +134,9 @@ namespace Controller.boat
             }
         }
 
-        public BoatController (BoatView boatView, MemberRegister memberRegister, InputChecker inputChecker)
+        public BoatController (MemberRegister memberRegister, InputChecker inputChecker)
         {
-            _boatView = boatView;
+            _boatView = new BoatView();
             _memberRegister = memberRegister;
             _inputChecker = inputChecker;
         }

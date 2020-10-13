@@ -136,9 +136,9 @@ namespace Controller.member
             return name;
         }
 
-        public MemberController(MemberView memberView, MemberRegister memberRegister, InputChecker inputChecker, WrongInputMessages wrongInputMessages)
+        public MemberController(MemberRegister memberRegister, InputChecker inputChecker, WrongInputMessages wrongInputMessages)
         {
-            _memberView = memberView;
+            _memberView = new MemberView();
             _memberRegister = memberRegister;
             _inputChecker = inputChecker;
             _wrongInput = wrongInputMessages;
