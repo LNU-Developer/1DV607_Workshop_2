@@ -14,9 +14,8 @@ namespace Controller
             Menu menu = new Menu();
             SubMenu subMenu = new SubMenu();
             MemberRegister memberRegister = new MemberRegister();
-            WrongInputMessages wrongInputMessages = new WrongInputMessages();
             InputChecker inputChecker = new InputChecker(memberRegister, wrongInputMessages);
-            MemberController memberController = new MemberController(memberRegister, inputChecker, wrongInputMessages);
+            MemberController memberController = new MemberController(memberRegister, inputChecker);
             BoatController boatController = new BoatController(memberRegister, inputChecker);
             menu.DisplayMenu();
             MenuChoice menuChoice = menu.GetInput();

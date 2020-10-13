@@ -7,6 +7,7 @@ namespace Controller.boat
     class BoatController
     {
         private BoatView _boatView;
+        private BoatViewWrongInputMessages _boatViewWrongInputMessages;
         private MemberRegister _memberRegister;
         private InputChecker _inputChecker;
         public void AddBoat()
@@ -24,7 +25,7 @@ namespace Controller.boat
             string lengthString = _boatView.InputBoatLength();
             if(_inputChecker.ConvertToDouble(lengthString) == 0)
             {
-                _boatView.PrintNotADoubleAboveZero();
+                _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
                 AddBoat();
             } else {
                 boatRegister.AddBoat(boatType, _inputChecker.ConvertToDouble(lengthString));
@@ -40,7 +41,7 @@ namespace Controller.boat
 
             if(boatRegister.Boats.Count == 0)
             {
-                _boatView.PrintNoBoatsFound();
+                _boatViewWrongInputMessages.PrintNoBoatsFound();
                 return;
             }
             else
@@ -58,7 +59,7 @@ namespace Controller.boat
 
             if(_inputChecker.ConvertToInt(idString) == 0)
             {
-                _boatView.PrintNotADoubleAboveZero();
+                _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
                 RemoveBoat();
             } else {
                 int id = _inputChecker.ConvertToInt(idString);
@@ -86,7 +87,7 @@ namespace Controller.boat
 
             if(boatRegister.Boats.Count == 0)
             {
-                _boatView.PrintNoBoatsFound();
+                _boatViewWrongInputMessages.PrintNoBoatsFound();
                 return;
             }
             else
@@ -104,7 +105,7 @@ namespace Controller.boat
 
             if(_inputChecker.ConvertToInt(idString) == 0)
             {
-                _boatView.PrintNotAnIntAboveZero();
+                _boatViewWrongInputMessages.PrintNotAnIntAboveZero();
                 UpdateBoat();
             }
             else
@@ -120,7 +121,7 @@ namespace Controller.boat
                     if(_inputChecker.ConvertToDouble(lengthString) == 0)
                     {
                         //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
-                        _boatView.PrintNotADoubleAboveZero();
+                        _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
                         UpdateBoat();
                     }
 
@@ -137,6 +138,7 @@ namespace Controller.boat
         public BoatController (MemberRegister memberRegister, InputChecker inputChecker)
         {
             _boatView = new BoatView();
+            _boatViewWrongInputMessages = new BoatViewWrongInputMessages();
             _memberRegister = memberRegister;
             _inputChecker = inputChecker;
         }
