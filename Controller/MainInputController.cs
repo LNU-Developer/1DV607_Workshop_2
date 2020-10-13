@@ -7,9 +7,7 @@ namespace Controller
 {
     abstract class MainInputController
     {
-        public abstract bool IsCorrectInputOfSsn (string id);
-
-
+        public abstract bool IsCorrectInputOfSsn (string id, bool idExists = false);
 
         public bool ValidatePidInput(string _identity)
         {

@@ -176,7 +176,7 @@ namespace Controller.boat
             }
         }
 
-         public override bool IsCorrectInputOfSsn (string id)
+         public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             if(!ValidatePidInput(id))
             {

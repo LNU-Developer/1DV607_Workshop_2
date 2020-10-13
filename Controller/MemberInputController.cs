@@ -13,7 +13,7 @@ namespace Controller.member
         {
             string pId = _memberView.InputSsn();
 
-            if(!IsCorrectInputOfSsn(pId))
+            if(!IsCorrectInputOfSsn(pId, true))
             {
                 AddMember();
             }
@@ -148,7 +148,7 @@ namespace Controller.member
             }
         }
 
-        public override bool IsCorrectInputOfSsn (string id)
+        public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             if(!ValidatePidInput(id))
             {
@@ -156,12 +156,12 @@ namespace Controller.member
                 return false;
             }
 
-            if(!DoesPIdExistInRegister(id))
+            if(!DoesPIdExistInRegister(id) && !idExists)
             {
                 _memberViewWrongInputMessages.PrintSsnNotExisting();
                 return false;
             }
-            else if(DoesPIdExistInRegister(id))
+            else if(DoesPIdExistInRegister(id) && idExists)
             {
                 _memberViewWrongInputMessages.MemberAlreadyExists();
                 return false;
