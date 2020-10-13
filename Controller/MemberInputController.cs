@@ -25,7 +25,6 @@ namespace Controller.member
 
                 string lastName = ValidateName(_memberView.InputLastName(), false);
 
-                //TODO: Are these credentials correct: show credentials.
                 _memberRegister.AddMember(firstName, lastName, pId);
 
                 if(DoesPIdExistInRegister(pId))
@@ -49,16 +48,18 @@ namespace Controller.member
             else
             {
                 _memberRegister.DeleteMemberBySsn(pId);
+
+                if(!DoesPIdExistInRegister(pId))
+                {
+                    _memberView.PrintActionSuccess();
+                }
+                else
+                {
+                    _memberView.PrintActionFail();
+                }
             }
 
-            if(!DoesPIdExistInRegister(pId))
-            {
-                _memberView.PrintActionSuccess();
-            }
-            else
-            {
-                _memberView.PrintActionFail();
-            }
+            
         }
         public void UpdateMember()
         {
@@ -127,11 +128,11 @@ namespace Controller.member
         {
             if(!IsCorrectNameInput(name) && isFirstName)
             {
-                name = _memberView.InputFirstName();
+                name = ValidateName(_memberView.InputFirstName());
             }
             else if(!IsCorrectNameInput(name) && !isFirstName)
             {
-                name = _memberView.InputLastName();
+                name = ValidateName(_memberView.InputLastName());
             }
             return name;
         }

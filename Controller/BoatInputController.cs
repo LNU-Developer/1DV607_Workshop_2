@@ -184,18 +184,31 @@ namespace Controller.boat
                 return false;
             }
 
-            // if(!DoesPIdExistInRegister(id) && !idExists)
-            // {
-            //     _boatViewWrongInputMessages.PrintSsnNotExisting();
-            //     return false;
-            // }
+            if(!DoesPIdExistInRegister(id) && !idExists)
+            {
+                _boatViewWrongInputMessages.PrintSsnNotExisting();
+                return false;
+            }
             // else if(DoesPIdExistInRegister(id) && idExists)
             // {
-            //     _boatViewWrongInputMessages.MemberAlreadyExists();
+            //     _memberViewWrongInputMessages.MemberAlreadyExists();
             //     return false;
             // }
 
             return true;
+        }
+
+        
+        private bool DoesPIdExistInRegister(string pId)
+        {
+            foreach (Member member in _memberRegister.Members)
+            {
+                if(member.PersonalId == pId)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public BoatInputController (MemberRegister memberRegister)

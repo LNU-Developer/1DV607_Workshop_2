@@ -19,11 +19,11 @@ namespace View.menu
             switch (System.Console.ReadKey().KeyChar)
             {
                 case '1':
-                    return BoatType.Kayak;
+                    return BoatType.Sailboat;
                 case '2':
                     return BoatType.Motorsailer;
                 case '3':
-                    return BoatType.Sailboat;
+                    return BoatType.Kayak;
                 default:
                     return BoatType.Other;
             }
