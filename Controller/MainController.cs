@@ -1,7 +1,5 @@
 using View;
 using View.menu;
-using View.member;
-using View.boat;
 using View.input;
 using Controller.member;
 using Controller.boat;
@@ -11,8 +9,10 @@ namespace Controller
 {
     class MainController
     {
-        public bool Start(Menu menu, SubMenu subMenu)
+        public bool Start()
         {
+            Menu menu = new Menu();
+            SubMenu subMenu = new SubMenu();
             MemberRegister memberRegister = new MemberRegister();
             WrongInputMessages wrongInputMessages = new WrongInputMessages();
             InputChecker inputChecker = new InputChecker(memberRegister, wrongInputMessages);

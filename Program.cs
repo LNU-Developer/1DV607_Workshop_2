@@ -10,7 +10,7 @@ namespace Controller
             {
                 DotNetEnv.Env.Load();
                 MainController controller = new MainController();
-                while (controller.Start(new Menu(), new SubMenu()));
+                while (controller.Start());
             }
             catch (System.Exception)
             {
