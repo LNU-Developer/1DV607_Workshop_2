@@ -2,6 +2,8 @@ using Enum.boat.type;
 using Model;
 using View.menu;
 using View.boat;
+using System;
+
 namespace Controller.boat
 {
     class BoatController
@@ -23,12 +25,12 @@ namespace Controller.boat
             BoatType boatType = boatTypeMenu.GetInput();
 
             string lengthString = _boatView.InputBoatLength();
-            if(_inputChecker.ConvertToDouble(lengthString) == 0)
+            if(ConvertToDouble(lengthString) == 0)
             {
                 _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
                 AddBoat();
             } else {
-                boatRegister.AddBoat(boatType, _inputChecker.ConvertToDouble(lengthString));
+                boatRegister.AddBoat(boatType, ConvertToDouble(lengthString));
                 _boatView.PrintActionSuccess();
             }
         }
@@ -57,12 +59,12 @@ namespace Controller.boat
 
             string idString = _boatView.InputBoatId();
 
-            if(_inputChecker.ConvertToInt(idString) == 0)
+            if(ConvertToInt(idString) == 0)
             {
                 _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
                 RemoveBoat();
             } else {
-                int id = _inputChecker.ConvertToInt(idString);
+                int id = ConvertToInt(idString);
                 if(boatRegister.IsBoat(id))
                 {
                     boatRegister.DeleteById(id);
@@ -103,14 +105,14 @@ namespace Controller.boat
 
             string idString = _boatView.InputBoatId();
 
-            if(_inputChecker.ConvertToInt(idString) == 0)
+            if(ConvertToInt(idString) == 0)
             {
                 _boatViewWrongInputMessages.PrintNotAnIntAboveZero();
                 UpdateBoat();
             }
             else
             {
-                int id = _inputChecker.ConvertToInt(idString);
+                int id = ConvertToInt(idString);
 
                 if(boatRegister.IsBoat(id))
                 {
@@ -118,20 +120,60 @@ namespace Controller.boat
                     BoatType boatType = boatTypeMenu.GetInput();
 
                     string lengthString = _boatView.InputBoatLength();
-                    if(_inputChecker.ConvertToDouble(lengthString) == 0)
+                    if(ConvertToDouble(lengthString) == 0)
                     {
                         //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
                         _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
                         UpdateBoat();
                     }
 
-                    boatRegister.UpdateBoat(id, boatType, _inputChecker.ConvertToDouble(lengthString));
+                    boatRegister.UpdateBoat(id, boatType, ConvertToDouble(lengthString));
                     _boatView.PrintActionSuccess();
                 }
                 else
                 {
                     _boatView.PrintActionFail();
                 }
+            }
+        }
+
+         private int ConvertToInt(string input)
+        {
+            try
+            {
+                int number = Convert.ToInt32(input);
+                if(number > 0)
+                {
+                   return number;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        private double ConvertToDouble(string input)
+        {
+            try
+            {
+                double length = Convert.ToDouble(input);
+                if(length > 0)
+                {
+                    return length;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch
+            {
+                return 0;
             }
         }
 

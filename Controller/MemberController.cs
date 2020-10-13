@@ -1,6 +1,7 @@
 using Model;
 using View.member;
-using View;
+using System.Linq;
+
 namespace Controller.member
 {
     class MemberController
@@ -125,15 +126,27 @@ namespace Controller.member
 
         private string ValidateName(string name, bool isFirstName = true)
         {
-            if(!_inputChecker.IsCorrectNameInput(name) && isFirstName)
+            if(!IsCorrectNameInput(name) && isFirstName)
             {
                 name = _memberView.InputFirstName();
             }
-            else if(!_inputChecker.IsCorrectNameInput(name) && !isFirstName)
+            else if(!IsCorrectNameInput(name) && !isFirstName)
             {
                 name = _memberView.InputLastName();
             }
             return name;
+        }
+
+        private bool IsCorrectNameInput(string input)
+        {
+            if(input.Any(char.IsDigit) || input.Length < 1)
+            {
+                _memberViewWrongInputMessages.NotCorrectName();
+                return false;
+            }
+            else {
+                return true;
+            }
         }
 
         public MemberController(MemberRegister memberRegister, InputChecker inputChecker)

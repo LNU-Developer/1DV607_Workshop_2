@@ -45,57 +45,8 @@ namespace Controller
             return false;
         }
 
-        public int ConvertToInt(string input)
-        {
-            try
-            {
-                int number = Convert.ToInt32(input);
-                if(number > 0)
-                {
-                   return number;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            catch
-            {
-                return 0;
-            }
-        }
 
-        public double ConvertToDouble(string input)
-        {
-            try
-            {
-                double length = Convert.ToDouble(input);
-                if(length > 0)
-                {
-                    return length;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            catch
-            {
-                return 0;
-            }
-        }
 
-        public bool IsCorrectNameInput(string input)
-        {
-            if(input.Any(char.IsDigit) || input.Length < 1)
-            {
-                _wrongInput.NotCorrectName();
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
         public bool ValidatePidInput(string _identity)
         {
             if (PIdInputIsCorrectFormat(_identity) && IsSwedishSsn(_identity))
