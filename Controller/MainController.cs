@@ -1,4 +1,3 @@
-using View;
 using View.menu;
 using View.input;
 using Controller.member;

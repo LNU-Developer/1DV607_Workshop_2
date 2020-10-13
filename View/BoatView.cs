@@ -14,37 +14,11 @@ namespace View.boat
             Console.WriteLine("\nPlease enter the ID of the boat you want to select.");
             return Console.ReadLine();
         }
-        // public void PrintNotADoubleAboveZero()
-        // {
-        //     Console.ForegroundColor = ConsoleColor.Red;
-        //     Console.WriteLine("Wrong input provided. Please enter a decimal number above zero.");
-        //     Console.ResetColor();
-        // }
-        // public void PrintNotAnIntAboveZero()
-        // {
-        //     Console.ForegroundColor = ConsoleColor.Red;
-        //     Console.WriteLine("Wrong input provided. Please enter a number above zero.");
-        //     Console.ResetColor();
-        // }
-
-        // public void PrintNoBoatsFound()
-        // {
-        //     Console.ForegroundColor = ConsoleColor.Yellow;
-        //     Console.WriteLine("This member has no boats in register.");
-        //     Console.ResetColor();
-        // }
         public override void PrintActionFail()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\nThe boat doesn't exist.");
             Console.ResetColor();
         }
-
-        // public void PrintSsnNotExisting()
-        // {
-        //     Console.ForegroundColor = ConsoleColor.Yellow;
-        //     Console.WriteLine("\nThis social security number was not found in the register. Please try again!");
-        //     Console.ResetColor();
-        // }
     }
 }

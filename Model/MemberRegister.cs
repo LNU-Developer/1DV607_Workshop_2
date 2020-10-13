@@ -9,7 +9,6 @@ namespace Model
         {
             get { return Database.FetchAllMembers().Result.AsReadOnly(); }
         }
-
         public void AddMember(string firstName, string lastName, string personalId)
         {
             if(!Database.MemberExist(personalId).Result)
@@ -25,11 +24,9 @@ namespace Model
             }
             else
             {
-                throw new ArgumentException(
-                        $"{nameof(personalId)} already exists. Unable to register new member.");
+                throw new ArgumentException($"{nameof(personalId)} already exists. Unable to register new member.");
             }
         }
-
         public Member GetMemberBySsn(string id)
         {
             id = id.Replace("-", "");
@@ -44,11 +41,9 @@ namespace Model
             }
             else
             {
-                throw new ArgumentException(
-                        $"{nameof(id)} member doesn't exists.");
+                throw new ArgumentException($"{nameof(id)} member doesn't exists.");
             }
         }
-
         public Member GetMemberByMemberId(int id)
         {
             if(Database.MemberIdExist(id).Result)
@@ -57,11 +52,9 @@ namespace Model
             }
             else
             {
-                throw new ArgumentException(
-                        $"{nameof(id)} member doesn't exists.");
+                throw new ArgumentException($"{nameof(id)} member doesn't exists.");
             }
         }
-
         public void DeleteMemberBySsn(string id)
         {
             if(Database.MemberExist(id).Result)
@@ -69,7 +62,6 @@ namespace Model
                 Database.RemoveMemberBySsn(id).Wait();
             }
         }
-
         public override void DeleteById(int id)
         {
             if(Database.MemberIdExist(id).Result)
@@ -77,7 +69,6 @@ namespace Model
                 Database.RemoveMemberById(id).Wait();
             }
         }
-
         public void UpdateMember(string firstName, string lastName, string personalId)
         {
             if(Database.MemberExist(personalId).Result)
@@ -92,7 +83,6 @@ namespace Model
                 Database.AddMember(newMember).Wait();
             }
         }
-
         public override int GenerateId()
         {
             Random a = new Random();

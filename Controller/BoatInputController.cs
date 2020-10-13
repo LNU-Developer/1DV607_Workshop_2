@@ -17,20 +17,26 @@ namespace Controller.boat
             
             string pId = _boatView.InputSsn();
 
-            if(!IsCorrectInputOfSsn(pId)) AddBoat();
-
-            BoatRegister boatRegister = new BoatRegister(_memberRegister.GetMemberBySsn(pId).PersonalId);
-            boatTypeMenu.DisplayMenu();
-            BoatType boatType = boatTypeMenu.GetInput();
-
-            string lengthString = _boatView.InputBoatLength();
-            if(ConvertToDouble(lengthString) == 0)
+            if(!IsCorrectInputOfSsn(pId)) 
             {
-                _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
                 AddBoat();
-            } else {
-                boatRegister.AddBoat(boatType, ConvertToDouble(lengthString));
-                _boatView.PrintActionSuccess();
+            } 
+            else
+            {
+                BoatRegister boatRegister = new BoatRegister(_memberRegister.GetMemberBySsn(pId).PersonalId);
+                boatTypeMenu.DisplayMenu();
+                BoatType boatType = boatTypeMenu.GetInput();
+
+                string lengthString = _boatView.InputBoatLength();
+
+                if(ConvertToDouble(lengthString) == 0)
+                {
+                    _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
+                    AddBoat();
+                } else {
+                    boatRegister.AddBoat(boatType, ConvertToDouble(lengthString));
+                    _boatView.PrintActionSuccess();
+                }
             }
         }
         public void RemoveBoat()
@@ -135,8 +141,7 @@ namespace Controller.boat
                 }
             }
         }
-
-         private int ConvertToInt(string input)
+        private int ConvertToInt(string input)
         {
             try
             {
@@ -155,7 +160,6 @@ namespace Controller.boat
                 return 0;
             }
         }
-
         private double ConvertToDouble(string input)
         {
             try
@@ -175,7 +179,6 @@ namespace Controller.boat
                 return 0;
             }
         }
-
          public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             if(!ValidatePidInput(id))
@@ -197,8 +200,6 @@ namespace Controller.boat
 
             return true;
         }
-
-        
         private bool DoesPIdExistInRegister(string pId)
         {
             foreach (Member member in _memberRegister.Members)
@@ -210,7 +211,6 @@ namespace Controller.boat
             }
             return false;
         }
-
         public BoatInputController (MemberRegister memberRegister)
         {
             _boatView = new BoatView();

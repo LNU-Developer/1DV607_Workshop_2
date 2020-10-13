@@ -1,9 +1,9 @@
 using System;
+
 namespace View
 {
     abstract class WrongInputMessages
     {
-
         public void NotCorrectPId()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

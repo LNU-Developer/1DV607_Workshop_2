@@ -16,7 +16,6 @@ namespace View.boat
             Console.WriteLine("Wrong input provided. Please enter a number above zero.");
             Console.ResetColor();
         }
-
         public void PrintNoBoatsFound()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

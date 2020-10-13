@@ -27,8 +27,7 @@ namespace Model
             set
             {
                 if (value < 0 )
-                    throw new ArgumentOutOfRangeException(
-                        $"{nameof(value)} must be above 0");
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be above 0");
                 _length = value;
             }
         }
@@ -40,8 +39,7 @@ namespace Model
             set
             {
                 if (value < 0 )
-                    throw new ArgumentOutOfRangeException(
-                        $"{nameof(value)} must be above 0");
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be above 0");
 
                 _boatId=value;
             }

@@ -1,5 +1,6 @@
 using System;
 using View.input;
+
 namespace View.menu
 {
     class Menu
@@ -22,7 +23,6 @@ namespace View.menu
             Console.WriteLine("0. Exit program");
             Console.WriteLine("═══════════════════════════════════════════");
         }
-
         public MenuChoice GetInput()
         {
             switch (System.Console.ReadKey().KeyChar)

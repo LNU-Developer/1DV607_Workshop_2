@@ -10,7 +10,6 @@ namespace View.member
             Console.WriteLine("\nA member with this personal number already exists in the register.");
             Console.ResetColor();
         }
-
         public void NotCorrectName()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

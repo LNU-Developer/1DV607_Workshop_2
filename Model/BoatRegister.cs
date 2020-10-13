@@ -11,7 +11,6 @@ namespace Model
         {
             get { return Database.FetchAllBoatsForMember(_ownerPersonalId).Result.AsReadOnly(); }
         }
-
         public void AddBoat(BoatType boatType, double length)
         {
             Boat newBoat = new Boat()
@@ -22,7 +21,6 @@ namespace Model
             };
             Database.AddBoat(newBoat, _ownerPersonalId).Wait();
         }
-
         public override void DeleteById(int id)
         {
             if(Database.BoatIdExist(id, _ownerPersonalId).Result)
@@ -30,7 +28,6 @@ namespace Model
                 Database.RemoveBoatById(id, _ownerPersonalId).Wait();
             }
         }
-
         public Boat GetBoatById (int id)
         {
             if(Database.BoatIdExist(id, _ownerPersonalId).Result)
@@ -39,11 +36,9 @@ namespace Model
             }
             else
             {
-                throw new ArgumentException(
-                        $"{nameof(id)} boat doesn't exists.");
+                throw new ArgumentException($"{nameof(id)} boat doesn't exists.");
             }
         }
-
         public void UpdateBoat(int id, BoatType boatType, double length)
         {
             if(Database.BoatIdExist(id, _ownerPersonalId).Result)
@@ -57,19 +52,11 @@ namespace Model
                 Database.AddBoat(newBoat, _ownerPersonalId).Wait();
             }
         }
-
         public bool IsBoat(int id)
         {
-            if(Database.BoatIdExist(id, _ownerPersonalId).Result)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if(Database.BoatIdExist(id, _ownerPersonalId).Result) { return true; }
+            else { return false; }
         }
-
         public override int GenerateId()
         {
             Random a = new Random();
@@ -84,7 +71,6 @@ namespace Model
     	        
             return newBoatId;
         }
-
         public BoatRegister(string PersonalId)
         {
             _ownerPersonalId=PersonalId;

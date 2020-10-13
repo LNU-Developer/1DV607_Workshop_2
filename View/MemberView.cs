@@ -1,5 +1,4 @@
 using System;
-using View.input;
 
 namespace View.member
 {
@@ -34,7 +33,6 @@ namespace View.member
                 Console.WriteLine("Boat information:");
             }
         }
-
         public void PrintBoatTotal(int total)
         {
             Console.WriteLine("Number of boats: " + total);

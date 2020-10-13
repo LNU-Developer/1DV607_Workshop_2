@@ -58,8 +58,6 @@ namespace Controller.member
                     _memberView.PrintActionFail();
                 }
             }
-
-            
         }
         public void UpdateMember()
         {
@@ -123,7 +121,6 @@ namespace Controller.member
             }
             _memberView.PrintEndOfInformation();
         }
-
         private string ValidateName(string name, bool isFirstName = true)
         {
             if(!IsCorrectNameInput(name) && isFirstName)
@@ -136,7 +133,6 @@ namespace Controller.member
             }
             return name;
         }
-
         private bool IsCorrectNameInput(string input)
         {
             if(input.Any(char.IsDigit) || input.Length < 1)
@@ -148,7 +144,6 @@ namespace Controller.member
                 return true;
             }
         }
-
         public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             if(!ValidatePidInput(id))
@@ -170,7 +165,6 @@ namespace Controller.member
 
             return true;
         }
-
         private bool DoesPIdExistInRegister(string pId)
         {
             foreach (Member member in _memberRegister.Members)
@@ -182,7 +176,6 @@ namespace Controller.member
             }
             return false;
         }
-
         public MemberInputController(MemberRegister memberRegister)
         {
             _memberView = new MemberView();

@@ -5,7 +5,6 @@ namespace View
 {
     abstract class MainView
     {
-
         public abstract void PrintActionFail();
         public void PrintActionSuccess()
         {
@@ -28,7 +27,6 @@ namespace View
             Console.WriteLine("   Boat id: " + id);
             Console.WriteLine("__________");
         }
-
         public void PrintEndOfInformation()
         {
             Console.WriteLine("END OF INFORMATION");

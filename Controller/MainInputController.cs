@@ -1,6 +1,3 @@
-using Model;
-using View.member;
-using System.Linq;
 using System;
 
 namespace Controller
@@ -8,7 +5,6 @@ namespace Controller
     abstract class MainInputController
     {
         public abstract bool IsCorrectInputOfSsn (string id, bool idExists = false);
-
         public bool ValidatePidInput(string _identity)
         {
             if (PIdInputIsCorrectFormat(_identity) && IsSwedishSsn(_identity))
@@ -20,7 +16,6 @@ namespace Controller
                 return false;
             }
         }
-        
         private bool PIdInputIsCorrectFormat(string _identity) {
             _identity = _identity.Replace("-", "");
             _identity = _identity.Replace("+", "");
@@ -41,7 +36,6 @@ namespace Controller
             }
             return true;
         }
-
         private bool IsSwedishSsn(string _identity)
         {
             double[] chars = new double[10];
@@ -85,7 +79,6 @@ namespace Controller
             }
 
         }
-
         private double SumDigits(double number)
         {
             double sum = 0;
