@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Controller.member
 {
-    class MemberController : InputController
+    class MemberInputController : MainInputController
     {
         private MemberView _memberView;
         private MemberRegister _memberRegister;
@@ -148,7 +148,7 @@ namespace Controller.member
             }
         }
 
-        public MemberController(MemberRegister memberRegister)
+        public MemberInputController(MemberRegister memberRegister)
         {
             _memberView = new MemberView();
              _memberViewWrongInputMessages = new MemberViewWrongInputMessages();

@@ -5,7 +5,7 @@ using System;
 
 namespace Controller
 {
-    abstract class InputController
+    abstract class MainInputController
     {
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
@@ -51,9 +51,7 @@ namespace Controller
             {
                 return false;
             }
-
         }
-
         
         private bool PIdInputIsCorrectFormat(string _identity) {
             _identity = _identity.Replace("-", "");

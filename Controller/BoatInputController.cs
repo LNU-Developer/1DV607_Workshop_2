@@ -6,7 +6,7 @@ using System;
 
 namespace Controller.boat
 {
-    class BoatController : InputController
+    class BoatInputController : MainInputController
     {
         private BoatView _boatView;
         private BoatViewWrongInputMessages _boatViewWrongInputMessages;
@@ -176,7 +176,7 @@ namespace Controller.boat
             }
         }
 
-        public BoatController (MemberRegister memberRegister)
+        public BoatInputController (MemberRegister memberRegister)
         {
             _boatView = new BoatView();
             _boatViewWrongInputMessages = new BoatViewWrongInputMessages();
