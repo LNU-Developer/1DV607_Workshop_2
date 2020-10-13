@@ -5,8 +5,15 @@ namespace View
 {
     abstract class MainView
     {
-        public abstract void PrintActionSuccess();
+
         public abstract void PrintActionFail();
+        public void PrintActionSuccess()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Action completed successfully!");
+            Console.ResetColor();
+            Console.WriteLine("\n═══════════════════════════════════════════");
+        }
         public string InputSsn()
         {
             Console.WriteLine("\nPlease enter a social security number (10 digits):");

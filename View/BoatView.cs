@@ -39,13 +39,6 @@ namespace View.boat
             Console.WriteLine("\nThe boat doesn't exist.");
             Console.ResetColor();
         }
-        public override void PrintActionSuccess()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Action completed successfully!");
-            Console.ResetColor();
-            Console.WriteLine("\n═══════════════════════════════════════════");
-        }
 
         public void PrintSsnNotExisting()
         {

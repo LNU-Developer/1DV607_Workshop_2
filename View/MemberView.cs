@@ -21,13 +21,6 @@ namespace View.member
             Console.WriteLine("\nSomething went wrong. Try again:");
             Console.ResetColor();
         }
-        public override void PrintActionSuccess()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Action completed successfully!");
-            Console.ResetColor();
-            Console.WriteLine("\n═══════════════════════════════════════════");
-        }
 
         public void PrintMember(string firstName, string lastName, string memberId, string ssn = "")
         {
