@@ -1,16 +1,12 @@
-using System;
-using System.Linq;
 using Model;
-using View;
+using View.member;
+using System.Linq;
+using System;
 
 namespace Controller
-
 {
-    class InputChecker
+    abstract class InputController
     {
-        private MemberRegister _memberRegister;
-        private WrongInputMessages _wrongInput;
-
         public bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             if(!ValidatePidInput(id))
@@ -45,9 +41,7 @@ namespace Controller
             return false;
         }
 
-
-
-        public bool ValidatePidInput(string _identity)
+                public bool ValidatePidInput(string _identity)
         {
             if (PIdInputIsCorrectFormat(_identity) && IsSwedishSsn(_identity))
             {
@@ -60,6 +54,7 @@ namespace Controller
 
         }
 
+        
         private bool PIdInputIsCorrectFormat(string _identity) {
             _identity = _identity.Replace("-", "");
             _identity = _identity.Replace("+", "");
@@ -134,12 +129,6 @@ namespace Controller
                 sum = sum + Char.GetNumericValue(temp[i]);
             }
             return sum;
-        }
-    
-        public InputChecker(MemberRegister memberRegister, WrongInputMessages wrongInput)
-        {
-            _memberRegister = memberRegister;
-            _wrongInput = wrongInput;
         }
     }
 }

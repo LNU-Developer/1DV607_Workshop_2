@@ -4,17 +4,16 @@ using System.Linq;
 
 namespace Controller.member
 {
-    class MemberController
+    class MemberController : InputController
     {
         private MemberView _memberView;
         private MemberRegister _memberRegister;
-        private InputChecker _inputChecker;
         private MemberViewWrongInputMessages _memberViewWrongInputMessages;
         public void AddMember()
         {
             string pId = _memberView.InputSsn();
 
-            if(!_inputChecker.IsCorrectInputOfSsn(pId, true))
+            if(!IsCorrectInputOfSsn(pId, true))
             {
                 AddMember();
             }
@@ -29,7 +28,7 @@ namespace Controller.member
                 //TODO: Are these credentials correct: show credentials.
                 _memberRegister.AddMember(firstName, lastName, pId);
 
-                if(_inputChecker.DoesPIdExistInRegister(pId))
+                if(DoesPIdExistInRegister(pId))
                 {
                     _memberView.PrintActionSuccess();
                 }
@@ -43,7 +42,7 @@ namespace Controller.member
         {
             string pId = _memberView.InputSsn();
 
-            if(!_inputChecker.IsCorrectInputOfSsn(pId))
+            if(!IsCorrectInputOfSsn(pId))
             {
                 DeleteMember();
             }
@@ -52,7 +51,7 @@ namespace Controller.member
                 _memberRegister.DeleteMemberBySsn(pId);
             }
 
-            if(!_inputChecker.DoesPIdExistInRegister(pId))
+            if(!DoesPIdExistInRegister(pId))
             {
                 _memberView.PrintActionSuccess();
             }
@@ -65,7 +64,7 @@ namespace Controller.member
         {
             string pId = _memberView.InputSsn();
             
-            if(!_inputChecker.DoesPIdExistInRegister(pId))
+            if(!DoesPIdExistInRegister(pId))
             {
                 _memberViewWrongInputMessages.PrintSsnNotExisting();
                 UpdateMember();
@@ -108,7 +107,7 @@ namespace Controller.member
         {
             string pId = _memberView.InputSsn();
 
-            if(!_inputChecker.IsCorrectInputOfSsn(pId)) ShowMember();
+            if(!IsCorrectInputOfSsn(pId)) ShowMember();
 
             Member selectedMember =  _memberRegister.GetMemberBySsn(pId);
             _memberView.PrintMember(selectedMember.FirstName, selectedMember.LastName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
@@ -149,12 +148,11 @@ namespace Controller.member
             }
         }
 
-        public MemberController(MemberRegister memberRegister, InputChecker inputChecker)
+        public MemberController(MemberRegister memberRegister)
         {
             _memberView = new MemberView();
              _memberViewWrongInputMessages = new MemberViewWrongInputMessages();
             _memberRegister = memberRegister;
-            _inputChecker = inputChecker;  
         }
     }
 }

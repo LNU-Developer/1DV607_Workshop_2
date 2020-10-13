@@ -6,19 +6,18 @@ using System;
 
 namespace Controller.boat
 {
-    class BoatController
+    class BoatController : InputController
     {
         private BoatView _boatView;
         private BoatViewWrongInputMessages _boatViewWrongInputMessages;
         private MemberRegister _memberRegister;
-        private InputChecker _inputChecker;
         public void AddBoat()
         {
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
             
             string pId = _boatView.InputSsn();
 
-            if(!_inputChecker.IsCorrectInputOfSsn(pId)) AddBoat();
+            if(!IsCorrectInputOfSsn(pId)) AddBoat();
 
             BoatRegister boatRegister = new BoatRegister(_memberRegister.GetMemberBySsn(pId).PersonalId);
             boatTypeMenu.DisplayMenu();
@@ -38,7 +37,7 @@ namespace Controller.boat
         {
             string pId = _boatView.InputSsn();
 
-            if(!_inputChecker.IsCorrectInputOfSsn(pId)) RemoveBoat();
+            if(!IsCorrectInputOfSsn(pId)) RemoveBoat();
             BoatRegister boatRegister = new BoatRegister(_memberRegister.GetMemberBySsn(pId).PersonalId);
 
             if(boatRegister.Boats.Count == 0)
@@ -81,7 +80,7 @@ namespace Controller.boat
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
             string pId = _boatView.InputSsn();
 
-            if(!_inputChecker.IsCorrectInputOfSsn(pId)) UpdateBoat();
+            if(!IsCorrectInputOfSsn(pId)) UpdateBoat();
 
             Member selectedMember =  _memberRegister.GetMemberBySsn(pId);
 
@@ -177,12 +176,11 @@ namespace Controller.boat
             }
         }
 
-        public BoatController (MemberRegister memberRegister, InputChecker inputChecker)
+        public BoatController (MemberRegister memberRegister)
         {
             _boatView = new BoatView();
             _boatViewWrongInputMessages = new BoatViewWrongInputMessages();
             _memberRegister = memberRegister;
-            _inputChecker = inputChecker;
         }
     }
 }
