@@ -62,7 +62,7 @@ namespace Controller.member
         public void UpdateMember()
         {
             string pId = _memberView.InputSsn();
-            
+
             if(!DoesPIdExistInRegister(pId))
             {
                 _memberViewWrongInputMessages.PrintSsnNotExisting();
@@ -80,9 +80,8 @@ namespace Controller.member
         {
             foreach (Member member in _memberRegister.Members)
             {
-                BoatRegister boatRegister = new BoatRegister(member.PersonalId);
                 _memberView.PrintMember(member.FirstName, member.LastName, member.MemberId.ToString());
-                _memberView.PrintBoatTotal(boatRegister.Boats.Count);
+                _memberView.PrintBoatTotal(member.BoatRegister.Boats.Count);
             }
             _memberView.PrintEndOfInformation();
         }
@@ -90,11 +89,10 @@ namespace Controller.member
         {
             foreach (Member member in _memberRegister.Members)
             {
-               BoatRegister boatRegister = new BoatRegister(member.PersonalId);
                _memberView.PrintMember(member.FirstName, member.LastName, member.MemberId.ToString(), member.PersonalId);
 
                int count = 0;
-               foreach (Boat boat in boatRegister.Boats)
+               foreach (Boat boat in member.BoatRegister.Boats)
                {
                    count += 1;
                    _memberView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);
@@ -111,10 +109,8 @@ namespace Controller.member
             Member selectedMember =  _memberRegister.GetMemberBySsn(pId);
             _memberView.PrintMember(selectedMember.FirstName, selectedMember.LastName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
 
-            BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
-
             int count = 0;
-            foreach (Boat boat in boatRegister.Boats)
+            foreach (Boat boat in selectedMember.BoatRegister.Boats)
             {
                 count += 1;
                 _memberView.PrintBoatInformation(count, boat.Type, boat.Length, boat.BoatId);

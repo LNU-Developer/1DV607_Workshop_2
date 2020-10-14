@@ -14,16 +14,16 @@ namespace Controller.boat
         public void AddBoat()
         {
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
-            
+
             string pId = _boatView.InputSsn();
 
-            if(!IsCorrectInputOfSsn(pId)) 
+            if(!IsCorrectInputOfSsn(pId))
             {
                 AddBoat();
-            } 
+            }
             else
             {
-                BoatRegister boatRegister = new BoatRegister(_memberRegister.GetMemberBySsn(pId).PersonalId);
+                BoatRegister boatRegister = _memberRegister.GetMemberBySsn(pId).BoatRegister;
                 boatTypeMenu.DisplayMenu();
                 BoatType boatType = boatTypeMenu.GetInput();
 
@@ -44,7 +44,7 @@ namespace Controller.boat
             string pId = _boatView.InputSsn();
 
             if(!IsCorrectInputOfSsn(pId)) RemoveBoat();
-            BoatRegister boatRegister = new BoatRegister(_memberRegister.GetMemberBySsn(pId).PersonalId);
+            BoatRegister boatRegister = _memberRegister.GetMemberBySsn(pId).BoatRegister;
 
             if(boatRegister.Boats.Count == 0)
             {
@@ -88,9 +88,7 @@ namespace Controller.boat
 
             if(!IsCorrectInputOfSsn(pId)) UpdateBoat();
 
-            Member selectedMember =  _memberRegister.GetMemberBySsn(pId);
-
-            BoatRegister boatRegister = new BoatRegister(selectedMember.PersonalId);
+            BoatRegister boatRegister = _memberRegister.GetMemberBySsn(pId).BoatRegister;
 
             if(boatRegister.Boats.Count == 0)
             {

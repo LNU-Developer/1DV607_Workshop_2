@@ -53,19 +53,6 @@ namespace Model
             Member member = snapshot.ConvertTo<Member>();
             return member;
         }
-        public async Task<Member> FetchMemberById(int id)
-        {
-            CollectionReference  colRef = _db.Collection("members");
-            Query query = colRef.WhereEqualTo("MemberId", id);
-            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
-            Member member = null;
-
-            foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
-            {
-                member = documentSnapshot.ConvertTo<Member>();
-            }
-            return member;
-        }
         public async Task<List<Member>> FetchAllMembers()
         {
             Query allMembersQuery = _db.Collection("members");
@@ -121,18 +108,6 @@ namespace Model
             {
                 return false;
             }
-        }
-        public async Task<Boat> FetchBoatById(int id)
-        {
-            CollectionReference  colRef = _db.Collection("boats");
-            Query query = colRef.WhereEqualTo("BoatId", id);
-            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
-            Boat boat = null;
-            foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
-            {
-                boat = documentSnapshot.ConvertTo<Boat>();
-            }
-            return boat;
         }
         public async Task<List<Boat>> FetchAllBoatsForMember(string personalId)
         {

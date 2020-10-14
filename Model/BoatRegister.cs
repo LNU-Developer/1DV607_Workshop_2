@@ -28,17 +28,6 @@ namespace Model
                 Database.RemoveBoatById(id, _ownerPersonalId).Wait();
             }
         }
-        public Boat GetBoatById (int id)
-        {
-            if(Database.BoatIdExist(id, _ownerPersonalId).Result)
-            {
-                return Database.FetchBoatById(id).Result;
-            }
-            else
-            {
-                throw new ArgumentException($"{nameof(id)} boat doesn't exists.");
-            }
-        }
         public void UpdateBoat(int id, BoatType boatType, double length)
         {
             if(Database.BoatIdExist(id, _ownerPersonalId).Result)
@@ -68,7 +57,7 @@ namespace Model
             {
                 newBoatId = a.Next(0, 100000000);
             }
-    	        
+
             return newBoatId;
         }
         public BoatRegister(string PersonalId)

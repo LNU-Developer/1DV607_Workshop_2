@@ -44,17 +44,7 @@ namespace Model
                 throw new ArgumentException($"{nameof(id)} member doesn't exists.");
             }
         }
-        public Member GetMemberByMemberId(int id)
-        {
-            if(Database.MemberIdExist(id).Result)
-            {
-                return Database.FetchMemberById(id).Result;
-            }
-            else
-            {
-                throw new ArgumentException($"{nameof(id)} member doesn't exists.");
-            }
-        }
+
         public void DeleteMemberBySsn(string id)
         {
             if(Database.MemberExist(id).Result)
