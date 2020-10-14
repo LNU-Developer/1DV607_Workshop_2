@@ -5,6 +5,10 @@ using Enum.boat.type;
 namespace Model
 {
     [FirestoreData]
+
+    /// <summary>
+    /// Class to handle a boat object. Using firebase attribute in this class in order to automatically serialize when sending a retreiving from Firebase
+    /// </summary>
     class Boat {
         private BoatType _boatType;
         private double _length;

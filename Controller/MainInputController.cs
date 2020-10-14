@@ -1,10 +1,26 @@
 using System;
+using Model;
 
 namespace Controller
 {
+    /// <summary>
+    ///  This class that handles and validates inputs from the user.
+    /// </summary>
     abstract class MainInputController
     {
+        private MemberRegister _memberRegister;
+
+        public MemberRegister MemberRegister { get { return _memberRegister; } }
+
         public abstract bool IsCorrectInputOfSsn (string id, bool idExists = false);
+
+        /// <summary>
+        /// Validates a social secutiry number if this is the correct format and is a real swedish social security number.
+        /// </summary>
+        /// <returns>
+        /// true or false
+        /// </returns>
+        /// <param name="_identity">A string containing the social security number.</param>
         public bool ValidatePidInput(string _identity)
         {
             if (PIdInputIsCorrectFormat(_identity) && IsSwedishSsn(_identity))
@@ -16,6 +32,14 @@ namespace Controller
                 return false;
             }
         }
+        /// <summary>
+        /// Validates a social secutiry number if this is the correct format.
+        /// </summary>
+        /// <returns>
+        /// true or false
+        /// </returns>
+        /// <param name="_identity">A string containing the social security number.</param>
+
         private bool PIdInputIsCorrectFormat(string _identity) {
             _identity = _identity.Replace("-", "");
             _identity = _identity.Replace("+", "");
@@ -36,6 +60,14 @@ namespace Controller
             }
             return true;
         }
+        /// <summary>
+        /// Validates a social secutiry number if this is a real social security number.
+        /// </summary>
+        /// <returns>
+        /// true or false
+        /// </returns>
+        /// <param name="_identity">A string containing the social security number.</param>
+
         private bool IsSwedishSsn(string _identity)
         {
             double[] chars = new double[10];
@@ -79,6 +111,14 @@ namespace Controller
             }
 
         }
+        /// <summary>
+        /// Summurizes all individual digits in a number. E.g 12 would return 1+2 = 3.
+        /// </summary>
+        /// <returns>
+        /// Sum of digits in a number
+        /// </returns>
+        /// <param name="number">a number.</param>
+
         private double SumDigits(double number)
         {
             double sum = 0;
@@ -88,6 +128,31 @@ namespace Controller
                 sum = sum + Char.GetNumericValue(temp[i]);
             }
             return sum;
+        }
+
+        /// <summary>
+        /// Check if the input is correct in a social security number
+        /// </summary>
+        /// <returns>
+        /// true or false
+        /// </returns>
+        /// <param name="id">the social security number in string format.</param>
+        /// <param name="idExists">Flag to show if the social security number exists in the register or not.</param>
+        public bool DoesPIdExistInRegister(string pId)
+        {
+            foreach (Member member in _memberRegister.Members)
+            {
+                if(member.PersonalId == pId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected MainInputController (MemberRegister MemberRegister)
+        {
+            _memberRegister = MemberRegister;
         }
     }
 }

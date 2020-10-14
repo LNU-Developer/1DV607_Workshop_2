@@ -5,6 +5,10 @@ using Google.Cloud.Firestore;
 namespace Model
 {
     [FirestoreData]
+
+    /// <summary>
+    /// Class to handle a memnber object. Using firebase attribute in this class in order to automatically serialize when sending a retreiving from Firebase
+    /// </summary>
     class Member
     {
         private string _firstName;

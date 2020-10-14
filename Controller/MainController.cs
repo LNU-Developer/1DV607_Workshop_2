@@ -6,6 +6,9 @@ using Model;
 
 namespace Controller
 {
+    /// <summary>
+    ///  This class is the main router/controller guiding the user to the correct controller though the options that the user selects.
+    /// </summary>
     class MainController
     {
         public bool Start()

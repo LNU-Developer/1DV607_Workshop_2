@@ -6,11 +6,17 @@ using System;
 
 namespace Controller.boat
 {
+    /// <summary>
+    ///  This class inherits from the MainInputController and handles and validates inputs related to the boatcommands.
+    /// </summary>
     class BoatInputController : MainInputController
     {
         private BoatView _boatView;
         private BoatViewWrongInputMessages _boatViewWrongInputMessages;
-        private MemberRegister _memberRegister;
+
+        /// <summary>
+        /// Adds boat to a member
+        /// </summary>
         public void AddBoat()
         {
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
@@ -23,7 +29,7 @@ namespace Controller.boat
             }
             else
             {
-                BoatRegister boatRegister = _memberRegister.GetMemberBySsn(pId).BoatRegister;
+                BoatRegister boatRegister = MemberRegister.GetMemberBySsn(pId).BoatRegister;
                 boatTypeMenu.DisplayMenu();
                 BoatType boatType = boatTypeMenu.GetInput();
 
@@ -39,12 +45,16 @@ namespace Controller.boat
                 }
             }
         }
+
+        /// <summary>
+        /// Removes boat from a member
+        /// </summary>
         public void RemoveBoat()
         {
             string pId = _boatView.InputSsn();
 
             if(!IsCorrectInputOfSsn(pId)) RemoveBoat();
-            BoatRegister boatRegister = _memberRegister.GetMemberBySsn(pId).BoatRegister;
+            BoatRegister boatRegister = MemberRegister.GetMemberBySsn(pId).BoatRegister;
 
             if(boatRegister.Boats.Count == 0)
             {
@@ -81,6 +91,10 @@ namespace Controller.boat
                 }
             }
         }
+
+        /// <summary>
+        /// Updates boat on a member
+        /// </summary>
         public void UpdateBoat()
         {
             BoatTypeMenu boatTypeMenu = new BoatTypeMenu();
@@ -88,7 +102,17 @@ namespace Controller.boat
 
             if(!IsCorrectInputOfSsn(pId)) UpdateBoat();
 
-            BoatRegister boatRegister = _memberRegister.GetMemberBySsn(pId).BoatRegister;
+            BoatRegister boatRegister;
+            if(MemberRegister.MemberExist(pId))
+            {
+                boatRegister = MemberRegister.GetMemberBySsn(pId).BoatRegister;
+            }
+            else
+            {
+                _boatViewWrongInputMessages.PrintSsnNotExisting();
+                return;
+            }
+
 
             if(boatRegister.Boats.Count == 0)
             {
@@ -125,7 +149,6 @@ namespace Controller.boat
                     string lengthString = _boatView.InputBoatLength();
                     if(ConvertToDouble(lengthString) == 0)
                     {
-                        //TODO: Fix bug, when user first enter a wrong value it gets added as zero when user enters a correct value
                         _boatViewWrongInputMessages.PrintNotADoubleAboveZero();
                         UpdateBoat();
                     }
@@ -139,6 +162,14 @@ namespace Controller.boat
                 }
             }
         }
+
+        /// <summary>
+        /// Convert string to integer
+        /// </summary>
+        /// <returns>
+        /// An integer if all went successfully, and zero if something went wrong.
+        /// </returns>
+        /// <param name="input">a number in the string format.</param>
         private int ConvertToInt(string input)
         {
             try
@@ -158,6 +189,14 @@ namespace Controller.boat
                 return 0;
             }
         }
+
+        /// <summary>
+        /// Convert string to double
+        /// </summary>
+        /// <returns>
+        /// An double if all went successfully, and zero if something went wrong.
+        /// </returns>
+        /// <param name="input">a number in the string format.</param>
         private double ConvertToDouble(string input)
         {
             try
@@ -177,6 +216,15 @@ namespace Controller.boat
                 return 0;
             }
         }
+
+        /// <summary>
+        /// Check if the input is correct in a social security number
+        /// </summary>
+        /// <returns>
+        /// true or false
+        /// </returns>
+        /// <param name="id">the social security number in string format.</param>
+        /// <param name="idExists">Flag to show if the social security number exists in the register or not.</param>
         public override bool IsCorrectInputOfSsn (string id, bool idExists = false)
         {
             if(!ValidatePidInput(id))
@@ -190,30 +238,13 @@ namespace Controller.boat
                 _boatViewWrongInputMessages.PrintSsnNotExisting();
                 return false;
             }
-            // else if(DoesPIdExistInRegister(id) && idExists)
-            // {
-            //     _memberViewWrongInputMessages.MemberAlreadyExists();
-            //     return false;
-            // }
-
             return true;
         }
-        private bool DoesPIdExistInRegister(string pId)
-        {
-            foreach (Member member in _memberRegister.Members)
-            {
-                if(member.PersonalId == pId)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        public BoatInputController (MemberRegister memberRegister)
+
+        public BoatInputController (MemberRegister memberRegister) : base(memberRegister)
         {
             _boatView = new BoatView();
             _boatViewWrongInputMessages = new BoatViewWrongInputMessages();
-            _memberRegister = memberRegister;
         }
     }
 }
