@@ -27,9 +27,9 @@ namespace Controller.member
             {
                 if (pId.Length == 12) pId = pId.Substring(2);
 
-                string firstName = ValidateName(_memberView.InputFirstName());
+                string firstName = _memberView.InputFirstName();
 
-                string lastName = ValidateName(_memberView.InputLastName(), false);
+                string lastName = _memberView.InputLastName();
 
                 MemberRegister.AddMember(firstName, lastName, pId);
 
@@ -84,8 +84,8 @@ namespace Controller.member
             }
             else
             {
-                string firstName = ValidateName(_memberView.InputFirstName());
-                string lastName = ValidateName(_memberView.InputLastName(), false);
+                string firstName = _memberView.InputFirstName();
+                string lastName = _memberView.InputLastName();
                 MemberRegister.UpdateMember(firstName, lastName, pId);
                 _memberView.PrintActionSuccess();
             }
@@ -172,46 +172,6 @@ namespace Controller.member
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Validates if a name is in the correct format, and prompts the user to enter a new name if it isn't.
-        /// </summary>
-        /// <returns>
-        /// A string with a validated name
-        /// </returns>
-        /// <param name="name">the name in string format.</param>
-        /// <param name="isFirstName">Flag to show if it's the first name or last name being inputted.</param>
-        private string ValidateName(string name, bool isFirstName = true)
-        {
-            if(!IsCorrectNameInput(name) && isFirstName)
-            {
-                name = ValidateName(_memberView.InputFirstName());
-            }
-            else if(!IsCorrectNameInput(name) && !isFirstName)
-            {
-                name = ValidateName(_memberView.InputLastName());
-            }
-            return name;
-        }
-
-        /// <summary>
-        /// Validates if a name is in the correct format, and shows an error message if it isn't
-        /// </summary>
-        /// <returns>
-        /// True or false
-        /// </returns>
-        /// <param name="input">the name in string format.</param>
-        private bool IsCorrectNameInput(string input)
-        {
-            if(input.Any(char.IsDigit) || input.Length < 1)
-            {
-                _memberViewWrongInputMessages.NotCorrectName();
-                return false;
-            }
-            else {
-                return true;
-            }
         }
 
         public MemberInputController(MemberRegister memberRegister) : base (memberRegister)
