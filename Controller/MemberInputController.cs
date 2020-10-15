@@ -133,7 +133,12 @@ namespace Controller.member
             if(!IsCorrectInputOfSsn(pId)) ShowMember();
 
             Member selectedMember =  MemberRegister.GetMemberBySsn(pId);
-            _memberView.PrintMember(selectedMember.FirstName, selectedMember.LastName, selectedMember.MemberId.ToString(), selectedMember.PersonalId);
+            string firstName = selectedMember.FirstName;
+            string lastName = selectedMember.LastName;
+            string memberId = selectedMember.MemberId.ToString();
+            string personalId = selectedMember.PersonalId;
+
+            _memberView.PrintMember(firstName, lastName, memberId, personalId);
 
             int count = 0;
             foreach (Boat boat in selectedMember.BoatRegister.Boats)
