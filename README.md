@@ -1,7 +1,7 @@
 # BoatClub (Workshop 2)
 The grade 2 assignment for Workshop 2 in 1DV607 at LNU.
 
-Created by: Filippa Jakobsson, Rickard Marjanovic (rm222jx) and Pernilla Göth (pg222jx)
+Created by: Filippa Jakobsson (fj222nq), Rickard Marjanovic (rm222jx) and Pernilla Göth (pg222jx)
 
 ## Instructions
 
