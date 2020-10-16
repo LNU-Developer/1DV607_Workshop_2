@@ -16,7 +16,7 @@ Created by: Filippa Jakobsson (fj222nq), Rickard Marjanovic (rm222jx) and Pernil
 - Interact with the menu and use the application.
 
 ### General use (alternative)
-- Download file from [here](https://drive.google.com/file/d/1WgFwh36VI1iytud1L5mcbQ__lsRr2RoL/view?usp=sharing)
+- Download file from [here](https://drive.google.com/file/d/1iE7BXSN7vws8y_U_ofAeVWKtI8Yv9kpu/view?usp=sharing)
 - Extract file "BoatClub.zip".
 - Run file "workshop_2.exe".
 - Enjoy!
